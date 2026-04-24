@@ -4,99 +4,94 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("References")]
-    public CharacterController playerController;
+    public Transform cameraTransform;
+    public InputActionReference moveAction;
+    public InputActionReference jumpAction;
 
     [Header("Basic Movement Settings")]
     public float speed;
 
-    [Header("JumpSettings")]
+    [Header("Phsyics")]
+    [SerializeField] private float gravity = 12f;
+    [SerializeField] private float initialFallVelocity = -2f;
+    private float verticalVelocity;
+
+    [Header("Jump Settings")]
     public float jumpForce;
-    public int jumpCount;
-    private float yVelocity;
-    private int jumpsRemaining;
-
-    [Header("DodgeSettings")]
-    public float dodgeForce;
-    public float dodgeCoolDown;
-    public int dodgeCount;
-
-    [Header("Gravity Settings")]
-    public float gravity = -9.81f;
 
     [Header("Ground Check Settings")]
-    public Transform groundCheck;
-    public float groundDistance = 0.3f;
-    public LayerMask groundMask;
+    [SerializeField] private bool isGrounded;
 
-    private PlayerInputAction inputActions;
 
+    private CharacterController playerController;
     private Vector2 moveInput;
 
     private void Awake()
     {
-        inputActions = new PlayerInputAction();
+        playerController = GetComponent<CharacterController>();
     }
 
     private void OnEnable()
     {
-        inputActions.Player.Enable();
-        inputActions.Player.Jump.performed += OnJump;
+        moveAction.action.Enable();
+        jumpAction.action.Enable();
+
+        moveAction.action.performed += StoreMovementInput;
+        moveAction.action.canceled += StoreMovementInput;
+        jumpAction.action.performed += Jump;
     }
 
     private void OnDisable()
     {
-        inputActions.Player.Jump.performed -= OnJump;
-        inputActions.Player.Disable();
+        moveAction.action.performed -= StoreMovementInput;
+        moveAction.action.canceled -= StoreMovementInput;
+        jumpAction.action.performed += Jump;
+
+        moveAction.action.Disable();
+        jumpAction.action.Disable();
     }
+
 
     private void Update()
     {
-        //dauerhafter Boden Check
-        bool isGrounded = IsGrounded();
+        isGrounded = playerController.isGrounded;
 
-        if (isGrounded && yVelocity < 0)
-        {
-            yVelocity = -2f;
-            jumpsRemaining = jumpCount;
-        }
+        HandleGravity();
+        HandleMovement();
 
-        moveInput = inputActions.Player.Move.ReadValue<Vector2>();
-
-        float x = moveInput.x;
-        float y = moveInput.y;
-
-        Vector3 move = transform.right * x + transform.forward * y;
-
-        move = move.normalized * speed;
-
-        yVelocity += gravity * Time.deltaTime;
-        move.y = yVelocity;
-
-        playerController.Move(move * Time.deltaTime);
     }
 
-    private void Jump()
+    private void HandleMovement()
     {
-        if (jumpsRemaining > 0)
+        var move = cameraTransform.TransformDirection(new Vector3(moveInput.x, 0, moveInput.y)).normalized;
+        var currentSpeed = speed;
+        var finalMove = move * currentSpeed;
+        finalMove.y = verticalVelocity;
+
+        playerController.Move(finalMove * Time.deltaTime);
+    }
+
+    private void Jump(InputAction.CallbackContext context)
+    {
+        if(isGrounded)
         {
-            yVelocity = Mathf.Sqrt(jumpForce * -2f * gravity);
-            jumpsRemaining--;
+            verticalVelocity = jumpForce;
+            Debug.Log("Jump");
         }
     }
 
-    private void Dodge()
+    private void HandleGravity()
     {
+        if(isGrounded && verticalVelocity < 0)
+        {
+            verticalVelocity = initialFallVelocity;
+        }
 
+        verticalVelocity += gravity * Time.deltaTime;
     }
 
-    //Checkt ob Spieler gerade am Boden ist
-    private bool IsGrounded()
+    private void StoreMovementInput(InputAction.CallbackContext context)
     {
-        return Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-    }
-
-    private void OnJump(InputAction.CallbackContext ctx)
-    {
-        Jump();
+        moveInput = context.ReadValue<Vector2>();
     }
 }
