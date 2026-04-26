@@ -865,6 +865,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1252589636}
   - component: {fileID: 1252589637}
+  - component: {fileID: 1252589639}
   - component: {fileID: 1252589638}
   m_Layer: 0
   m_Name: Player
@@ -904,11 +905,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   cameraTransform: {fileID: 1908406026}
   moveAction: {fileID: 3615905555046828763, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
-  jumpAction: {fileID: -1054639396817077319, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
   speed: 5
   gravity: -12
   initialFallVelocity: -2
-  jumpForce: 7
+  verticalVelocity: 0
   isGrounded: 0
 --- !u!143 &1252589638
 CharacterController:
@@ -935,6 +935,29 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1252589639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252589632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92e1960d7fd7017428b76d55060d6cc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerActions
+  jumpAction: {fileID: -1054639396817077319, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
+  shootAction: {fileID: -6958466865685411686, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
+  dashAction: {fileID: 4922645045113211378, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
+  hitAction: {fileID: -4900986322801745503, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
+  powerUpAction: {fileID: -3361091801344585588, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
+  damage: 0
+  reloadTime: 0
+  shotCount: 0
+  dashForce: 0
+  dashCount: 0
+  jumpForce: 5
 --- !u!1 &1324277756
 GameObject:
   m_ObjectHideFlags: 0

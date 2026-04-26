@@ -3,10 +3,24 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
+        playerController = GetComponent<CharacterController>();
+    }
+
     [Header("References")]
     public Transform cameraTransform;
     public InputActionReference moveAction;
-    public InputActionReference jumpAction;
 
     [Header("Basic Movement Settings")]
     public float speed;
@@ -14,41 +28,29 @@ public class PlayerMovement : MonoBehaviour
     [Header("Phsyics")]
     [SerializeField] private float gravity = 12f;
     [SerializeField] private float initialFallVelocity = -2f;
-    private float verticalVelocity;
-
-    [Header("Jump Settings")]
-    public float jumpForce;
+    public float verticalVelocity;
 
     [Header("Ground Check Settings")]
-    [SerializeField] private bool isGrounded;
+    public bool isGrounded;
 
 
     private CharacterController playerController;
     private Vector2 moveInput;
 
-    private void Awake()
-    {
-        playerController = GetComponent<CharacterController>();
-    }
-
     private void OnEnable()
     {
         moveAction.action.Enable();
-        jumpAction.action.Enable();
 
         moveAction.action.performed += StoreMovementInput;
         moveAction.action.canceled += StoreMovementInput;
-        jumpAction.action.performed += Jump;
     }
 
     private void OnDisable()
     {
         moveAction.action.performed -= StoreMovementInput;
         moveAction.action.canceled -= StoreMovementInput;
-        jumpAction.action.performed += Jump;
 
         moveAction.action.Disable();
-        jumpAction.action.Disable();
     }
 
 
@@ -63,21 +65,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMovement()
     {
-        var move = cameraTransform.TransformDirection(new Vector3(moveInput.x, 0, moveInput.y)).normalized;
-        var currentSpeed = speed;
-        var finalMove = move * currentSpeed;
+        Vector3 forward = cameraTransform.forward;
+        Vector3 right = cameraTransform.right;
+
+        forward.y = 0;
+        right.y = 0;
+
+        forward.Normalize();
+        right.Normalize();
+
+        Vector3 move = forward * moveInput.y + right * moveInput.x;
+
+        Vector3 finalMove = move * speed;
         finalMove.y = verticalVelocity;
 
         playerController.Move(finalMove * Time.deltaTime);
-    }
-
-    private void Jump(InputAction.CallbackContext context)
-    {
-        if(isGrounded)
-        {
-            verticalVelocity = jumpForce;
-            Debug.Log("Jump");
-        }
     }
 
     private void HandleGravity()
