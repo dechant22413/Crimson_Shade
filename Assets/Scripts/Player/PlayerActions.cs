@@ -29,7 +29,8 @@ public class PlayerActions : MonoBehaviour
     public int shotCount;
 
     [Header("Dash Settings")]
-    public float dashForce;
+    public float dashForce = 20f;
+    public float dashDuration = 0.2f;
     public int dashCount;
 
     [Header("Jump Settings")]
@@ -83,7 +84,29 @@ public class PlayerActions : MonoBehaviour
 
     private void Dash(InputAction.CallbackContext context)
     {
+        Debug.Log("Dash");
 
+        Vector2 input = PlayerMovement.Instance.GetMoveInput();
+
+        Transform cam = PlayerMovement.Instance.cameraTransform;
+
+        Vector3 forward = cam.forward;
+        Vector3 right = cam.right;
+
+        forward.y = 0;
+        right.y = 0;
+
+        forward.Normalize();
+        right.Normalize();
+
+        Vector3 moveDir = forward * input.y + right * input.x;
+
+        if (moveDir == Vector3.zero)
+            moveDir = forward;
+
+        moveDir.Normalize();
+
+        PlayerMovement.Instance.StartDash(moveDir, dashForce, dashDuration);
     }
 
     private void Jump(InputAction.CallbackContext context)

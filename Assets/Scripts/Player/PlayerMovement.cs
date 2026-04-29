@@ -33,6 +33,12 @@ public class PlayerMovement : MonoBehaviour
     [Header("Ground Check Settings")]
     public bool isGrounded;
 
+    [Header("Dash Indication")]
+    public bool isDashing;
+    private float dashTimer;
+    private Vector3 dashDirection;
+    private float dashForce;
+
 
     private CharacterController playerController;
     private Vector2 moveInput;
@@ -53,6 +59,18 @@ public class PlayerMovement : MonoBehaviour
         moveAction.action.Disable();
     }
 
+    public void StartDash(Vector3 direction, float force, float duration)
+    {
+        isDashing = true;
+        dashDirection = direction;
+        dashForce = force;
+        dashTimer = duration;
+    }
+
+    public Vector2 GetMoveInput()
+    {
+        return moveInput;
+    }
 
     private void Update()
     {
@@ -65,6 +83,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMovement()
     {
+        if (isDashing)
+        {
+            playerController.Move(dashDirection * dashForce * Time.deltaTime);
+
+            dashTimer -= Time.deltaTime;
+            if (dashTimer <= 0)
+            {
+                isDashing = false;
+            }
+
+            return;
+        }
+
         Vector3 forward = cameraTransform.forward;
         Vector3 right = cameraTransform.right;
 

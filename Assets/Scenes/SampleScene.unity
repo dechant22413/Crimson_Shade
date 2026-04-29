@@ -1441,6 +1441,7 @@ MonoBehaviour:
   initialFallVelocity: -2
   verticalVelocity: 0
   isGrounded: 0
+  isDashing: 0
 --- !u!143 &1252589638
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1486,9 +1487,10 @@ MonoBehaviour:
   damage: 0
   reloadTime: 0
   shotCount: 0
-  dashForce: 0
+  dashForce: 15
+  dashDuration: 0.3
   dashCount: 0
-  jumpForce: 5
+  jumpForce: 8
 --- !u!1 &1253395436 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5713468254458557210, guid: 0e77b345e7b51194082cc231a01a45ac, type: 3}
