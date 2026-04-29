@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f764b8b40f9f76140993f991d1443099
+guid: 86f8e7a014c71c24fb0189a04fef8692
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -34,8 +34,8 @@ ModelImporter:
       name: Scene
       takeName: Scene
       internalID: -623603649343465320
-      firstFrame: 80
-      lastFrame: 110
+      firstFrame: 190
+      lastFrame: 215
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -58,7 +58,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 80
+      additiveReferencePoseFrame: 190
     isReadable: 0
   meshes:
     lODScreenPercentages: []
