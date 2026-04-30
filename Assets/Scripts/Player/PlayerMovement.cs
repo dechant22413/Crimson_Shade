@@ -64,7 +64,8 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         dashDirection = direction;
         dashForce = force;
-        dashTimer = duration;
+
+        dashTimer = duration; 
     }
 
     public Vector2 GetMoveInput()
@@ -87,15 +88,18 @@ public class PlayerMovement : MonoBehaviour
         {
             playerController.Move(dashDirection * dashForce * Time.deltaTime);
 
-            dashTimer -= Time.deltaTime;
+            dashTimer -= Time.deltaTime; 
+
             if (dashTimer <= 0)
             {
                 isDashing = false;
+                verticalVelocity = 0f;
             }
 
             return;
         }
 
+        // normale Bewegung
         Vector3 forward = cameraTransform.forward;
         Vector3 right = cameraTransform.right;
 
