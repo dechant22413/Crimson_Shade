@@ -2001,7 +2001,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   cameraTransform: {fileID: 1908406026}
   moveAction: {fileID: 3615905555046828763, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
-  speed: 5
+  speed: 7
   gravity: -12
   initialFallVelocity: -2
   verticalVelocity: 0
