@@ -1701,12 +1701,12 @@ GameObject:
   - component: {fileID: 1110191115}
   - component: {fileID: 1110191114}
   m_Layer: 5
-  m_Name: Image
+  m_Name: ThirdsImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1110191113
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3199,9 +3199,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSway
   lookAction: {fileID: 4769964313160762485, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
-  smooth: 5
-  swayMultiplier: 0.5
-  maxSway: 5
+  smooth: 4
+  swayMultiplier: 0.8
+  maxSway: 6
 --- !u!1 &1908406025
 GameObject:
   m_ObjectHideFlags: 0
