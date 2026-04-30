@@ -804,6 +804,7 @@ GameObject:
   m_Component:
   - component: {fileID: 701665728}
   - component: {fileID: 701665729}
+  - component: {fileID: 701665730}
   m_Layer: 0
   m_Name: Arms_Root
   m_TagString: Untagged
@@ -842,6 +843,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FollowCameraRotation
   cameraTransform: {fileID: 330585546}
   smooth: 25
+--- !u!114 &701665730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701665727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76032b834008a574bb1c3cc8b8b35504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponLag
+  cameraTransform: {fileID: 330585546}
+  positionLag: 0.05
+  returnSpeed: 8
+  velocityMultiplier: 0.02
+  maxOffset: 0.2
 --- !u!1001 &737929566
 PrefabInstance:
   m_ObjectHideFlags: 0
