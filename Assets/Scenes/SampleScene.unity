@@ -319,7 +319,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.031, z: 0}
+  m_LocalPosition: {x: 0, y: 2.111, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -803,6 +803,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 701665728}
+  - component: {fileID: 701665729}
   m_Layer: 0
   m_Name: Arms_Root
   m_TagString: Untagged
@@ -819,14 +820,28 @@ Transform:
   m_GameObject: {fileID: 701665727}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.031, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1066677794}
   - {fileID: 737929567}
-  m_Father: {fileID: 1908406026}
+  m_Father: {fileID: 1252589636}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &701665729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701665727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4235f24966fb8484b90e11e584a26721, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FollowCameraRotation
+  cameraTransform: {fileID: 330585546}
+  smooth: 25
 --- !u!1001 &737929566
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1945,11 +1960,12 @@ Transform:
   m_GameObject: {fileID: 1252589632}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1908406026}
+  - {fileID: 701665728}
+  - {fileID: 1990121743}
   - {fileID: 1324277757}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3201,8 +3217,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1435277440}
-  - {fileID: 701665728}
-  m_Father: {fileID: 1252589636}
+  m_Father: {fileID: 1990121743}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1908406027
 MonoBehaviour:
@@ -3218,7 +3233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineInputAxisController
   ScanRecursively: 1
   SuppressInputWhileBlending: 1
-  IgnoreTimeScale: 0
+  IgnoreTimeScale: 1
   m_ControllerManager:
     Controllers:
     - Name: Look X (Pan)
@@ -3525,6 +3540,55 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3390558720134950976, guid: 0e77b345e7b51194082cc231a01a45ac, type: 3}
+--- !u!1 &1990121742
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1990121743}
+  - component: {fileID: 1990121744}
+  m_Layer: 0
+  m_Name: CameraRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1990121743
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990121742}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1908406026}
+  m_Father: {fileID: 1252589636}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1990121744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990121742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 036646ce5bc3d34458450e6c89bf2707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HeadBobbing
+  moveAction: {fileID: 3615905555046828763, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
+  bobSpeed: 10
+  bobAmount: 0.05
+  smooth: 10
 --- !u!1 &2092151285
 GameObject:
   m_ObjectHideFlags: 0

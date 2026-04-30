@@ -134,4 +134,9 @@ public class PlayerMovement : MonoBehaviour
     {
         moveInput = context.ReadValue<Vector2>();
     }
+
+    public bool IsGrounded()
+    {
+        return playerController.isGrounded;
+    }
 }
