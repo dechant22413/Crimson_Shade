@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 dashDirection;
     private float dashForce;
 
+    public Vector3 CurrentVelocity;
 
     private CharacterController playerController;
     private Vector2 moveInput;
@@ -115,6 +116,8 @@ public class PlayerMovement : MonoBehaviour
         finalMove.y = verticalVelocity;
 
         playerController.Move(finalMove * Time.deltaTime);
+
+        CurrentVelocity = playerController.velocity;
     }
 
     private void HandleGravity()
