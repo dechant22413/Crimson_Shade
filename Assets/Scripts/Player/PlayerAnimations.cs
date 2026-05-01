@@ -18,7 +18,8 @@ public class PlayerAnimations : MonoBehaviour
     }
 
     [Header("References")]
-    public Animator playerAnimator;
+    public Animator leftArmAnimator;
+    public Animator rightArmAnimator;
 
     private static readonly int shoot = Animator.StringToHash("Shoot");
     private static readonly int dash = Animator.StringToHash("Dash");

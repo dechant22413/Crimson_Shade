@@ -322,7 +322,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 2.111, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1435277440}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 10.18, y: 0, z: 0}
 --- !u!114 &330585547
@@ -955,6 +956,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FollowCameraRotation
   cameraTransform: {fileID: 1435277440}
   smooth: 25
+  maxAngleOffset: 15
 --- !u!114 &701665730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2370,12 +2372,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1435277439}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.00000011920929, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1908406026}
+  m_Father: {fileID: 330585546}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1435277441
 MonoBehaviour:
@@ -3354,8 +3356,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.031, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1435277440}
+  m_Children: []
   m_Father: {fileID: 1990121743}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1908406027

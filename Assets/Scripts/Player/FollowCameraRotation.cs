@@ -3,9 +3,12 @@ using Unity.Cinemachine;
 
 public class FollowCameraRotation : MonoBehaviour
 {
+    [Header("References")]
     public Transform cameraTransform;
+
     [Header("Smoothing")]
     public float smooth = 12f;
+
     [Header("Lag Limit")]
     public float maxAngleOffset = 15f;
 

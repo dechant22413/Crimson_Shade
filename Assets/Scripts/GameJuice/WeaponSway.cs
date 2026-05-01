@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class WeaponSway : MonoBehaviour
 {
-    [Header("Input")]
+    [Header("References")]
     public InputActionReference lookAction;
 
     [Header("Sway Settings")]
