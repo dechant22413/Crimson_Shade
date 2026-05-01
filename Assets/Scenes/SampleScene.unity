@@ -3319,9 +3319,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSway
   lookAction: {fileID: 4769964313160762485, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
-  smooth: 4
-  swayMultiplier: 0.8
-  maxSway: 6
+  smooth: 15
+  swayMultiplier: 0.5
+  maxSway: 3
 --- !u!1 &1908406025
 GameObject:
   m_ObjectHideFlags: 0
