@@ -27,27 +27,27 @@ public class HeadBobbing : MonoBehaviour
     {
         Vector2 move = moveAction.action.ReadValue<Vector2>();
         float speed = move.magnitude;
-
         bool grounded = PlayerMovement.Instance != null && PlayerMovement.Instance.isGrounded;
-
 
         if (grounded && speed > 0.1f)
         {
             bobTimer += Time.deltaTime * bobSpeed * speed;
         }
+        else
+        {
+            // Timer sanft zurück auf nächsten Nulldurchgang schieben
+            bobTimer = Mathf.Lerp(bobTimer, Mathf.Round(bobTimer / (Mathf.PI * 2f)) * (Mathf.PI * 2f), Time.deltaTime * smooth);
+        }
 
         Vector3 targetOffset = Vector3.zero;
-
         if (grounded && speed > 0.1f)
         {
             float bobX = Mathf.Sin(bobTimer) * bobAmount * speed;
             float bobY = Mathf.Cos(bobTimer * 2f) * bobAmount * 0.5f * speed;
-
             targetOffset = new Vector3(bobX, bobY, 0f);
         }
 
         currentOffset = Vector3.Lerp(currentOffset, targetOffset, Time.deltaTime * smooth);
-
         transform.localPosition = baseLocalPos + currentOffset;
     }
 }
