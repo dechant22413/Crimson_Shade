@@ -954,7 +954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4235f24966fb8484b90e11e584a26721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FollowCameraRotation
-  cameraTransform: {fileID: 1435277440}
+  cameraTransform: {fileID: 330585546}
   smooth: 25
   maxAngleOffset: 15
 --- !u!114 &701665730
@@ -4121,6 +4121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HeadBobbing
   moveAction: {fileID: 3615905555046828763, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
+  cameraTransform: {fileID: 330585546}
   bobSpeed: 10
   bobAmount: 0.05
   idleBobSpeed: 1.5

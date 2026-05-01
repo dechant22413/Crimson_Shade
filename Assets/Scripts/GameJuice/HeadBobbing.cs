@@ -5,6 +5,7 @@ public class HeadBobbing : MonoBehaviour
 {
     [Header("References")]
     public InputActionReference moveAction;
+    public Transform cameraTransform;
 
     [Header("Walk Bob Settings")]
     public float bobSpeed = 10f;
@@ -52,9 +53,12 @@ public class HeadBobbing : MonoBehaviour
 
         if (walking)
         {
-            float bobX = Mathf.Sin(bobTimer) * bobAmount * speed;
-            float bobY = Mathf.Cos(bobTimer * 2f) * bobAmount * 0.5f * speed;
-            targetOffset = new Vector3(bobX, bobY, 0f);
+            float bobSide = Mathf.Sin(bobTimer) * bobAmount * speed;
+            float bobUp = Mathf.Cos(bobTimer * 2f) * bobAmount * 0.5f * speed;
+
+            // Offset in Camera Space berechnen, dann in Local Space des Camera Root umrechnen
+            Vector3 worldOffset = cameraTransform.right * bobSide + cameraTransform.up * bobUp;
+            targetOffset = transform.parent.InverseTransformDirection(worldOffset);
         }
         else if (grounded)
         {
