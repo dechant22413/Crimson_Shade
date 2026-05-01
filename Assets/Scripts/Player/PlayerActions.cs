@@ -22,6 +22,7 @@ public class PlayerActions : MonoBehaviour
     public InputActionReference dashAction;
     public InputActionReference hitAction;
     public InputActionReference powerUpAction;
+    public InputActionReference reloadAction;
 
     [Header("Gun Settings")]
     public int damage;
@@ -43,12 +44,15 @@ public class PlayerActions : MonoBehaviour
         dashAction.action.Enable();
         hitAction.action.Enable();
         powerUpAction.action.Enable();
+        reloadAction.action.Enable();
+        
 
         jumpAction.action.performed += Jump;
         shootAction.action.performed += Shoot;
         dashAction.action.performed += Dash;
         hitAction.action.performed += Hit;
         powerUpAction.action.performed += PowerUp;
+        reloadAction.action.performed += Reload;
 
     }
 
@@ -59,27 +63,33 @@ public class PlayerActions : MonoBehaviour
         dashAction.action.performed -= Dash;
         hitAction.action.performed -= Hit;
         powerUpAction.action.performed -= PowerUp;
+        reloadAction.action.performed -= Reload;
 
         jumpAction.action.Disable();
         shootAction.action.Disable();
         dashAction.action.Disable();
         hitAction.action.Disable();
         powerUpAction.action.Disable();
+        reloadAction.action.Disable();
     }
 
     private void Shoot(InputAction.CallbackContext context)
     {
-
+        PlayerAnimations.Instance.Shoot();
+    }
+    private void Reload(InputAction.CallbackContext context)
+    {
+        PlayerAnimations.Instance.Reload();
     }
 
     private void Hit(InputAction.CallbackContext context)
     {
-        
+        PlayerAnimations.Instance.Hit();
     }
 
     private void PowerUp(InputAction.CallbackContext context)
     {
-
+        
     }
 
     private void Dash(InputAction.CallbackContext context)
@@ -118,8 +128,5 @@ public class PlayerActions : MonoBehaviour
         }
     }
 
-    private void Reload()
-    {
 
-    }
 }
