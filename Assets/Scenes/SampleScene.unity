@@ -841,7 +841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4235f24966fb8484b90e11e584a26721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FollowCameraRotation
-  cameraTransform: {fileID: 330585546}
+  cameraTransform: {fileID: 1435277440}
   smooth: 25
 --- !u!114 &701665730
 MonoBehaviour:
@@ -3214,6 +3214,7 @@ GameObject:
   - component: {fileID: 1908406029}
   - component: {fileID: 1908406028}
   - component: {fileID: 1908406027}
+  - component: {fileID: 1908406030}
   m_Layer: 0
   m_Name: PlayerCamera
   m_TagString: Untagged
@@ -3355,6 +3356,18 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
+--- !u!114 &1908406030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908406025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78224cbab306e95449da2670cdfd6865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DisableCinemachineInputOnStart
 --- !u!1001 &1916597753
 PrefabInstance:
   m_ObjectHideFlags: 0

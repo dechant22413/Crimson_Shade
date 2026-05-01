@@ -1,23 +1,24 @@
 using UnityEngine;
+using Unity.Cinemachine;
 
 public class FollowCameraRotation : MonoBehaviour
 {
     public Transform cameraTransform;
-
     [Header("Smoothing")]
     public float smooth = 12f;
 
-    private bool initialized;
-
-    void LateUpdate()
+    void OnEnable()
     {
-        if (!initialized)
-        {
-            transform.rotation = cameraTransform.rotation;
-            initialized = true;
-            return;
-        }
+        CinemachineCore.CameraUpdatedEvent.AddListener(OnCameraUpdated);
+    }
 
+    void OnDisable()
+    {
+        CinemachineCore.CameraUpdatedEvent.RemoveListener(OnCameraUpdated);
+    }
+
+    void OnCameraUpdated(CinemachineBrain brain)
+    {
         transform.rotation = Quaternion.Slerp(
             transform.rotation,
             cameraTransform.rotation,
