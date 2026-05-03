@@ -2,15 +2,13 @@ using UnityEngine;
 
 public class PlayerKnife : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void OnAnimationStart()
     {
-        
+        PlayerAnimations.Instance.IsLeftArmPlaying = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnAnimationEnd()
     {
-        
+        PlayerAnimations.Instance.IsLeftArmPlaying = false;
     }
 }

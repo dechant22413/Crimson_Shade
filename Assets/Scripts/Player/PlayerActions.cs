@@ -37,6 +37,8 @@ public class PlayerActions : MonoBehaviour
     [Header("Jump Settings")]
     public float jumpForce;
 
+    private bool isAttacking = false;
+
     private void OnEnable()
     {
         jumpAction.action.Enable();
@@ -50,7 +52,10 @@ public class PlayerActions : MonoBehaviour
         jumpAction.action.performed += Jump;
         shootAction.action.performed += Shoot;
         dashAction.action.performed += Dash;
+
         hitAction.action.performed += Hit;
+        hitAction.action.canceled += HitCanceled;
+
         powerUpAction.action.performed += PowerUp;
         reloadAction.action.performed += Reload;
 
@@ -61,7 +66,10 @@ public class PlayerActions : MonoBehaviour
         jumpAction.action.performed -= Jump;
         shootAction.action.performed -= Shoot;
         dashAction.action.performed -= Dash;
+
         hitAction.action.performed -= Hit;
+        hitAction.action.canceled -= HitCanceled;
+
         powerUpAction.action.performed -= PowerUp;
         reloadAction.action.performed -= Reload;
 
@@ -75,16 +83,31 @@ public class PlayerActions : MonoBehaviour
 
     private void Shoot(InputAction.CallbackContext context)
     {
-        PlayerAnimations.Instance.Shoot();
+        if (PlayerAnimations.Instance.IsRightArmPlaying) return;
+        PlayerAnimations.Instance.PlayShoot();
     }
     private void Reload(InputAction.CallbackContext context)
     {
-        PlayerAnimations.Instance.Reload();
+        if (PlayerAnimations.Instance.IsRightArmPlaying) return;
+        PlayerAnimations.Instance.PlayReload();
     }
 
     private void Hit(InputAction.CallbackContext context)
     {
-        PlayerAnimations.Instance.Hit();
+        isAttacking = true;
+    }
+
+    private void HitCanceled(InputAction.CallbackContext context)
+    {
+        isAttacking = false;
+    }
+
+    private void Update()
+    {
+        if (PlayerAnimations.Instance.IsLeftArmPlaying) return;
+
+        if (isAttacking)
+            PlayerAnimations.Instance.PlayHit();
     }
 
     private void PowerUp(InputAction.CallbackContext context)

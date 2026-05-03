@@ -2,15 +2,13 @@ using UnityEngine;
 
 public class PlayerShotgun : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void OnAnimationStart()
     {
-        
+        PlayerAnimations.Instance.IsRightArmPlaying = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnAnimationEnd()
     {
-        
+        PlayerAnimations.Instance.IsRightArmPlaying = false;
     }
 }
