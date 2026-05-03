@@ -2354,6 +2354,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cdc1f55667a04d45b5f7a886bb67f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerKnife
+  attackLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  playerCam: {fileID: 330585545}
+  attackDistance: 3
+  attackDamage: 0
 --- !u!1 &849207863 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7493878742392398381, guid: 0e77b345e7b51194082cc231a01a45ac, type: 3}
