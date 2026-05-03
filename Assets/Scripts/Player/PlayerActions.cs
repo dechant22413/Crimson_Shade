@@ -112,7 +112,7 @@ public class PlayerActions : MonoBehaviour
         Vector3 moveDir = forward * input.y + right * input.x;
 
         if (moveDir == Vector3.zero)
-            moveDir = forward;
+            moveDir = - forward;
 
         moveDir.Normalize();
 
