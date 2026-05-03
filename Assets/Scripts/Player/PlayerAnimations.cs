@@ -17,6 +17,8 @@ public class PlayerAnimations : MonoBehaviour
     public bool IsLeftArmPlaying { get; set; }
     public bool IsRightArmPlaying { get; set; }
 
+    private int hitindex = 0;
+
     private static readonly int reload = Animator.StringToHash("Reload");
     private static readonly int shoot = Animator.StringToHash("Shoot");
     private static readonly int flip = Animator.StringToHash("Flip");
@@ -32,7 +34,13 @@ public class PlayerAnimations : MonoBehaviour
     public void PlayFingerRoll() => leftArmAnimator.SetTrigger(fingerRoll);
     public void PlayHit()
     {
-        int index = Random.Range(0, hitTriggers.Length);
-        leftArmAnimator.SetTrigger(hitTriggers[index]);
+        leftArmAnimator.SetTrigger(hitTriggers[hitindex]);
+
+        hitindex++;
+
+        if (hitindex > 2)
+        {
+            hitindex = 0;
+        }
     }
 }
