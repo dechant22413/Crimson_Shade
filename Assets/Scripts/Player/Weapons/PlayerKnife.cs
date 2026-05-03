@@ -7,12 +7,12 @@ public class PlayerKnife : MonoBehaviour
     public Camera playerCam;
 
     [Header("Knife Stats")]
-    public float attackDistance = 3f;
+    public float attackRange = 3f;
     public float attackDamage;
 
     public void Attack()
     {
-        if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out RaycastHit hit, attackDistance, attackLayer))
+        if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out RaycastHit hit, attackRange, attackLayer))
         {
             HitTarget(hit.point);
         }
