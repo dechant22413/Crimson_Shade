@@ -2219,7 +2219,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1063828087}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2622,7 +2622,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -9090841124329444039, guid: 8a249a2b5faddd1478803c69cdcd4967, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -72.20594
+      value: -72.205925
       objectReference: {fileID: 0}
     - target: {fileID: -9090841124329444039, guid: 8a249a2b5faddd1478803c69cdcd4967, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -2742,7 +2742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6769093190217610536, guid: 8a249a2b5faddd1478803c69cdcd4967, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0.5649942
+      value: 0.56499416
       objectReference: {fileID: 0}
     - target: {fileID: -6769093190217610536, guid: 8a249a2b5faddd1478803c69cdcd4967, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -2754,7 +2754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6601959745071072651, guid: 8a249a2b5faddd1478803c69cdcd4967, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 83.88188
+      value: 83.881874
       objectReference: {fileID: 0}
     - target: {fileID: -6601959745071072651, guid: 8a249a2b5faddd1478803c69cdcd4967, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -2806,11 +2806,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4062230309735122420, guid: 8a249a2b5faddd1478803c69cdcd4967, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 9.695753
+      value: 9.695752
       objectReference: {fileID: 0}
     - target: {fileID: -4062230309735122420, guid: 8a249a2b5faddd1478803c69cdcd4967, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -11.0358715
+      value: -11.035871
       objectReference: {fileID: 0}
     - target: {fileID: -4062230309735122420, guid: 8a249a2b5faddd1478803c69cdcd4967, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -2858,7 +2858,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3296678992748144085, guid: 8a249a2b5faddd1478803c69cdcd4967, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -3.7495334
+      value: -3.7495332
       objectReference: {fileID: 0}
     - target: {fileID: -3296678992748144085, guid: 8a249a2b5faddd1478803c69cdcd4967, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -2966,7 +2966,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 172796736788694006, guid: 8a249a2b5faddd1478803c69cdcd4967, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0.000014892493
+      value: 0.000014855094
       objectReference: {fileID: 0}
     - target: {fileID: 172796736788694006, guid: 8a249a2b5faddd1478803c69cdcd4967, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -3162,15 +3162,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9205654897710395915, guid: 8a249a2b5faddd1478803c69cdcd4967, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0.000014718594
+      value: 0.000014660018
       objectReference: {fileID: 0}
     - target: {fileID: 9205654897710395915, guid: 8a249a2b5faddd1478803c69cdcd4967, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0.00000739781
+      value: 0.000008199981
       objectReference: {fileID: 0}
     - target: {fileID: 9205654897710395915, guid: 8a249a2b5faddd1478803c69cdcd4967, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 20.849995
+      value: 20.849997
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3185,6 +3185,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8a249a2b5faddd1478803c69cdcd4967, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1876615017}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8a249a2b5faddd1478803c69cdcd4967, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1876615018}
   m_SourcePrefab: {fileID: 100100000, guid: 8a249a2b5faddd1478803c69cdcd4967, type: 3}
 --- !u!4 &1066677794 stripped
 Transform:
@@ -6503,10 +6506,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19053bfdab4b100469434e71dcc4f987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShotgun
-  bulletPrefab: {fileID: 0}
-  bulletSpawn: {fileID: 0}
-  bulletVelocity: 0
-  bulletRange: 0
+  attackLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  playerCam: {fileID: 330585545}
+  fireImpulse: {fileID: 1876615018}
+  shotgunAnimations: {fileID: 1876615016}
+  magazinCapacity: 2
+  lifeDrain: 0
+  attackRange: 20
+  attackDamage: 10
+  pelletCount: 8
+  spreadAngle: 10
+--- !u!114 &1876615018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1876615014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineImpulseSource
+  ImpulseDefinition:
+    ImpulseChannel: 1
+    ImpulseShape: 1
+    CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ImpulseDuration: 0.2
+    ImpulseType: 0
+    DissipationRate: 0.25
+    RawSignal: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    RepeatMode: 0
+    Randomize: 1
+    TimeEnvelope:
+      AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      AttackTime: 0
+      SustainTime: 0.2
+      DecayTime: 0.7
+      ScaleWithImpact: 1
+      HoldForever: 0
+    ImpactRadius: 100
+    DirectionMode: 0
+    DissipationMode: 2
+    DissipationDistance: 100
+    PropagationSpeed: 343
+  DefaultVelocity: {x: 0, y: -0.2, z: 0}
 --- !u!1 &1908406025
 GameObject:
   m_ObjectHideFlags: 0
@@ -6518,6 +6582,7 @@ GameObject:
   - component: {fileID: 1908406026}
   - component: {fileID: 1908406029}
   - component: {fileID: 1908406028}
+  - component: {fileID: 1908406031}
   - component: {fileID: 1908406027}
   - component: {fileID: 1908406030}
   m_Layer: 0
@@ -6672,6 +6737,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78224cbab306e95449da2670cdfd6865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DisableCinemachineInputOnStart
+--- !u!114 &1908406031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908406025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineImpulseListener
+  ApplyAfter: 2
+  ChannelMask: 1
+  Gain: 1
+  Use2DDistance: 0
+  UseCameraSpace: 1
+  SignalCombinationMode: 0
+  ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &1926022879 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2654588731736316862, guid: 0e77b345e7b51194082cc231a01a45ac, type: 3}
