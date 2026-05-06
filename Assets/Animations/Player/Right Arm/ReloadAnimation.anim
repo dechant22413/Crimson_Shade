@@ -16373,15 +16373,15 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 2.0833333
-    functionName: OnAnimationEnd
+  - time: 0.625
+    functionName: Reload
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 2.0833333
-    functionName: Reload
+    functionName: OnAnimationEnd
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

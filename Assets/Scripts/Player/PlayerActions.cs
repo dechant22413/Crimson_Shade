@@ -32,7 +32,7 @@ public class PlayerActions : MonoBehaviour
     [Header("Dash Settings")]
     public float dashForce = 20f;
     public float dashDuration = 0.2f;
-    public int dashCount;
+    public float dashStrain = 10;
 
     [Header("Jump Settings")]
     public float jumpForce;
@@ -117,6 +117,12 @@ public class PlayerActions : MonoBehaviour
 
     private void Dash(InputAction.CallbackContext context)
     {
+        if(PlayerStats.Instance.GetStamina() < dashStrain)
+        {
+            Debug.Log("Not Enough Stamina");
+            return;
+        }
+
         Debug.Log("Dash");
 
         Vector2 input = PlayerMovement.Instance.GetMoveInput();
@@ -140,6 +146,8 @@ public class PlayerActions : MonoBehaviour
         moveDir.Normalize();
 
         PlayerMovement.Instance.StartDash(moveDir, dashForce, dashDuration);
+
+        PlayerStats.Instance.UseStamina(dashStrain);
     }
 
     private void Jump(InputAction.CallbackContext context)

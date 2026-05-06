@@ -14,7 +14,7 @@ public class PlayerShotgun : MonoBehaviour
 
     [Header("Shotgun Stats")]
     public int magazinCapacity = 2;
-    public float lifeDrain;
+    public int lifeDrain = 30;
     public float attackRange = 20f;
     public float attackDamage = 10f;
     public int pelletCount = 8;
@@ -59,10 +59,20 @@ public class PlayerShotgun : MonoBehaviour
             Debug.Log("Magazin already full");
             return;
         }
+
+        if (PlayerStats.Instance.GetLifePoints() <= lifeDrain)
+        {
+            shotgunAnimations.Play("Idle", 0, 0f);
+            PlayerAnimations.Instance.IsRightArmPlaying = false;
+            Debug.Log("Not Enough LifePoints to reload");
+            return;
+        }
     }
 
     public void Reload()
     {
+        PlayerStats.Instance.ChangeLifePoints(lifeDrain * (-1) * (magazinCapacity - ammoCount));
+
         ammoCount = magazinCapacity;
     }
 
