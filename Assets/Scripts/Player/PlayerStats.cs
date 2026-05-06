@@ -30,6 +30,7 @@ public class PlayerStats : MonoBehaviour
 
     [Header("PowerUp Settings")]
     public float maxPowerUp = 5;
+    public int powerUpHeal;
     public float powerUpSmooth = 5f;
     [SerializeField] private float currentPowerUp;
 
@@ -108,16 +109,22 @@ public class PlayerStats : MonoBehaviour
 
     public void ChangePowerUp(int amount)
     {
+        if (currentPowerUp == maxPowerUp)
+        {
+            ActivatePowerUp();
+            return;
+        }
+        
         currentPowerUp = Mathf.Clamp(currentPowerUp + amount, 0, maxPowerUp);
         powerUpTarget = currentPowerUp / maxPowerUp;
-
-        if (currentPowerUp == maxPowerUp)  ActivatePowerUp();
     }
 
     public void ActivatePowerUp()
     {
         currentPowerUp = 0;
         powerUpTarget = currentPowerUp / maxPowerUp;
+
+        ChangeLifePoints(powerUpHeal);
     }
 
     public float GetStamina() => currentStamina;

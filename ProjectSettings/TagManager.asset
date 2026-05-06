@@ -13,9 +13,9 @@ TagManager:
   - UI
   - Ground
   - Weapon
-  - Hittable
-  - 
-  - 
+  - EnemyBodyHit
+  - EnemyHeadHit
+  - EnvironmentHit
   - 
   - 
   - 

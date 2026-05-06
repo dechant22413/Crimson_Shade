@@ -1,13 +1,13 @@
-using System.Collections;
 using Unity.Cinemachine;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class PlayerShotgun : MonoBehaviour
 {
     [Header("References")]
-    public LayerMask attackLayer;
+    public LayerMask enemyBodyHit;
+    public LayerMask enemyHeadHit;
+    public LayerMask environmentHit;
     public Camera playerCam;
     public CinemachineImpulseSource fireImpulse;
     public Animator shotgunAnimations;
@@ -19,6 +19,12 @@ public class PlayerShotgun : MonoBehaviour
     public float attackDamage = 10f;
     public int pelletCount = 8;
     public float spreadAngle = 10f;
+
+    [Header("Ammo UI")]
+    public Image ammoIndicatorLeft;
+    public Image ammoIndicatorRight;
+    public Color ammoActiveColor = Color.white;
+    public Color ammoEmptyColor = new Color(1f, 1f, 1f, 0.2f);
 
     private int ammoCount;
 
@@ -33,21 +39,45 @@ public class PlayerShotgun : MonoBehaviour
         {
             shotgunAnimations.Play("Idle", 0, 0f);
             PlayerAnimations.Instance.IsRightArmPlaying = false;
-            Debug.Log("Magazin Empty");
             return;
         }
 
         ammoCount--;
         fireImpulse.GenerateImpulse();
 
+        LayerMask combined = enemyBodyHit | enemyHeadHit | environmentHit;
+
         for (int i = 0; i < pelletCount; i++)
         {
             Vector3 direction = GetSpreadDirection();
-            if (Physics.Raycast(playerCam.transform.position, direction, out RaycastHit hit, attackRange, attackLayer))
+            if (Physics.Raycast(playerCam.transform.position, direction, out RaycastHit hit, attackRange, combined))
             {
-                HitTarget(hit.point, hit.collider);
+                int layer = hit.collider.gameObject.layer;
+                if (((1 << layer) & enemyBodyHit) != 0)
+                    EnemyBodyHit(hit.point, hit.collider);
+                else if (((1 << layer) & enemyHeadHit) != 0)
+                    EnemyHeadHit(hit.point, hit.collider);
+                else if (((1 << layer) & environmentHit) != 0)
+                    EnvironmentHit(hit.point);
             }
         }
+
+        UpdateAmmoUI();
+    }
+
+    private void EnemyBodyHit(Vector3 pos, Collider col)
+    {
+        Debug.Log($"Body Hit {col.name} for {attackDamage}");
+    }
+
+    private void EnemyHeadHit(Vector3 pos, Collider col)
+    {
+        Debug.Log($"Head Hit {col.name} for {attackDamage}");
+    }
+
+    private void EnvironmentHit(Vector3 pos)
+    {
+        Debug.Log("Environment Hit");
     }
 
     public void InitializeReload()
@@ -74,11 +104,16 @@ public class PlayerShotgun : MonoBehaviour
         PlayerStats.Instance.ChangeLifePoints(lifeDrain * (-1) * (magazinCapacity - ammoCount));
 
         ammoCount = magazinCapacity;
+
+        UpdateAmmoUI();
     }
 
-    private void HitTarget(Vector3 pos, Collider col)
+    private void UpdateAmmoUI()
     {
-        Debug.Log($"Pellet hit {col.name} for {attackDamage} damage");
+        if (ammoIndicatorLeft != null)
+            ammoIndicatorLeft.color = ammoCount >= 2 ? ammoActiveColor : ammoEmptyColor;
+        if (ammoIndicatorRight != null)
+            ammoIndicatorRight.color = ammoCount >= 1 ? ammoActiveColor : ammoEmptyColor;
     }
 
     private Vector3 GetSpreadDirection()
