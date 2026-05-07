@@ -112,7 +112,13 @@ public class PlayerActions : MonoBehaviour
 
     private void PowerUp(InputAction.CallbackContext context)
     {
-        
+        if (PlayerStats.Instance.GetPowerUp() < PlayerStats.Instance.maxPowerUp)
+        {
+            Debug.Log("Not Enough PowerUp");
+            return;
+        }
+
+        PlayerStats.Instance.ActivatePowerUp();
     }
 
     private void Dash(InputAction.CallbackContext context)

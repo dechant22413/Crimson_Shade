@@ -92,12 +92,22 @@ public class PlayerShotgun : MonoBehaviour
         Debug.Log("Environment Hit");
     }
 
+    public void OnAnimationStart()
+    {
+        PlayerAnimations.Instance.IsRightArmPlaying = true;
+    }
+
+    public void OnAnimationEnd()
+    {
+        PlayerAnimations.Instance.IsRightArmPlaying = false;
+    }
+
     public void InitializeReload()
     {
         if (ammoCount == magazinCapacity)
         {
             shotgunAnimations.Play("Idle", 0, 0f);
-            PlayerAnimations.Instance.IsRightArmPlaying = false;
+            OnAnimationEnd();
             Debug.Log("Magazin already full");
             return;
         }
@@ -105,7 +115,7 @@ public class PlayerShotgun : MonoBehaviour
         if (PlayerStats.Instance.GetLifePoints() <= lifeDrain * (magazinCapacity - ammoCount))
         {
             shotgunAnimations.Play("Idle", 0, 0f);
-            PlayerAnimations.Instance.IsRightArmPlaying = false;
+            OnAnimationEnd();
             Debug.Log("Not Enough LifePoints to reload");
             return;
         }
@@ -160,18 +170,6 @@ public class PlayerShotgun : MonoBehaviour
         Vector3 spread = playerCam.transform.right * randomCircle.x
                        + playerCam.transform.up * randomCircle.y;
         return (forward + spread).normalized;
-    }
-
-
-
-    public void OnAnimationStart()
-    {
-        PlayerAnimations.Instance.IsRightArmPlaying = true;
-    }
-
-    public void OnAnimationEnd()
-    {
-        PlayerAnimations.Instance.IsRightArmPlaying = false;
     }
 
     private void OnDrawGizmosSelected()

@@ -109,12 +109,6 @@ public class PlayerStats : MonoBehaviour
 
     public void ChangePowerUp(int amount)
     {
-        if (currentPowerUp == maxPowerUp)
-        {
-            ActivatePowerUp();
-            return;
-        }
-        
         currentPowerUp = Mathf.Clamp(currentPowerUp + amount, 0, maxPowerUp);
         powerUpTarget = currentPowerUp / maxPowerUp;
     }
@@ -129,4 +123,6 @@ public class PlayerStats : MonoBehaviour
 
     public float GetStamina() => currentStamina;
     public float GetLifePoints() => currentLifePoints;
+
+    public float GetPowerUp() => currentPowerUp;
 }
