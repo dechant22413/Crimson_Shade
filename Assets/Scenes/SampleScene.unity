@@ -6211,8 +6211,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 435.617, y: -191}
-  m_SizeDelta: {x: 297.235, y: 38}
+  m_AnchoredPosition: {x: 429.066, y: -191}
+  m_SizeDelta: {x: 284.134, y: 38}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1555368210
 MonoBehaviour:
@@ -7778,6 +7778,7 @@ MonoBehaviour:
   environmentHit:
     serializedVersion: 2
     m_Bits: 1024
+  container: {fileID: 1680033192}
   playerCam: {fileID: 330585545}
   fireImpulse: {fileID: 1876615018}
   shotgunAnimations: {fileID: 1876615016}
@@ -7791,6 +7792,9 @@ MonoBehaviour:
   ammoIndicatorRight: {fileID: 1300250502}
   ammoActiveColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   ammoEmptyColor: {r: 0, g: 0, b: 0, a: 0.5019608}
+  spreadAmount: 60
+  expandSpeed: 25
+  contractSpeed: 15
 --- !u!114 &1876615018
 MonoBehaviour:
   m_ObjectHideFlags: 0

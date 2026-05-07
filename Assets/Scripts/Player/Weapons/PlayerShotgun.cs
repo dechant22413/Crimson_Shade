@@ -1,6 +1,7 @@
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class PlayerShotgun : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PlayerShotgun : MonoBehaviour
     public LayerMask enemyBodyHit;
     public LayerMask enemyHeadHit;
     public LayerMask environmentHit;
+    public RectTransform container;
     public Camera playerCam;
     public CinemachineImpulseSource fireImpulse;
     public Animator shotgunAnimations;
@@ -26,11 +28,20 @@ public class PlayerShotgun : MonoBehaviour
     public Color ammoActiveColor = Color.white;
     public Color ammoEmptyColor = new Color(1f, 1f, 1f, 0.2f);
 
+    [Header("Crosshair Spread Settings")]
+    public float spreadAmount = 60f;
+    public float expandSpeed = 20f;
+    public float contractSpeed = 8f;
+
     private int ammoCount;
+    private float baseWidth;
+    private Coroutine spreadCoroutine;
 
     private void Start()
     {
         ammoCount = magazinCapacity;
+
+        baseWidth = container.sizeDelta.x;
     }
 
     public void Attack()
@@ -44,6 +55,7 @@ public class PlayerShotgun : MonoBehaviour
 
         ammoCount--;
         fireImpulse.GenerateImpulse();
+        Spread();
 
         LayerMask combined = enemyBodyHit | enemyHeadHit | environmentHit;
 
@@ -90,7 +102,7 @@ public class PlayerShotgun : MonoBehaviour
             return;
         }
 
-        if (PlayerStats.Instance.GetLifePoints() <= lifeDrain)
+        if (PlayerStats.Instance.GetLifePoints() <= lifeDrain * (magazinCapacity - ammoCount))
         {
             shotgunAnimations.Play("Idle", 0, 0f);
             PlayerAnimations.Instance.IsRightArmPlaying = false;
@@ -106,6 +118,31 @@ public class PlayerShotgun : MonoBehaviour
         ammoCount = magazinCapacity;
 
         UpdateAmmoUI();
+    }
+
+    public void Spread()
+    {
+        if (spreadCoroutine != null) StopCoroutine(spreadCoroutine);
+        spreadCoroutine = StartCoroutine(SpreadRoutine());
+    }
+
+    private IEnumerator SpreadRoutine()
+    {
+        float targetWidth = baseWidth + spreadAmount;
+
+        while (Mathf.Abs(container.sizeDelta.x - targetWidth) > 0.5f)
+        {
+            container.sizeDelta = new Vector2(Mathf.Lerp(container.sizeDelta.x, targetWidth, Time.deltaTime * expandSpeed), container.sizeDelta.y);
+            yield return null;
+        }
+
+        while (Mathf.Abs(container.sizeDelta.x - baseWidth) > 0.1f)
+        {
+            container.sizeDelta = new Vector2(Mathf.Lerp(container.sizeDelta.x, baseWidth, Time.deltaTime * contractSpeed), container.sizeDelta.y);
+            yield return null;
+        }
+
+        container.sizeDelta = new Vector2(baseWidth, container.sizeDelta.y);
     }
 
     private void UpdateAmmoUI()
