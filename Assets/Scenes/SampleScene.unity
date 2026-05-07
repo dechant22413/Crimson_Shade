@@ -5081,6 +5081,7 @@ GameObject:
   - component: {fileID: 1300250501}
   - component: {fileID: 1300250503}
   - component: {fileID: 1300250502}
+  - component: {fileID: 1300250504}
   m_Layer: 5
   m_Name: AimingCircle_Right
   m_TagString: Untagged
@@ -5145,6 +5146,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1300250500}
   m_CullTransparentMesh: 1
+--- !u!114 &1300250504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300250500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aabc4d58c2c4b54f8218e76fd3c4ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PopWobbleJuice
+  continuousWobble: 0
+  popScale: 1.2
+  popDuration: 0.1
+  popOnStart: 0
+  wobbleSpeed: 8
+  wobbleScale: 1.05
+  popOnEnable: 0
 --- !u!1001 &1305103896
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8733,6 +8753,7 @@ GameObject:
   - component: {fileID: 2129349106}
   - component: {fileID: 2129349108}
   - component: {fileID: 2129349107}
+  - component: {fileID: 2129349109}
   m_Layer: 5
   m_Name: AimingCircle_Left
   m_TagString: Untagged
@@ -8797,6 +8818,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2129349105}
   m_CullTransparentMesh: 1
+--- !u!114 &2129349109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129349105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aabc4d58c2c4b54f8218e76fd3c4ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PopWobbleJuice
+  continuousWobble: 0
+  popScale: 1.2
+  popDuration: 0.1
+  popOnStart: 0
+  wobbleSpeed: 8
+  wobbleScale: 1.05
+  popOnEnable: 0
 --- !u!1 &2129356754
 GameObject:
   m_ObjectHideFlags: 0

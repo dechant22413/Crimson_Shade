@@ -56,6 +56,7 @@ public class PlayerShotgun : MonoBehaviour
         ammoCount--;
         fireImpulse.GenerateImpulse();
         Spread();
+        UpdateAmmoUI();
 
         LayerMask combined = enemyBodyHit | enemyHeadHit | environmentHit;
 
@@ -73,8 +74,6 @@ public class PlayerShotgun : MonoBehaviour
                     EnvironmentHit(hit.point);
             }
         }
-
-        UpdateAmmoUI();
     }
 
     private void EnemyBodyHit(Vector3 pos, Collider col)
@@ -128,6 +127,12 @@ public class PlayerShotgun : MonoBehaviour
         ammoCount = magazinCapacity;
 
         UpdateAmmoUI();
+
+        if (ammoIndicatorLeft.GetComponent<PopWobbleJuice>() != null)
+        {
+            ammoIndicatorLeft.GetComponent<PopWobbleJuice>().StartPop();
+            ammoIndicatorRight.GetComponent<PopWobbleJuice>().StartPop();
+        }
     }
 
     public void Spread()
