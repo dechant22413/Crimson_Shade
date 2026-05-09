@@ -79,11 +79,19 @@ public class PlayerShotgun : MonoBehaviour
     private void EnemyBodyHit(Vector3 pos, Collider col)
     {
         Debug.Log($"Body Hit {col.name} for {attackDamage}");
+
+        EnemyBase enemy = col.GetComponentInParent<EnemyBase>();
+        if (enemy != null)
+            enemy.TakeDamage(attackDamage);
     }
 
     private void EnemyHeadHit(Vector3 pos, Collider col)
     {
         Debug.Log($"Head Hit {col.name} for {attackDamage}");
+
+        EnemyBase enemy = col.GetComponentInParent<EnemyBase>();
+        if (enemy != null)
+            enemy.TakeDamage(attackDamage * 2f);
     }
 
     private void EnvironmentHit(Vector3 pos)
