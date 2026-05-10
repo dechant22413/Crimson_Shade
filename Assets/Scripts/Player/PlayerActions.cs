@@ -118,6 +118,12 @@ public class PlayerActions : MonoBehaviour
             return;
         }
 
+        if(PlayerStats.Instance.GetLifePoints() ==PlayerStats.Instance.maxLifePoints)
+        {
+            Debug.Log("Already full Health");
+            return;
+        }
+
         PlayerStats.Instance.ActivatePowerUp();
     }
 
