@@ -4762,7 +4762,7 @@ PrefabInstance:
     - target: {fileID: 895425838269697267, guid: 2aa35e5710fbc9f4789f2442973a03c6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: b89935c83ff0df844959c44f594148c1, type: 2}
+      objectReference: {fileID: 2100000, guid: 0b9b2ce309e6af44b8bdc9dded970b36, type: 2}
     - target: {fileID: 919132149155446097, guid: 2aa35e5710fbc9f4789f2442973a03c6, type: 3}
       propertyPath: m_Name
       value: BigChurch002
@@ -4774,7 +4774,7 @@ PrefabInstance:
     - target: {fileID: 1738776581880846596, guid: 2aa35e5710fbc9f4789f2442973a03c6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: b89935c83ff0df844959c44f594148c1, type: 2}
+      objectReference: {fileID: 2100000, guid: 7fb57cfbf2cf3244fb00f3c9c6010b60, type: 2}
     - target: {fileID: 1746654310787607633, guid: 2aa35e5710fbc9f4789f2442973a03c6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -11742,7 +11742,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 63f425f038d5cb147ad71894ba699468, type: 2}
+  - {fileID: 2100000, guid: 081f0b459bedf25448e5ab1af8d01080, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
