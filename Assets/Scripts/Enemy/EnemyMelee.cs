@@ -1,18 +1,24 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyMelee : EnemyBase
 {
+    [Header("Animation")]
+    public Animator animator;
+
     [Header("Patrol Settings")]
     public float walkPointRange = 10f;
     public float waitAtPointDuration = 1.5f;
-
     public LayerMask groundLayer;
 
     [Header("Melee Settings")]
     public float attackDamage = 20f;
-    public float timeBetweenAttacks = 1f;
     public float firstAttackDelay = 0.8f;
+
+    private static readonly int speedHash = Animator.StringToHash("Speed");
+    private static readonly int attackHash = Animator.StringToHash("Attack");
+    private static readonly int isAttackingHash = Animator.StringToHash("IsAttacking");
 
     private Vector3 walkPointA;
     private Vector3 walkPointB;
@@ -21,21 +27,52 @@ public class EnemyMelee : EnemyBase
     private bool goingToB;
     private bool alreadyAttacked;
     private bool firstAttackDone;
+    private float timeBetweenAttacks;
     private float waitTimer;
     private bool isWaiting;
 
+    protected override void Start()
+    {
+        base.Start();
+
+        foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips)
+        {
+            if (clip.name == "Ghoul_Standing_Attack_001")
+            {
+                timeBetweenAttacks = clip.length;
+                break;
+            }
+        }
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        animator.SetFloat(speedHash, agent.velocity.magnitude);
+    }
+
+    protected override void UpdateState()
+    {
+        if (alreadyAttacked) return;
+        base.UpdateState();
+    }
+
     protected override void OnStateChanged(EnemyState newState)
     {
-        base.OnStateChanged(newState); // Speed updaten aus EnemyBase
+        base.OnStateChanged(newState);
 
         if (newState == EnemyState.Attack && !firstAttackDone)
         {
             alreadyAttacked = true;
             firstAttackDone = true;
-            Invoke(nameof(ResetAttack), firstAttackDelay);
+            Invoke(nameof(StartFirstAttack), firstAttackDelay);
         }
+
         if (newState == EnemyState.Chase || newState == EnemyState.Patrol)
+        {
             firstAttackDone = false;
+            animator.SetBool(isAttackingHash, false);
+        }
     }
 
     protected override void Inactive()
@@ -46,7 +83,6 @@ public class EnemyMelee : EnemyBase
     protected override void Idle()
     {
         agent.SetDestination(transform.position);
-        // Idle Animation hier später
     }
 
     protected override void Patrol()
@@ -95,15 +131,27 @@ public class EnemyMelee : EnemyBase
 
         if (!alreadyAttacked)
         {
-            // Melee Schaden
-            PlayerStats.Instance.ChangeLifePoints(-(int)attackDamage);
-
+            animator.SetBool(isAttackingHash, true);
+            animator.ResetTrigger(attackHash);
+            animator.SetTrigger(attackHash);
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
 
+    public void OnAttackHit()
+    {
+        float dist = Vector3.Distance(transform.position, player.position);
+        if (dist <= attackRange)
+            PlayerStats.Instance.ChangeLifePoints(-(int)attackDamage);
+    }
+
     private void ResetAttack()
+    {
+        alreadyAttacked = false;
+    }
+
+    private void StartFirstAttack()
     {
         alreadyAttacked = false;
     }
@@ -113,20 +161,18 @@ public class EnemyMelee : EnemyBase
         Vector3 pointA = GetValidWalkPoint();
         Vector3 pointB = GetValidWalkPoint();
 
-        Debug.Log($"PointA: {pointA}, PointB: {pointB}");
-
         if (pointA != Vector3.zero && pointB != Vector3.zero)
         {
             walkPointA = pointA;
             walkPointB = pointB;
             walkPointsSet = true;
-            Debug.Log("Walkpoints gesetzt!");
         }
         else
         {
             Debug.LogWarning("Keine gültigen Walkpoints gefunden – groundLayer korrekt gesetzt?");
         }
     }
+
     private Vector3 GetValidWalkPoint()
     {
         for (int i = 0; i < 10; i++)
@@ -142,7 +188,6 @@ public class EnemyMelee : EnemyBase
 
             if (Physics.Raycast(candidate, Vector3.down, out RaycastHit rayHit, 20f, groundLayer))
             {
-                // rayHit.point ist der echte Bodenpunkt
                 if (NavMesh.SamplePosition(rayHit.point, out NavMeshHit navHit, 2f, NavMesh.AllAreas))
                     return navHit.position;
             }
