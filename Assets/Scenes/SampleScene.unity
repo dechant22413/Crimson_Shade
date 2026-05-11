@@ -3807,6 +3807,67 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 654289469}
   m_Mesh: {fileID: 6894428203817054813, guid: 77629db80ec33fc4f8039451b51c431a, type: 3}
+--- !u!1001 &656802656
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 65924eb22f0d0284fa4f767d53e28dd6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.55
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 65924eb22f0d0284fa4f767d53e28dd6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 65924eb22f0d0284fa4f767d53e28dd6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -14.26
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 65924eb22f0d0284fa4f767d53e28dd6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 65924eb22f0d0284fa4f767d53e28dd6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 65924eb22f0d0284fa4f767d53e28dd6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 65924eb22f0d0284fa4f767d53e28dd6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 65924eb22f0d0284fa4f767d53e28dd6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 65924eb22f0d0284fa4f767d53e28dd6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 65924eb22f0d0284fa4f767d53e28dd6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 65924eb22f0d0284fa4f767d53e28dd6, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6f7b5cdfacb27a84a957a5c7c2205d98, type: 2}
+    - target: {fileID: 919132149155446097, guid: 65924eb22f0d0284fa4f767d53e28dd6, type: 3}
+      propertyPath: m_Name
+      value: Little Bush
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 65924eb22f0d0284fa4f767d53e28dd6, type: 3}
 --- !u!1 &657515205 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2040254050740271484, guid: 2aa35e5710fbc9f4789f2442973a03c6, type: 3}
@@ -5286,7 +5347,7 @@ PrefabInstance:
     - target: {fileID: -678588488315902003, guid: a8252b4a4dd63e441aa047458a5ca388, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 0b9b2ce309e6af44b8bdc9dded970b36, type: 2}
+      objectReference: {fileID: 2100000, guid: 7fb57cfbf2cf3244fb00f3c9c6010b60, type: 2}
     - target: {fileID: 919132149155446097, guid: a8252b4a4dd63e441aa047458a5ca388, type: 3}
       propertyPath: m_Name
       value: StarterChapel002
@@ -13435,3 +13496,4 @@ SceneRoots:
   - {fileID: 829004599}
   - {fileID: 327242724}
   - {fileID: 395893241}
+  - {fileID: 656802656}
