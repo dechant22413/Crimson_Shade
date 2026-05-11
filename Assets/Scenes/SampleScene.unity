@@ -2392,8 +2392,8 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: -5063223942988036812, guid: 131bab841dd64224f844348e81a0269b, type: 3}
   m_PrefabInstance: {fileID: 1051638007}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &406293470
-BoxCollider:
+--- !u!64 &406293470
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2410,9 +2410,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.04449297, y: 0.044492945, z: 0.055937655}
-  m_Center: {x: 0.32604435, y: -0.000000059604606, z: 0.028197762}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7994650926060863905, guid: 131bab841dd64224f844348e81a0269b, type: 3}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -13051,7 +13052,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1, y: -0.5, z: 1}
-  m_LocalScale: {x: 100, y: 1, z: 100}
+  m_LocalScale: {x: 120, y: 1, z: 120}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
