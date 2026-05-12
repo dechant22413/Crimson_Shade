@@ -52,7 +52,7 @@ public class EnemyMelee : EnemyBase
             base.Update();
             float speed = Mathf.Clamp01(agent.velocity.magnitude / chaseSpeed);
             float currentSpeed = animator.GetFloat(speedHash);
-            float damp = speed < currentSpeed ? 0.35f : 0f;
+            float damp = speed < currentSpeed ? 0.15f : 0f;
             animator.SetFloat(speedHash, speed, damp, Time.deltaTime);
         }
     }
