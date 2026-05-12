@@ -429,6 +429,7 @@ MonoBehaviour:
   startState: 2
   currentState: 0
   animator: {fileID: 1295568067}
+  attackClipName: Ghoul_Standing_Attack_001
   walkPointRange: 10
   waitAtPointDuration: 5
   groundLayer:
@@ -445,14 +446,14 @@ NavMeshAgent:
   m_GameObject: {fileID: 189386929}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 1
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 500
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: -0.08333337
@@ -3647,7 +3648,7 @@ Animator:
   m_GameObject: {fileID: 807941736}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7a376584b0afa154dbf3d007ce40204c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0da79d5432cfe8e4b9a30804cbbc03f8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

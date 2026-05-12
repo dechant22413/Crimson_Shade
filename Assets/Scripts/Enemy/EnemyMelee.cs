@@ -6,6 +6,7 @@ public class EnemyMelee : EnemyBase
 {
     [Header("Animation")]
     public Animator animator;
+    public string attackClipName = "Ghoul_Standing_Attack_001";
 
     [Header("Patrol Settings")]
     public float walkPointRange = 10f;
@@ -37,7 +38,7 @@ public class EnemyMelee : EnemyBase
 
         foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips)
         {
-            if (clip.name == "Ghoul_Standing_Attack_001")
+            if (clip.name == attackClipName)
             {
                 timeBetweenAttacks = clip.length;
                 break;
@@ -47,8 +48,13 @@ public class EnemyMelee : EnemyBase
 
     protected override void Update()
     {
-        base.Update();
-        animator.SetFloat(speedHash, agent.velocity.magnitude);
+        {
+            base.Update();
+            float speed = Mathf.Clamp01(agent.velocity.magnitude / chaseSpeed);
+            float currentSpeed = animator.GetFloat(speedHash);
+            float damp = speed < currentSpeed ? 0.35f : 0f;
+            animator.SetFloat(speedHash, speed, damp, Time.deltaTime);
+        }
     }
 
     protected override void UpdateState()
@@ -75,53 +81,40 @@ public class EnemyMelee : EnemyBase
         }
     }
 
-    protected override void Inactive()
-    {
-        agent.SetDestination(transform.position);
-    }
-
-    protected override void Idle()
-    {
-        agent.SetDestination(transform.position);
-    }
+    protected override void Inactive() => agent.SetDestination(transform.position);
+    protected override void Idle() => agent.SetDestination(transform.position);
 
     protected override void Patrol()
     {
-        if (!walkPointsSet)
-            SearchWalkPoints();
+        if (!walkPointsSet) SearchWalkPoints();
 
-        if (walkPointsSet)
+        if (!walkPointsSet) return;
+
+        if (isWaiting)
         {
-            if (isWaiting)
+            waitTimer -= Time.deltaTime;
+            if (waitTimer <= 0f) isWaiting = false;
+            return;
+        }
+
+        if (CanUpdateNav())
+        {
+            currentWalkPoint = goingToB ? walkPointB : walkPointA;
+            agent.SetDestination(currentWalkPoint);
+
+            if ((transform.position - currentWalkPoint).magnitude < 1f)
             {
-                waitTimer -= Time.deltaTime;
-                if (waitTimer <= 0f)
-                    isWaiting = false;
-                return;
-            }
-
-            if (CanUpdateNav())
-            {
-                currentWalkPoint = goingToB ? walkPointB : walkPointA;
-                agent.SetDestination(currentWalkPoint);
-
-                if ((transform.position - currentWalkPoint).magnitude < 1f)
-                {
-                    goingToB = !goingToB;
-                    isWaiting = true;
-                    waitTimer = waitAtPointDuration;
-
-                    if (!goingToB)
-                        walkPointsSet = false;
-                }
+                goingToB = !goingToB;
+                isWaiting = true;
+                waitTimer = waitAtPointDuration;
+                if (!goingToB) walkPointsSet = false;
             }
         }
     }
 
     protected override void Chase()
     {
-        if (CanUpdateNav())
-            agent.SetDestination(player.position);
+        if (CanUpdateNav()) agent.SetDestination(player.position);
     }
 
     protected override void Attack()
@@ -141,20 +134,12 @@ public class EnemyMelee : EnemyBase
 
     public void OnAttackHit()
     {
-        float dist = Vector3.Distance(transform.position, player.position);
-        if (dist <= attackRange)
+        if (Vector3.Distance(transform.position, player.position) <= attackRange)
             PlayerStats.Instance.ChangeLifePoints(-(int)attackDamage);
     }
 
-    private void ResetAttack()
-    {
-        alreadyAttacked = false;
-    }
-
-    private void StartFirstAttack()
-    {
-        alreadyAttacked = false;
-    }
+    private void ResetAttack() => alreadyAttacked = false;
+    private void StartFirstAttack() => alreadyAttacked = false;
 
     private void SearchWalkPoints()
     {
@@ -177,20 +162,13 @@ public class EnemyMelee : EnemyBase
     {
         for (int i = 0; i < 10; i++)
         {
-            float randomZ = Random.Range(-walkPointRange, walkPointRange);
             float randomX = Random.Range(-walkPointRange, walkPointRange);
-
-            Vector3 candidate = new Vector3(
-                transform.position.x + randomX,
-                transform.position.y + 10f,
-                transform.position.z + randomZ
-            );
+            float randomZ = Random.Range(-walkPointRange, walkPointRange);
+            Vector3 candidate = new Vector3(transform.position.x + randomX, transform.position.y + 10f, transform.position.z + randomZ);
 
             if (Physics.Raycast(candidate, Vector3.down, out RaycastHit rayHit, 20f, groundLayer))
-            {
                 if (NavMesh.SamplePosition(rayHit.point, out NavMeshHit navHit, 2f, NavMesh.AllAreas))
                     return navHit.position;
-            }
         }
         return Vector3.zero;
     }
