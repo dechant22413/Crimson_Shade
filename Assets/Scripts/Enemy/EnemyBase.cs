@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public abstract class EnemyBase : MonoBehaviour
 {
-    public enum EnemyState { Inactive, Idle, Patrol, Chase, Attack }
+    public enum EnemyState { Inactive, Idle, Patrol, Chase, Attack, Stunned, Dead }
 
     [Header("References")]
     public NavMeshAgent agent;
@@ -26,6 +26,8 @@ public abstract class EnemyBase : MonoBehaviour
     public EnemyState startState = EnemyState.Idle;
     [SerializeField] protected EnemyState currentState;
 
+    protected bool isStunnedFlag;
+    private EnemyState stateBeforeStun;
     private float navUpdateTimer;
     private const float NavUpdateInterval = 0.15f;
 
@@ -59,11 +61,15 @@ public abstract class EnemyBase : MonoBehaviour
             case EnemyState.Patrol: Patrol(); break;
             case EnemyState.Chase: Chase(); break;
             case EnemyState.Attack: Attack(); break;
+            case EnemyState.Stunned: Stunned(); break;
+            case EnemyState.Dead: Dead(); break;
         }
     }
 
     protected virtual void UpdateState()
     {
+        if (currentState == EnemyState.Dead || currentState == EnemyState.Stunned) return;
+
         float distToPlayer = Vector3.Distance(transform.position, player.position);
         bool inAttack = distToPlayer <= attackRange;
         bool inGuaranteedRange = distToPlayer <= guaranteedDetectRange;
@@ -105,11 +111,15 @@ public abstract class EnemyBase : MonoBehaviour
             case EnemyState.Patrol:
             case EnemyState.Idle:
             case EnemyState.Inactive:
+            case EnemyState.Stunned:
                 agent.speed = patrolSpeed;
                 break;
             case EnemyState.Chase:
             case EnemyState.Attack:
                 agent.speed = chaseSpeed;
+                break;
+            case EnemyState.Dead:
+                agent.speed = 0f;
                 break;
         }
     }
@@ -119,16 +129,41 @@ public abstract class EnemyBase : MonoBehaviour
     protected abstract void Patrol();
     protected abstract void Chase();
     protected abstract void Attack();
+    protected abstract void Stunned();
+    protected abstract void Dead();
 
     public virtual void TakeDamage(float damage)
     {
+        if (currentState == EnemyState.Dead) return;
         health -= damage;
         if (health <= 0f) Die();
     }
 
+    public virtual void ArmorHit() { }
+
+    public virtual void Stun(float duration)
+    {
+        if (currentState == EnemyState.Dead) return;
+        if (isStunnedFlag) return;
+
+        isStunnedFlag = true;
+        stateBeforeStun = currentState;
+        SetState(EnemyState.Stunned);
+        CancelInvoke(nameof(RecoverFromStun));
+        Invoke(nameof(RecoverFromStun), duration);
+    }
+
+    private void RecoverFromStun()
+    {
+        isStunnedFlag = false;
+        SetState(stateBeforeStun);
+    }
+
     protected virtual void Die()
     {
-        Destroy(gameObject);
+        SetState(EnemyState.Dead);
+        agent.SetDestination(transform.position);
+        agent.enabled = false;
     }
 
     private void OnDrawGizmosSelected()

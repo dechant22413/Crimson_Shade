@@ -2,6 +2,7 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerShotgun : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerShotgun : MonoBehaviour
     public LayerMask enemyBodyHit;
     public LayerMask enemyHeadHit;
     public LayerMask environmentHit;
+    public LayerMask enemyArmorHit;
     public RectTransform container;
     public Camera playerCam;
     public CinemachineImpulseSource fireImpulse;
@@ -36,11 +38,11 @@ public class PlayerShotgun : MonoBehaviour
     private int ammoCount;
     private float baseWidth;
     private Coroutine spreadCoroutine;
+    private HashSet<EnemyBase> armorHitThisShot = new HashSet<EnemyBase>();
 
     private void Start()
     {
         ammoCount = magazinCapacity;
-
         baseWidth = container.sizeDelta.x;
     }
 
@@ -57,8 +59,9 @@ public class PlayerShotgun : MonoBehaviour
         fireImpulse.GenerateImpulse();
         Spread();
         UpdateAmmoUI();
+        armorHitThisShot.Clear();
 
-        LayerMask combined = enemyBodyHit | enemyHeadHit | environmentHit;
+        LayerMask combined = enemyBodyHit | enemyHeadHit | environmentHit | enemyArmorHit;
 
         for (int i = 0; i < pelletCount; i++)
         {
@@ -70,6 +73,8 @@ public class PlayerShotgun : MonoBehaviour
                     EnemyBodyHit(hit.point, hit.collider);
                 else if (((1 << layer) & enemyHeadHit) != 0)
                     EnemyHeadHit(hit.point, hit.collider);
+                else if (((1 << layer) & enemyArmorHit) != 0)
+                    EnemyArmorHit(hit.point, hit.collider);
                 else if (((1 << layer) & environmentHit) != 0)
                     EnvironmentHit(hit.point);
             }
@@ -78,8 +83,6 @@ public class PlayerShotgun : MonoBehaviour
 
     private void EnemyBodyHit(Vector3 pos, Collider col)
     {
-        Debug.Log($"Body Hit {col.name} for {attackDamage}");
-
         EnemyBase enemy = col.GetComponentInParent<EnemyBase>();
         if (enemy != null)
             enemy.TakeDamage(attackDamage);
@@ -87,11 +90,19 @@ public class PlayerShotgun : MonoBehaviour
 
     private void EnemyHeadHit(Vector3 pos, Collider col)
     {
-        Debug.Log($"Head Hit {col.name} for {attackDamage}");
-
         EnemyBase enemy = col.GetComponentInParent<EnemyBase>();
         if (enemy != null)
             enemy.TakeDamage(attackDamage * 2f);
+    }
+
+    private void EnemyArmorHit(Vector3 pos, Collider col)
+    {
+        EnemyBase enemy = col.GetComponentInParent<EnemyBase>();
+        if (enemy != null && !armorHitThisShot.Contains(enemy))
+        {
+            armorHitThisShot.Add(enemy);
+            enemy.ArmorHit();
+        }
     }
 
     private void EnvironmentHit(Vector3 pos)
@@ -115,7 +126,6 @@ public class PlayerShotgun : MonoBehaviour
         {
             shotgunAnimations.Play("Idle", 0, 0f);
             OnAnimationEnd();
-            Debug.Log("Magazin already full");
             return;
         }
 
@@ -123,7 +133,6 @@ public class PlayerShotgun : MonoBehaviour
         {
             shotgunAnimations.Play("Idle", 0, 0f);
             OnAnimationEnd();
-            Debug.Log("Not Enough LifePoints to reload");
             return;
         }
     }
@@ -131,9 +140,7 @@ public class PlayerShotgun : MonoBehaviour
     public void Reload()
     {
         PlayerStats.Instance.ChangeLifePoints(lifeDrain * (-1) * (magazinCapacity - ammoCount));
-
         ammoCount = magazinCapacity;
-
         UpdateAmmoUI();
 
         if (ammoIndicatorLeft.GetComponent<PopWobbleJuice>() != null)

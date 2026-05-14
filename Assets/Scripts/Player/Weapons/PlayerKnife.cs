@@ -6,6 +6,7 @@ public class PlayerKnife : MonoBehaviour
     public LayerMask enemyBodyHit;
     public LayerMask enemyHeadHit;
     public LayerMask environmentHit;
+    public LayerMask enemyArmorHit;
     public Camera playerCam;
 
     [Header("Knife Stats")]
@@ -15,7 +16,8 @@ public class PlayerKnife : MonoBehaviour
 
     public void Attack()
     {
-        LayerMask combined = enemyBodyHit | enemyHeadHit | environmentHit;
+        Debug.Log("Attack() aufgerufen");
+        LayerMask combined = enemyBodyHit | enemyHeadHit | environmentHit | enemyArmorHit;
 
         if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out RaycastHit hit, attackRange, combined))
         {
@@ -25,6 +27,8 @@ public class PlayerKnife : MonoBehaviour
                 EnemyBodyHit(hit.point, hit.collider);
             else if (((1 << layer) & enemyHeadHit) != 0)
                 EnemyHeadHit(hit.point, hit.collider);
+            else if (((1 << layer) & enemyArmorHit) != 0)
+                EnemyArmorHit(hit.point, hit.collider);
             else if (((1 << layer) & environmentHit) != 0)
                 EnvironmentHit(hit.point);
         }
@@ -48,6 +52,15 @@ public class PlayerKnife : MonoBehaviour
         EnemyBase enemy = col.GetComponentInParent<EnemyBase>();
         if (enemy != null)
             enemy.TakeDamage(attackDamage * 2f);
+    }
+
+    private void EnemyArmorHit(Vector3 pos, Collider col)
+    {
+        Debug.Log("ArmorHit");
+
+        EnemyBase enemy = col.GetComponentInParent<EnemyBase>();
+        if (enemy != null)
+            enemy.ArmorHit();
     }
 
     private void EnvironmentHit(Vector3 pos)
