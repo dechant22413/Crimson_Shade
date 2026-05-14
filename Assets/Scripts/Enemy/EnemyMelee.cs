@@ -179,6 +179,8 @@ public class EnemyMelee : EnemyBase
 
     protected override void Die()
     {
+        CancelInvoke(); // alle Invokes canceln
+        StopAllCoroutines(); // alle Coroutines stoppen
         base.Die();
         animator.SetTrigger(deathHash);
     }

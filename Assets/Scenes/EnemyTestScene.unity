@@ -480,7 +480,7 @@ MonoBehaviour:
   attackRange: 2.36
   patrolSpeed: 0.5
   chaseSpeed: 1.5
-  startState: 2
+  startState: 0
   currentState: 0
   animator: {fileID: 600058999}
   walkPointRange: 10
