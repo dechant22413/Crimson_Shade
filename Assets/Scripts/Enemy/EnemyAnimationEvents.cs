@@ -13,4 +13,9 @@ public class EnemyAnimationEvents : MonoBehaviour
     {
         enemy.OnAttackHit();
     }
+
+    public void ResetAttack()
+    {
+        enemy.ResetAttack();
+    }
 }

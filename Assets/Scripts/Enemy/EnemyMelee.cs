@@ -6,7 +6,6 @@ public class EnemyMelee : EnemyBase
 {
     [Header("Animation")]
     public Animator animator;
-    public string attackClipName = "Ghoul_Standing_Attack_001";
 
     [Header("Patrol Settings")]
     public float walkPointRange = 10f;
@@ -22,10 +21,10 @@ public class EnemyMelee : EnemyBase
     public float stunDuration = 2f;
 
     private static readonly int speedHash = Animator.StringToHash("Speed");
-    private static readonly int attackHash = Animator.StringToHash("Attack");
     private static readonly int isAttackingHash = Animator.StringToHash("IsAttacking");
     private static readonly int stunnedHash = Animator.StringToHash("Stunned");
     private static readonly int deathHash = Animator.StringToHash("Death");
+    private static readonly int isInactive = Animator.StringToHash("IsInactive");
 
     private Vector3 walkPointA;
     private Vector3 walkPointB;
@@ -34,7 +33,6 @@ public class EnemyMelee : EnemyBase
     private bool goingToB;
     private bool alreadyAttacked;
     private bool firstAttackDone;
-    private float timeBetweenAttacks;
     private float waitTimer;
     private bool isWaiting;
     private bool chaseDelayActive;
@@ -42,15 +40,6 @@ public class EnemyMelee : EnemyBase
     protected override void Start()
     {
         base.Start();
-
-        foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips)
-        {
-            if (clip.name == attackClipName)
-            {
-                timeBetweenAttacks = clip.length;
-                break;
-            }
-        }
     }
 
     protected override void Update()
@@ -64,7 +53,16 @@ public class EnemyMelee : EnemyBase
 
     protected override void UpdateState()
     {
-        if (alreadyAttacked) return;
+        if (alreadyAttacked)
+        {
+            float distToPlayer = Vector3.Distance(transform.position, player.position);
+            if (distToPlayer > attackRange)
+            {
+                alreadyAttacked = false;
+                animator.SetBool(isAttackingHash, false);
+            }
+            return;
+        }
         base.UpdateState();
     }
 
@@ -72,18 +70,15 @@ public class EnemyMelee : EnemyBase
     {
         base.OnStateChanged(newState);
 
+        animator.SetBool(isInactive, newState == EnemyState.Inactive);
+        animator.SetBool(stunnedHash, newState == EnemyState.Stunned);
+
         if (newState == EnemyState.Stunned)
         {
             animator.SetBool(isAttackingHash, false);
-            animator.ResetTrigger(attackHash);
-            animator.SetBool(stunnedHash, true);
-            CancelInvoke(nameof(ResetAttack));
             CancelInvoke(nameof(StartFirstAttack));
             alreadyAttacked = true;
-        }
-        else
-        {
-            animator.SetBool(stunnedHash, false);
+            firstAttackDone = false;
         }
 
         if (newState == EnemyState.Attack && !firstAttackDone)
@@ -92,13 +87,10 @@ public class EnemyMelee : EnemyBase
             firstAttackDone = true;
             Invoke(nameof(StartFirstAttack), firstAttackDelay);
         }
-
-        if (newState == EnemyState.Attack && firstAttackDone)
+        else if (newState == EnemyState.Attack && firstAttackDone)
         {
             alreadyAttacked = false;
             animator.SetBool(isAttackingHash, true);
-            animator.ResetTrigger(attackHash);
-            animator.SetTrigger(attackHash);
         }
 
         if (newState == EnemyState.Chase)
@@ -110,8 +102,8 @@ public class EnemyMelee : EnemyBase
         if (newState == EnemyState.Chase || newState == EnemyState.Patrol)
         {
             firstAttackDone = false;
+            alreadyAttacked = false;
             animator.SetBool(isAttackingHash, false);
-            animator.ResetTrigger(attackHash);
         }
     }
 
@@ -166,10 +158,7 @@ public class EnemyMelee : EnemyBase
         if (!alreadyAttacked)
         {
             animator.SetBool(isAttackingHash, true);
-            animator.ResetTrigger(attackHash);
-            animator.SetTrigger(attackHash);
             alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
 
@@ -179,11 +168,12 @@ public class EnemyMelee : EnemyBase
             PlayerStats.Instance.ChangeLifePoints(-(int)attackDamage);
     }
 
+    public void ResetAttack() => alreadyAttacked = false;
+
     public override void ArmorHit()
     {
         if (currentState == EnemyState.Dead) return;
         animator.SetBool(isAttackingHash, false);
-        animator.ResetTrigger(attackHash);
         Stun(stunDuration);
     }
 
@@ -193,7 +183,6 @@ public class EnemyMelee : EnemyBase
         animator.SetTrigger(deathHash);
     }
 
-    private void ResetAttack() => alreadyAttacked = false;
     private void StartFirstAttack() => alreadyAttacked = false;
 
     private void SearchWalkPoints()

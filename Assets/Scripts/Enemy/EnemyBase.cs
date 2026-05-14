@@ -43,7 +43,8 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void Start()
     {
-        SetState(startState);
+        currentState = startState; // direkt setzen ohne SetState
+        OnStateChanged(startState); // manuell aufrufen
     }
 
     protected virtual void Update()
@@ -78,6 +79,13 @@ public abstract class EnemyBase : MonoBehaviour
         float angle = Vector3.Angle(transform.forward, dirToPlayer);
         bool inFieldOfView = angle <= fieldOfViewAngle * 0.5f;
         bool inSight = distToPlayer <= sightRange && inFieldOfView;
+
+        if (currentState == EnemyState.Inactive)
+        {
+            if (inGuaranteedRange)
+                SetState(EnemyState.Idle);
+            return;
+        }
 
         if (inAttack)
             SetState(EnemyState.Attack);
