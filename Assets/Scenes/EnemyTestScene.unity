@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &10691426 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7146521406498821007, guid: fc5cb30e720998c4186591c2945fe982, type: 3}
+  m_PrefabInstance: {fileID: 913447900}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &27900676
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,6 +456,7 @@ GameObject:
   m_Component:
   - component: {fileID: 189386933}
   - component: {fileID: 189386932}
+  - component: {fileID: 189386934}
   - component: {fileID: 189386930}
   m_Layer: 0
   m_Name: Ghoul_Enemy
@@ -474,23 +480,23 @@ MonoBehaviour:
   agent: {fileID: 0}
   player: {fileID: 0}
   health: 60
+  attackDamage: 40
+  firstAttackDelay: 0.5
   sightRange: 12.77
   fieldOfViewAngle: 90
   guaranteedDetectRange: 6.33
   attackRange: 2.36
   patrolSpeed: 0.5
   chaseSpeed: 1.5
-  startState: 0
-  currentState: 0
-  animator: {fileID: 600058999}
   walkPointRange: 10
   waitAtPointDuration: 5
   chaseDelay: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  attackDamage: 40
-  firstAttackDelay: 0.5
+  startState: 0
+  currentState: 0
+  animator: {fileID: 600058999}
   stunDuration: 6
 --- !u!195 &189386932
 NavMeshAgent:
@@ -530,6 +536,22 @@ Transform:
   - {fileID: 600058997}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &189386934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189386929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf060095ee5c9374f917722eee57235c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GhoulCustomizer
+  hasHelmet: 1
+  hasClothing: 1
+  helmetMesh: {fileID: 1120280317}
+  clothingMesh: {fileID: 10691426}
 --- !u!1 &287042548
 GameObject:
   m_ObjectHideFlags: 0
@@ -2399,7 +2421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fc5cb30e720998c4186591c2945fe982, type: 3}
       propertyPath: m_Name
-      value: Ghoul with Clothing
+      value: GhoulMesh
       objectReference: {fileID: 0}
     - target: {fileID: 1465544812906338789, guid: fc5cb30e720998c4186591c2945fe982, type: 3}
       propertyPath: m_Layer
