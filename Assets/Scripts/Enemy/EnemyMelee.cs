@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,16 +5,6 @@ public class EnemyMelee : EnemyBase
 {
     [Header("Animation")]
     public Animator animator;
-
-    [Header("Patrol Settings")]
-    public float walkPointRange = 10f;
-    public float waitAtPointDuration = 1.5f;
-    public float chaseDelay = 0.5f;
-    public LayerMask groundLayer;
-
-    [Header("Melee Settings")]
-    public float attackDamage = 20f;
-    public float firstAttackDelay = 0.8f;
 
     [Header("Armor Hit Settings")]
     public float stunDuration = 2f;
@@ -25,23 +14,7 @@ public class EnemyMelee : EnemyBase
     private static readonly int isAttackingHash = Animator.StringToHash("IsAttacking");
     private static readonly int stunnedHash = Animator.StringToHash("Stunned");
     private static readonly int deathHash = Animator.StringToHash("Death");
-    private static readonly int isInactive = Animator.StringToHash("IsInactive");
-
-    private Vector3 walkPointA;
-    private Vector3 walkPointB;
-    private Vector3 currentWalkPoint;
-    private bool walkPointsSet;
-    private bool goingToB;
-    private bool alreadyAttacked;
-    private bool firstAttackDone;
-    private float waitTimer;
-    private bool isWaiting;
-    private bool chaseDelayActive;
-
-    protected override void Start()
-    {
-        base.Start();
-    }
+    private static readonly int isInactiveHash = Animator.StringToHash("IsInactive");
 
     protected override void Update()
     {
@@ -52,27 +25,11 @@ public class EnemyMelee : EnemyBase
         animator.SetFloat(speedHash, speed, damp, Time.deltaTime);
     }
 
-    protected override void UpdateState()
-    {
-        if (alreadyAttacked)
-        {
-            float distToPlayer = Vector3.Distance(transform.position, player.position);
-            if (distToPlayer > attackRange)
-            {
-                alreadyAttacked = false;
-                animator.SetBool(isAttackingHash, false);
-            }
-            return;
-        }
-        base.UpdateState();
-    }
-
     protected override void OnStateChanged(EnemyState newState)
     {
         base.OnStateChanged(newState);
 
-        // Animator Bools
-        animator.SetBool(isInactive, newState == EnemyState.Inactive);
+        animator.SetBool(isInactiveHash, newState == EnemyState.Inactive);
         animator.SetBool(stunnedHash, newState == EnemyState.Stunned);
         animator.SetBool(isInAttackRangeHash, newState == EnemyState.Attack);
 
@@ -80,82 +37,38 @@ public class EnemyMelee : EnemyBase
         {
             case EnemyState.Stunned:
                 animator.SetBool(isAttackingHash, false);
-                CancelInvoke(nameof(StartFirstAttack));
-                alreadyAttacked = true;
-                firstAttackDone = false;
                 break;
 
             case EnemyState.Attack:
-                if (!firstAttackDone)
+                if (firstAttackDone)
                 {
-                    alreadyAttacked = true;
-                    firstAttackDone = true;
-                    Invoke(nameof(StartFirstAttack), firstAttackDelay);
-                }
-                else
-                {
-                    alreadyAttacked = false;
                     animator.SetBool(isAttackingHash, true);
                 }
                 break;
 
             case EnemyState.Chase:
-                if (agent.isOnNavMesh)
-                    agent.SetDestination(transform.position);
-                firstAttackDone = false;
-                alreadyAttacked = false;
-                animator.SetBool(isAttackingHash, false);
-                StartCoroutine(ChaseDelay());
-                break;
-
             case EnemyState.Patrol:
             case EnemyState.Idle:
-                firstAttackDone = false;
-                alreadyAttacked = false;
                 animator.SetBool(isAttackingHash, false);
                 break;
         }
     }
+
+    protected override void OnPlayerOutOfAttackRange()
+    {
+        animator.SetBool(isAttackingHash, false);
+        animator.SetBool(isInAttackRangeHash, false);
+    }
+
     protected override void Inactive() => agent.SetDestination(transform.position);
     protected override void Idle() => agent.SetDestination(transform.position);
+    protected override void Patrol() { }
+    protected override void Chase() { }
     protected override void Dead() { }
 
     protected override void Stunned()
     {
         agent.SetDestination(transform.position);
-    }
-
-    protected override void Patrol()
-    {
-        if (!walkPointsSet) SearchWalkPoints();
-        if (!walkPointsSet) return;
-
-        if (isWaiting)
-        {
-            waitTimer -= Time.deltaTime;
-            if (waitTimer <= 0f) isWaiting = false;
-            return;
-        }
-
-        if (CanUpdateNav())
-        {
-            currentWalkPoint = goingToB ? walkPointB : walkPointA;
-            agent.SetDestination(currentWalkPoint);
-
-            if ((transform.position - currentWalkPoint).magnitude < 1f)
-            {
-                goingToB = !goingToB;
-                isWaiting = true;
-                waitTimer = waitAtPointDuration;
-                if (!goingToB) walkPointsSet = false;
-            }
-        }
-    }
-
-    protected override void Chase()
-    {
-        if (chaseDelayActive) return;
-        if (CanUpdateNav()) agent.SetDestination(player.position);
     }
 
     protected override void Attack()
@@ -188,63 +101,9 @@ public class EnemyMelee : EnemyBase
 
     protected override void Die()
     {
-        CancelInvoke(); // alle Invokes canceln
-        StopAllCoroutines(); // alle Coroutines stoppen
+        CancelInvoke();
+        StopAllCoroutines();
         base.Die();
         animator.SetTrigger(deathHash);
-    }
-
-    private void StartFirstAttack() => alreadyAttacked = false;
-
-    private void SearchWalkPoints()
-    {
-        Vector3 pointA = GetValidWalkPoint();
-        Vector3 pointB = GetValidWalkPoint();
-
-        if (pointA != Vector3.zero && pointB != Vector3.zero)
-        {
-            walkPointA = pointA;
-            walkPointB = pointB;
-            walkPointsSet = true;
-        }
-        else
-        {
-            Debug.LogWarning("Keine gültigen Walkpoints gefunden – groundLayer korrekt gesetzt?");
-        }
-    }
-
-    private Vector3 GetValidWalkPoint()
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            float randomX = Random.Range(-walkPointRange, walkPointRange);
-            float randomZ = Random.Range(-walkPointRange, walkPointRange);
-            Vector3 candidate = new Vector3(transform.position.x + randomX, transform.position.y + 10f, transform.position.z + randomZ);
-
-            if (Physics.Raycast(candidate, Vector3.down, out RaycastHit rayHit, 20f, groundLayer))
-                if (NavMesh.SamplePosition(rayHit.point, out NavMeshHit navHit, 2f, NavMesh.AllAreas))
-                    return navHit.position;
-        }
-        return Vector3.zero;
-    }
-
-    private IEnumerator ChaseDelay()
-    {
-        chaseDelayActive = true;
-        float timer = chaseDelay;
-        while (timer > 0f)
-        {
-            if (currentState != EnemyState.Chase)
-            {
-                chaseDelayActive = false;
-                yield break;
-            }
-            Vector3 dir = (player.position - transform.position).normalized;
-            dir.y = 0;
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 5f);
-            timer -= Time.deltaTime;
-            yield return null;
-        }
-        chaseDelayActive = false;
     }
 }

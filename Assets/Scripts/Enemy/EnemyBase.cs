@@ -11,6 +11,8 @@ public abstract class EnemyBase : MonoBehaviour
 
     [Header("Stats")]
     public float health = 100f;
+    public float attackDamage = 20f;
+    public float firstAttackDelay = 0.8f;
 
     [Header("Detection")]
     public float sightRange = 10f;
@@ -22,14 +24,32 @@ public abstract class EnemyBase : MonoBehaviour
     public float patrolSpeed = 2f;
     public float chaseSpeed = 5f;
 
+    [Header("Patrol")]
+    public float walkPointRange = 10f;
+    public float waitAtPointDuration = 1.5f;
+    public float chaseDelay = 0.5f;
+    public LayerMask groundLayer;
+
     [Header("Start State")]
     public EnemyState startState = EnemyState.Idle;
     [SerializeField] protected EnemyState currentState;
 
     protected bool isStunnedFlag;
+    protected bool alreadyAttacked;
+    protected bool firstAttackDone;
+    protected bool chaseDelayActive;
+
     private EnemyState stateBeforeStun;
     private float navUpdateTimer;
     private const float NavUpdateInterval = 0.15f;
+
+    private Vector3 walkPointA;
+    private Vector3 walkPointB;
+    private Vector3 currentWalkPoint;
+    private bool walkPointsSet;
+    private bool goingToB;
+    private float waitTimer;
+    private bool isWaiting;
 
     protected virtual void Awake()
     {
@@ -43,8 +63,8 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void Start()
     {
-        currentState = startState; // direkt setzen ohne SetState
-        OnStateChanged(startState); // manuell aufrufen
+        currentState = startState;
+        OnStateChanged(startState);
     }
 
     protected virtual void Update()
@@ -59,8 +79,8 @@ public abstract class EnemyBase : MonoBehaviour
         {
             case EnemyState.Inactive: Inactive(); break;
             case EnemyState.Idle: Idle(); break;
-            case EnemyState.Patrol: Patrol(); break;
-            case EnemyState.Chase: Chase(); break;
+            case EnemyState.Patrol: PatrolUpdate(); break;
+            case EnemyState.Chase: ChaseUpdate(); break;
             case EnemyState.Attack: Attack(); break;
             case EnemyState.Stunned: Stunned(); break;
             case EnemyState.Dead: Dead(); break;
@@ -70,6 +90,17 @@ public abstract class EnemyBase : MonoBehaviour
     protected virtual void UpdateState()
     {
         if (currentState == EnemyState.Dead || currentState == EnemyState.Stunned) return;
+
+        if (alreadyAttacked)
+        {
+            float dist = Vector3.Distance(transform.position, player.position);
+            if (dist > attackRange)
+            {
+                alreadyAttacked = false;
+                OnPlayerOutOfAttackRange();
+            }
+            return;
+        }
 
         float distToPlayer = Vector3.Distance(transform.position, player.position);
         bool inAttack = distToPlayer <= attackRange;
@@ -82,8 +113,7 @@ public abstract class EnemyBase : MonoBehaviour
 
         if (currentState == EnemyState.Inactive)
         {
-            if (inGuaranteedRange)
-                SetState(EnemyState.Idle);
+            if (inGuaranteedRange) SetState(EnemyState.Idle);
             return;
         }
 
@@ -130,7 +160,129 @@ public abstract class EnemyBase : MonoBehaviour
                 agent.speed = 0f;
                 break;
         }
+
+        switch (newState)
+        {
+            case EnemyState.Attack:
+                if (!firstAttackDone)
+                {
+                    alreadyAttacked = true;
+                    firstAttackDone = true;
+                    Invoke(nameof(StartFirstAttack), firstAttackDelay);
+                }
+                break;
+
+            case EnemyState.Chase:
+                if (agent.isOnNavMesh)
+                    agent.SetDestination(transform.position);
+                firstAttackDone = false;
+                alreadyAttacked = false;
+                StartCoroutine(ChaseDelayRoutine());
+                break;
+
+            case EnemyState.Patrol:
+            case EnemyState.Idle:
+                firstAttackDone = false;
+                alreadyAttacked = false;
+                break;
+
+            case EnemyState.Stunned:
+                CancelInvoke(nameof(StartFirstAttack));
+                alreadyAttacked = true;
+                firstAttackDone = false;
+                break;
+        }
     }
+
+    // Wird aufgerufen wenn Spieler außer Attack Range geht während alreadyAttacked true ist
+    protected virtual void OnPlayerOutOfAttackRange() { }
+
+    private void PatrolUpdate()
+    {
+        if (!walkPointsSet) SearchWalkPoints();
+        if (!walkPointsSet) return;
+
+        if (isWaiting)
+        {
+            waitTimer -= Time.deltaTime;
+            if (waitTimer <= 0f) isWaiting = false;
+            return;
+        }
+
+        if (CanUpdateNav())
+        {
+            currentWalkPoint = goingToB ? walkPointB : walkPointA;
+            agent.SetDestination(currentWalkPoint);
+
+            if ((transform.position - currentWalkPoint).magnitude < 1f)
+            {
+                goingToB = !goingToB;
+                isWaiting = true;
+                waitTimer = waitAtPointDuration;
+                if (!goingToB) walkPointsSet = false;
+            }
+        }
+    }
+
+    private void ChaseUpdate()
+    {
+        if (chaseDelayActive) return;
+        if (CanUpdateNav()) agent.SetDestination(player.position);
+    }
+
+    private void SearchWalkPoints()
+    {
+        Vector3 pointA = GetValidWalkPoint();
+        Vector3 pointB = GetValidWalkPoint();
+
+        if (pointA != Vector3.zero && pointB != Vector3.zero)
+        {
+            walkPointA = pointA;
+            walkPointB = pointB;
+            walkPointsSet = true;
+        }
+        else
+        {
+            Debug.LogWarning("Keine gültigen Walkpoints gefunden – groundLayer korrekt gesetzt?");
+        }
+    }
+
+    private Vector3 GetValidWalkPoint()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            float randomX = Random.Range(-walkPointRange, walkPointRange);
+            float randomZ = Random.Range(-walkPointRange, walkPointRange);
+            Vector3 candidate = new Vector3(transform.position.x + randomX, transform.position.y + 10f, transform.position.z + randomZ);
+
+            if (Physics.Raycast(candidate, Vector3.down, out RaycastHit rayHit, 20f, groundLayer))
+                if (NavMesh.SamplePosition(rayHit.point, out NavMeshHit navHit, 2f, NavMesh.AllAreas))
+                    return navHit.position;
+        }
+        return Vector3.zero;
+    }
+
+    private System.Collections.IEnumerator ChaseDelayRoutine()
+    {
+        chaseDelayActive = true;
+        float timer = chaseDelay;
+        while (timer > 0f)
+        {
+            if (currentState != EnemyState.Chase)
+            {
+                chaseDelayActive = false;
+                yield break;
+            }
+            Vector3 dir = (player.position - transform.position).normalized;
+            dir.y = 0;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 5f);
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+        chaseDelayActive = false;
+    }
+
+    private void StartFirstAttack() => alreadyAttacked = false;
 
     protected abstract void Inactive();
     protected abstract void Idle();
@@ -170,7 +322,8 @@ public abstract class EnemyBase : MonoBehaviour
     protected virtual void Die()
     {
         SetState(EnemyState.Dead);
-        agent.SetDestination(transform.position);
+        if (agent.isOnNavMesh)
+            agent.SetDestination(transform.position);
         agent.enabled = false;
     }
 
