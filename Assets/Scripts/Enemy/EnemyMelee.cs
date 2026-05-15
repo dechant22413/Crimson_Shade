@@ -21,6 +21,7 @@ public class EnemyMelee : EnemyBase
     public float stunDuration = 2f;
 
     private static readonly int speedHash = Animator.StringToHash("Speed");
+    private static readonly int isInAttackRangeHash = Animator.StringToHash("IsInAttackRange");
     private static readonly int isAttackingHash = Animator.StringToHash("IsAttacking");
     private static readonly int stunnedHash = Animator.StringToHash("Stunned");
     private static readonly int deathHash = Animator.StringToHash("Death");
@@ -70,43 +71,51 @@ public class EnemyMelee : EnemyBase
     {
         base.OnStateChanged(newState);
 
+        // Animator Bools
         animator.SetBool(isInactive, newState == EnemyState.Inactive);
         animator.SetBool(stunnedHash, newState == EnemyState.Stunned);
+        animator.SetBool(isInAttackRangeHash, newState == EnemyState.Attack);
 
-        if (newState == EnemyState.Stunned)
+        switch (newState)
         {
-            animator.SetBool(isAttackingHash, false);
-            CancelInvoke(nameof(StartFirstAttack));
-            alreadyAttacked = true;
-            firstAttackDone = false;
-        }
+            case EnemyState.Stunned:
+                animator.SetBool(isAttackingHash, false);
+                CancelInvoke(nameof(StartFirstAttack));
+                alreadyAttacked = true;
+                firstAttackDone = false;
+                break;
 
-        if (newState == EnemyState.Attack && !firstAttackDone)
-        {
-            alreadyAttacked = true;
-            firstAttackDone = true;
-            Invoke(nameof(StartFirstAttack), firstAttackDelay);
-        }
-        else if (newState == EnemyState.Attack && firstAttackDone)
-        {
-            alreadyAttacked = false;
-            animator.SetBool(isAttackingHash, true);
-        }
+            case EnemyState.Attack:
+                if (!firstAttackDone)
+                {
+                    alreadyAttacked = true;
+                    firstAttackDone = true;
+                    Invoke(nameof(StartFirstAttack), firstAttackDelay);
+                }
+                else
+                {
+                    alreadyAttacked = false;
+                    animator.SetBool(isAttackingHash, true);
+                }
+                break;
 
-        if (newState == EnemyState.Chase)
-        {
-            agent.SetDestination(transform.position);
-            StartCoroutine(ChaseDelay());
-        }
+            case EnemyState.Chase:
+                if (agent.isOnNavMesh)
+                    agent.SetDestination(transform.position);
+                firstAttackDone = false;
+                alreadyAttacked = false;
+                animator.SetBool(isAttackingHash, false);
+                StartCoroutine(ChaseDelay());
+                break;
 
-        if (newState == EnemyState.Chase || newState == EnemyState.Patrol)
-        {
-            firstAttackDone = false;
-            alreadyAttacked = false;
-            animator.SetBool(isAttackingHash, false);
+            case EnemyState.Patrol:
+            case EnemyState.Idle:
+                firstAttackDone = false;
+                alreadyAttacked = false;
+                animator.SetBool(isAttackingHash, false);
+                break;
         }
     }
-
     protected override void Inactive() => agent.SetDestination(transform.position);
     protected override void Idle() => agent.SetDestination(transform.position);
     protected override void Dead() { }
