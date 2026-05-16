@@ -525,9 +525,10 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  startState: 0
+  startState: 2
   currentState: 0
   animator: {fileID: 600058999}
+  walkAnimationSpeed: 1
   stunDuration: 6
 --- !u!195 &189386932
 NavMeshAgent:

@@ -5,6 +5,7 @@ public class EnemyMelee : EnemyBase
 {
     [Header("Animation")]
     public Animator animator;
+    public float walkAnimationSpeed = 1f;
 
     [Header("Armor Hit Settings")]
     public float stunDuration = 2f;
@@ -19,10 +20,21 @@ public class EnemyMelee : EnemyBase
     protected override void Update()
     {
         base.Update();
+
         float speed = agent.velocity.magnitude / chaseSpeed;
         float currentSpeed = animator.GetFloat(speedHash);
         float damp = speed < currentSpeed ? 0.25f : 0f;
         animator.SetFloat(speedHash, speed, damp, Time.deltaTime);
+
+        if (currentState == EnemyState.Patrol || currentState == EnemyState.Chase)
+        {
+            float normalizedSpeed = agent.velocity.magnitude / patrolSpeed;
+            animator.speed = Mathf.Clamp(normalizedSpeed, 0.1f, chaseSpeed / patrolSpeed) * walkAnimationSpeed;
+        }
+        else
+        {
+            animator.speed = 1f;
+        }
     }
 
     protected override void OnStateChanged(EnemyState newState)
@@ -41,9 +53,7 @@ public class EnemyMelee : EnemyBase
 
             case EnemyState.Attack:
                 if (firstAttackDone)
-                {
                     animator.SetBool(isAttackingHash, true);
-                }
                 break;
 
             case EnemyState.Chase:
