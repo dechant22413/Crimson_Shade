@@ -300,6 +300,9 @@ public abstract class EnemyBase : MonoBehaviour
         if (currentState == EnemyState.Dead) return;
         health -= damage;
         if (health <= 0f) Die();
+
+        if (UIManager.Instance != null)
+            UIManager.Instance.ShowHitIndicator();
     }
 
     public virtual void ArmorHit() { }
@@ -328,8 +331,10 @@ public abstract class EnemyBase : MonoBehaviour
         if (agent.isOnNavMesh)
             agent.SetDestination(transform.position);
         agent.enabled = false;
-    }
 
+        if (UIManager.Instance != null)
+            UIManager.Instance.ShowKillIndicator();
+    }
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
