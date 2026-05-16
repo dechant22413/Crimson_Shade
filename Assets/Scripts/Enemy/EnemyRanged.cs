@@ -56,7 +56,7 @@ public class EnemyRanged : EnemyBase
         }
     }
 
-    public void ResetAttack() => alreadyAttacked = false;
+    public override void ResetAttack() => alreadyAttacked = false;
 
     protected override void Die()
     {

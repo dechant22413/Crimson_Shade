@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class EnemyAnimationEvents : MonoBehaviour
 {
-    private EnemyMelee enemy;
+    private EnemyBase enemy;
 
     private void Awake()
     {
-        enemy = GetComponentInParent<EnemyMelee>();
+        enemy = GetComponentInParent<EnemyBase>();
     }
 
     public void OnAttackHit()

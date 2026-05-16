@@ -659,9 +659,9 @@ MonoBehaviour:
   attackDamage: 20
   firstAttackDelay: 0.8
   sightRange: 10
-  fieldOfViewAngle: 90
-  guaranteedDetectRange: 2
-  attackRange: 5
+  fieldOfViewAngle: 130
+  guaranteedDetectRange: 7
+  attackRange: 8
   patrolSpeed: 2
   chaseSpeed: 5
   walkPointRange: 10
@@ -669,8 +669,8 @@ MonoBehaviour:
   chaseDelay: 0.5
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
-  startState: 0
+    m_Bits: 64
+  startState: 2
   currentState: 0
   animator: {fileID: 785037681}
 --- !u!1 &287042548

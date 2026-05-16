@@ -197,6 +197,9 @@ public abstract class EnemyBase : MonoBehaviour
     // Wird aufgerufen wenn Spieler auﬂer Attack Range geht w‰hrend alreadyAttacked true ist
     protected virtual void OnPlayerOutOfAttackRange() { }
 
+    public virtual void OnAttackHit() { }
+    public virtual void ResetAttack() { }
+
     private void PatrolUpdate()
     {
         if (!walkPointsSet) SearchWalkPoints();
