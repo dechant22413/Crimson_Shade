@@ -16,6 +16,23 @@ public class UIManager : MonoBehaviour
 
     private Coroutine currentIndicatorCoroutine;
 
+    private void Start()
+    {
+        HideCursor();
+    }
+
+    public void HideCursor()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void ShowCursor()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     public void ShowHitIndicator()
     {
         // Hit nicht anzeigen, wenn Kill aktiv ist
