@@ -9,6 +9,10 @@ public class EnemyRanged : EnemyBase
     public GameObject projectilePrefab;
     public GameObject projectileSpawn;
 
+    [Header("Inactive Settings")]
+    public float inactiveDelay = 5f;
+    private bool canGoInactive;
+
     private static readonly int isAttackingHash = Animator.StringToHash("IsAttacking");
     private static readonly int deathHash = Animator.StringToHash("Death");
     private static readonly int isInactiveHash = Animator.StringToHash("IsInactive");
@@ -33,6 +37,23 @@ public class EnemyRanged : EnemyBase
                 animator.SetBool(isAttackingHash, false);
                 break;
         }
+
+        if (newState == EnemyState.Patrol)
+        {
+            canGoInactive = true;
+            Invoke(nameof(GoInactive), inactiveDelay);
+        }
+        else
+        {
+            canGoInactive = false;
+            CancelInvoke(nameof(GoInactive));
+        }
+    }
+
+    private void GoInactive()
+    {
+        if (canGoInactive)
+            SetState(EnemyState.Inactive);
     }
 
     protected override void OnPlayerOutOfAttackRange()
@@ -58,8 +79,12 @@ public class EnemyRanged : EnemyBase
             animator.SetBool(isAttackingHash, true);
             alreadyAttacked = true;
         }
+    }
 
-        Instantiate(projectilePrefab, projectileSpawn.transform.position, projectileSpawn.transform.rotation);
+    public override void SpawnProjectile()
+    {
+        GameObject proj = Instantiate(projectilePrefab, projectileSpawn.transform.position, projectileSpawn.transform.rotation);
+        proj.GetComponent<Homing_Projectile>().Launch();
     }
 
     public override void ResetAttack() => alreadyAttacked = false;

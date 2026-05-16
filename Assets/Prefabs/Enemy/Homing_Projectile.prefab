@@ -30,7 +30,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8799455786125397533}
   m_Father: {fileID: 0}
@@ -74,10 +74,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09c2ed667d1a7864d9ee660a4f7989ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Homing_Projectile
-  damage: 0
+  damage: 40
   lifeTime: 5
   speed: 8
-  homingFactor: 3
+  homingFactor: 1
+  growDuration: 0.75
 --- !u!135 &8071559889753561758
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -97,7 +98,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6423739747544736880
 GameObject:
@@ -128,8 +129,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1851717679600025964}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

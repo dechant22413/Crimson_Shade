@@ -471,7 +471,7 @@ Transform:
   m_GameObject: {fileID: 182000874}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.46, z: 0.698}
+  m_LocalPosition: {x: 0, y: 1.46, z: 0.924}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -512,13 +512,13 @@ MonoBehaviour:
   player: {fileID: 0}
   health: 60
   attackDamage: 40
-  firstAttackDelay: 0.5
+  firstAttackDelay: 5
   sightRange: 12.77
   fieldOfViewAngle: 90
   guaranteedDetectRange: 6.33
   attackRange: 2.36
   patrolSpeed: 0.5
-  chaseSpeed: 1.5
+  chaseSpeed: 1
   walkPointRange: 10
   waitAtPointDuration: 5
   chaseDelay: 1
@@ -561,7 +561,7 @@ Transform:
   m_GameObject: {fileID: 189386929}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.25, y: 0, z: 15.87}
+  m_LocalPosition: {x: 0.43, y: 0, z: 14.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -601,7 +601,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &191369824
 Transform:
   m_ObjectHideFlags: 0
@@ -658,10 +658,10 @@ MonoBehaviour:
   health: 100
   attackDamage: 20
   firstAttackDelay: 0.8
-  sightRange: 10
+  sightRange: 13
   fieldOfViewAngle: 130
-  guaranteedDetectRange: 7
-  attackRange: 8
+  guaranteedDetectRange: 11
+  attackRange: 10
   patrolSpeed: 2
   chaseSpeed: 5
   walkPointRange: 10
@@ -673,8 +673,9 @@ MonoBehaviour:
   startState: 2
   currentState: 0
   animator: {fileID: 785037681}
-  projectilePrefab: {fileID: 0}
-  projectileSpawn: {fileID: 0}
+  projectilePrefab: {fileID: 2567240206949030101, guid: 8165872dde0e03f428bad0d83b9e33c8, type: 3}
+  projectileSpawn: {fileID: 182000874}
+  inactiveDelay: 5
 --- !u!1 &287042548
 GameObject:
   m_ObjectHideFlags: 0
@@ -711,7 +712,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &287042550
 MonoBehaviour:
@@ -764,9 +765,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PopWobbleJuice
   continuousWobble: 0
-  popScale: 1.04
-  popDuration: 0.2
-  popOnStart: 0
+  popScale: 1.6
+  popDuration: 0.1
+  popOnStart: 1
   wobbleSpeed: 8
   wobbleScale: 1.05
   popOnEnable: 1
@@ -1235,7 +1236,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4096120871940991593, guid: 6cb97086099f65b48982bf71b3103dae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -0.00005722046
       objectReference: {fileID: 0}
     - target: {fileID: -4096120871940991593, guid: 6cb97086099f65b48982bf71b3103dae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1255,7 +1256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5021228346462164004, guid: 6cb97086099f65b48982bf71b3103dae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 0.000036239624
       objectReference: {fileID: 0}
     - target: {fileID: 5021228346462164004, guid: 6cb97086099f65b48982bf71b3103dae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1267,7 +1268,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5224694813830001383, guid: 6cb97086099f65b48982bf71b3103dae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 0.00007247925
       objectReference: {fileID: 0}
     - target: {fileID: 5224694813830001383, guid: 6cb97086099f65b48982bf71b3103dae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1279,7 +1280,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9179017853419834167, guid: 6cb97086099f65b48982bf71b3103dae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -0.0000705719
       objectReference: {fileID: 0}
     - target: {fileID: 9179017853419834167, guid: 6cb97086099f65b48982bf71b3103dae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -4950,7 +4951,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1621760724
 MonoBehaviour:
@@ -5003,9 +5004,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PopWobbleJuice
   continuousWobble: 0
-  popScale: 1.04
-  popDuration: 0.2
-  popOnStart: 0
+  popScale: 1.6
+  popDuration: 0.1
+  popOnStart: 1
   wobbleSpeed: 8
   wobbleScale: 1.05
   popOnEnable: 1
@@ -5550,7 +5551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CursorManager
   hitIndicator: {fileID: 1621760722}
   killIndicator: {fileID: 287042548}
-  displayTime: 0.2
+  displayTime: 0.3
 --- !u!1 &1990121742
 GameObject:
   m_ObjectHideFlags: 0

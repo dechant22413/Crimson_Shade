@@ -295,6 +295,8 @@ public abstract class EnemyBase : MonoBehaviour
     protected abstract void Stunned();
     protected abstract void Dead();
 
+    public virtual void SpawnProjectile() { }
+
     public virtual void TakeDamage(float damage)
     {
         if (currentState == EnemyState.Dead) return;

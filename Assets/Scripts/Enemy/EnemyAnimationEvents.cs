@@ -18,4 +18,9 @@ public class EnemyAnimationEvents : MonoBehaviour
     {
         enemy.ResetAttack();
     }
+
+    public void SpawnProjectile()
+    {
+        enemy.SpawnProjectile();
+    }
 }
