@@ -5,6 +5,10 @@ public class EnemyRanged : EnemyBase
     [Header("Animation")]
     public Animator animator;
 
+    [Header("Projectile")]
+    public GameObject projectilePrefab;
+    public GameObject projectileSpawn;
+
     private static readonly int isAttackingHash = Animator.StringToHash("IsAttacking");
     private static readonly int deathHash = Animator.StringToHash("Death");
     private static readonly int isInactiveHash = Animator.StringToHash("IsInactive");
@@ -54,6 +58,8 @@ public class EnemyRanged : EnemyBase
             animator.SetBool(isAttackingHash, true);
             alreadyAttacked = true;
         }
+
+        Instantiate(projectilePrefab, projectileSpawn.transform.position, projectileSpawn.transform.rotation);
     }
 
     public override void ResetAttack() => alreadyAttacked = false;
