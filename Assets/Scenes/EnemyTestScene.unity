@@ -512,7 +512,7 @@ MonoBehaviour:
   player: {fileID: 0}
   health: 60
   attackDamage: 40
-  firstAttackDelay: 5
+  firstAttackDelay: 2
   sightRange: 12.77
   fieldOfViewAngle: 90
   guaranteedDetectRange: 6.33
@@ -527,6 +527,7 @@ MonoBehaviour:
     m_Bits: 64
   startState: 2
   currentState: 0
+  alreadyAttacked: 0
   animator: {fileID: 600058999}
   walkAnimationSpeed: 1
   stunDuration: 6
@@ -672,6 +673,7 @@ MonoBehaviour:
     m_Bits: 64
   startState: 2
   currentState: 0
+  alreadyAttacked: 0
   animator: {fileID: 785037681}
   projectilePrefab: {fileID: 2567240206949030101, guid: 8165872dde0e03f428bad0d83b9e33c8, type: 3}
   projectileSpawn: {fileID: 182000874}

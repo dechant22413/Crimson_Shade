@@ -51,11 +51,6 @@ public class EnemyMelee : EnemyBase
                 animator.SetBool(isAttackingHash, false);
                 break;
 
-            case EnemyState.Attack:
-                if (firstAttackDone)
-                    animator.SetBool(isAttackingHash, true);
-                break;
-
             case EnemyState.Chase:
             case EnemyState.Patrol:
             case EnemyState.Idle:
@@ -64,10 +59,16 @@ public class EnemyMelee : EnemyBase
         }
     }
 
+
     protected override void OnPlayerOutOfAttackRange()
     {
         animator.SetBool(isAttackingHash, false);
         animator.SetBool(isInAttackRangeHash, false);
+
+        CancelInvoke(nameof(EnableFirstAttack));
+
+        firstAttackDone = false;
+        alreadyAttacked = false;
     }
 
     protected override void Inactive() => agent.SetDestination(transform.position);

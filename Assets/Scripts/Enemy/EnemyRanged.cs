@@ -59,6 +59,11 @@ public class EnemyRanged : EnemyBase
     protected override void OnPlayerOutOfAttackRange()
     {
         animator.SetBool(isAttackingHash, false);
+
+        CancelInvoke(nameof(EnableFirstAttack));
+
+        firstAttackDone = false;
+        alreadyAttacked = false;
     }
 
     protected override void Inactive() => agent.SetDestination(transform.position);

@@ -35,9 +35,9 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] protected EnemyState currentState;
 
     protected bool isStunnedFlag;
-    protected bool alreadyAttacked;
+    public bool alreadyAttacked;
     protected bool firstAttackDone;
-    public bool chaseDelayActive;
+    protected bool chaseDelayActive;
 
     private EnemyState stateBeforeStun;
     private float navUpdateTimer;
@@ -50,7 +50,7 @@ public abstract class EnemyBase : MonoBehaviour
     private bool goingToB;
     private float waitTimer;
     private bool isWaiting;
-    public bool firstChase = true;
+    private bool firstChase = true;
 
     protected virtual void Awake()
     {
@@ -90,50 +90,93 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void UpdateState()
     {
-        if (currentState == EnemyState.Dead || currentState == EnemyState.Stunned) return;
-
-        if (alreadyAttacked)
-        {
-            float dist = Vector3.Distance(transform.position, player.position);
-            if (dist > attackRange)
-            {
-                alreadyAttacked = false;
-                OnPlayerOutOfAttackRange();
-            }
+        if (currentState == EnemyState.Dead ||
+            currentState == EnemyState.Stunned)
             return;
-        }
 
-        float distToPlayer = Vector3.Distance(transform.position, player.position);
-        bool inAttack = distToPlayer <= attackRange;
-        bool inGuaranteedRange = distToPlayer <= guaranteedDetectRange;
+        float distToPlayer =
+            Vector3.Distance(transform.position, player.position);
 
-        Vector3 dirToPlayer = (player.position - transform.position).normalized;
-        float angle = Vector3.Angle(transform.forward, dirToPlayer);
-        bool inFieldOfView = angle <= fieldOfViewAngle * 0.5f;
-        bool inSight = distToPlayer <= sightRange && inFieldOfView;
+        bool inAttack =
+            distToPlayer <= attackRange;
 
+        bool inGuaranteedRange =
+            distToPlayer <= guaranteedDetectRange;
+
+        Vector3 dir =
+            (player.position - transform.position).normalized;
+
+        float angle =
+            Vector3.Angle(transform.forward, dir);
+
+        bool inSight =
+            distToPlayer <= sightRange &&
+            angle <= fieldOfViewAngle * 0.5f;
+
+
+        // Inactive ? Idle
         if (currentState == EnemyState.Inactive)
         {
-            if (inGuaranteedRange) SetState(EnemyState.Idle);
+            if (inGuaranteedRange)
+                SetState(EnemyState.Idle);
+
             return;
         }
 
-        if (inAttack)
-            SetState(EnemyState.Attack);
-        else if (inSight || inGuaranteedRange)
+
+        // Spieler außer Reichweite  Attack abbrechen
+        if (!inAttack &&
+            currentState == EnemyState.Attack)
         {
-            firstChase = currentState != EnemyState.Chase && currentState != EnemyState.Attack;
-            SetState(EnemyState.Chase);
+            CancelInvoke(nameof(EnableFirstAttack));
+
+            firstAttackDone = false;
+            alreadyAttacked = false;
+
+            OnPlayerOutOfAttackRange();
+
+            SetState(
+                inSight || inGuaranteedRange
+                ? EnemyState.Chase
+                : EnemyState.Patrol
+            );
+
+            return;
         }
-        else if (currentState == EnemyState.Attack || currentState == EnemyState.Chase)
+
+
+        // Attack
+        if (inAttack)
+        {
+            SetState(EnemyState.Attack);
+            return;
+        }
+
+
+        // Chase
+        if (inSight || inGuaranteedRange)
+        {
+            firstChase =
+                currentState != EnemyState.Chase;
+
+            SetState(EnemyState.Chase);
+            return;
+        }
+
+
+        // Patrol
+        if (currentState ==
+                EnemyState.Attack ||
+            currentState ==
+                EnemyState.Chase)
         {
             firstChase = true;
-            SetState(EnemyState.Patrol);
-        }
-        else if (currentState == EnemyState.Attack || currentState == EnemyState.Chase)
-            SetState(EnemyState.Patrol);
-    }
 
+            SetState(
+                EnemyState.Patrol
+            );
+        }
+    }
     protected void SetState(EnemyState newState)
     {
         if (currentState == newState) return;
@@ -161,52 +204,63 @@ public abstract class EnemyBase : MonoBehaviour
             case EnemyState.Stunned:
                 agent.speed = patrolSpeed;
                 break;
+
             case EnemyState.Chase:
                 agent.speed = chaseSpeed;
+
                 if (agent.isOnNavMesh)
                     agent.SetDestination(transform.position);
-                firstAttackDone = false;
-                alreadyAttacked = false;
+
                 if (firstChase)
                     StartCoroutine(ChaseDelayRoutine());
+
                 break;
+
             case EnemyState.Attack:
                 agent.speed = chaseSpeed;
                 break;
+
             case EnemyState.Dead:
                 agent.speed = 0f;
                 break;
         }
 
+
         switch (newState)
         {
             case EnemyState.Attack:
+
                 if (!firstAttackDone)
                 {
-                    alreadyAttacked = true;
                     firstAttackDone = true;
-                    Invoke(nameof(StartFirstAttack), firstAttackDelay);
+
+                    if (firstAttackDelay > 0)
+                    {
+                        alreadyAttacked = true;
+                        Invoke(nameof(EnableFirstAttack), firstAttackDelay);
+                    }
                 }
+
                 break;
+
 
             case EnemyState.Chase:
+
                 if (agent.isOnNavMesh)
                     agent.SetDestination(transform.position);
-                firstAttackDone = false;
-                alreadyAttacked = false;
+
                 StartCoroutine(ChaseDelayRoutine());
+
                 break;
 
-            case EnemyState.Patrol:
-            case EnemyState.Idle:
-                firstAttackDone = false;
-                alreadyAttacked = false;
-                break;
 
             case EnemyState.Stunned:
-                CancelInvoke(nameof(StartFirstAttack));
+
+                CancelInvoke(nameof(EnableFirstAttack));
+
                 alreadyAttacked = true;
                 firstAttackDone = false;
+
                 break;
         }
     }
@@ -304,7 +358,24 @@ public abstract class EnemyBase : MonoBehaviour
         chaseDelayActive = false;
     }
 
-    private void StartFirstAttack() => alreadyAttacked = false;
+    protected void EnableFirstAttack()
+    {
+        float dist = Vector3.Distance(
+            transform.position,
+            player.position
+        );
+
+        if (dist <= attackRange &&
+            currentState == EnemyState.Attack)
+        {
+            alreadyAttacked = false;
+        }
+        else
+        {
+            firstAttackDone = false;
+            alreadyAttacked = false;
+        }
+    }
 
     protected abstract void Inactive();
     protected abstract void Idle();
