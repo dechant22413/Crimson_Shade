@@ -37,7 +37,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected bool isStunnedFlag;
     protected bool alreadyAttacked;
     protected bool firstAttackDone;
-    protected bool chaseDelayActive;
+    public bool chaseDelayActive;
 
     private EnemyState stateBeforeStun;
     private float navUpdateTimer;
@@ -50,6 +50,7 @@ public abstract class EnemyBase : MonoBehaviour
     private bool goingToB;
     private float waitTimer;
     private bool isWaiting;
+    public bool firstChase = true;
 
     protected virtual void Awake()
     {
@@ -120,7 +121,15 @@ public abstract class EnemyBase : MonoBehaviour
         if (inAttack)
             SetState(EnemyState.Attack);
         else if (inSight || inGuaranteedRange)
+        {
+            firstChase = currentState != EnemyState.Chase && currentState != EnemyState.Attack;
             SetState(EnemyState.Chase);
+        }
+        else if (currentState == EnemyState.Attack || currentState == EnemyState.Chase)
+        {
+            firstChase = true;
+            SetState(EnemyState.Patrol);
+        }
         else if (currentState == EnemyState.Attack || currentState == EnemyState.Chase)
             SetState(EnemyState.Patrol);
     }
@@ -153,6 +162,14 @@ public abstract class EnemyBase : MonoBehaviour
                 agent.speed = patrolSpeed;
                 break;
             case EnemyState.Chase:
+                agent.speed = chaseSpeed;
+                if (agent.isOnNavMesh)
+                    agent.SetDestination(transform.position);
+                firstAttackDone = false;
+                alreadyAttacked = false;
+                if (firstChase)
+                    StartCoroutine(ChaseDelayRoutine());
+                break;
             case EnemyState.Attack:
                 agent.speed = chaseSpeed;
                 break;
@@ -267,6 +284,8 @@ public abstract class EnemyBase : MonoBehaviour
 
     private System.Collections.IEnumerator ChaseDelayRoutine()
     {
+        if (!firstChase) yield break;
+
         chaseDelayActive = true;
         float timer = chaseDelay;
         while (timer > 0f)

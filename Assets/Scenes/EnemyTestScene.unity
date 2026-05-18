@@ -521,7 +521,7 @@ MonoBehaviour:
   chaseSpeed: 1
   walkPointRange: 10
   waitAtPointDuration: 5
-  chaseDelay: 1
+  chaseDelay: 1.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -601,7 +601,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &191369824
 Transform:
   m_ObjectHideFlags: 0
@@ -657,7 +657,7 @@ MonoBehaviour:
   player: {fileID: 0}
   health: 100
   attackDamage: 20
-  firstAttackDelay: 0.8
+  firstAttackDelay: 1.3
   sightRange: 13
   fieldOfViewAngle: 130
   guaranteedDetectRange: 11
