@@ -317,6 +317,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f0643564ebe56d43bcef4fe251b3125, type: 3}
+--- !u!23 &146537045 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1684107799473140416, guid: 6cb97086099f65b48982bf71b3103dae, type: 3}
+  m_PrefabInstance: {fileID: 427187205}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &146775673 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1774396794915600814, guid: fc5cb30e720998c4186591c2945fe982, type: 3}
@@ -620,6 +625,7 @@ GameObject:
   - component: {fileID: 191369824}
   - component: {fileID: 191369825}
   - component: {fileID: 191369826}
+  - component: {fileID: 191369827}
   m_Layer: 0
   m_Name: Orb_Enemy
   m_TagString: Untagged
@@ -702,6 +708,25 @@ MonoBehaviour:
   projectilePrefab: {fileID: 2567240206949030101, guid: 8165872dde0e03f428bad0d83b9e33c8, type: 3}
   projectileSpawn: {fileID: 182000874}
   inactiveDelay: 5
+--- !u!114 &191369827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191369823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a27392aa7c71a4aaa61c0b702d48c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DissolveEffect
+  renderers:
+  - {fileID: 335754057}
+  - {fileID: 1128083475}
+  - {fileID: 619748459}
+  - {fileID: 1433767940}
+  - {fileID: 146537045}
+  dissolveDuration: 2
 --- !u!1 &287042548
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,6 +993,11 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!23 &335754057 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6317578925029434746, guid: 6cb97086099f65b48982bf71b3103dae, type: 3}
+  m_PrefabInstance: {fileID: 427187205}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1268,6 +1298,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1684107799473140416, guid: 6cb97086099f65b48982bf71b3103dae, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 74487dacfa71afa4ab5180524205917c, type: 2}
     - target: {fileID: 919132149155446097, guid: 6cb97086099f65b48982bf71b3103dae, type: 3}
       propertyPath: m_Name
       value: OrbMesh
@@ -1300,6 +1334,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6317578925029434746, guid: 6cb97086099f65b48982bf71b3103dae, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 74487dacfa71afa4ab5180524205917c, type: 2}
+    - target: {fileID: 6829333093618665122, guid: 6cb97086099f65b48982bf71b3103dae, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 74487dacfa71afa4ab5180524205917c, type: 2}
+    - target: {fileID: 8100320773420232829, guid: 6cb97086099f65b48982bf71b3103dae, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 74487dacfa71afa4ab5180524205917c, type: 2}
+    - target: {fileID: 8730303016566787287, guid: 6cb97086099f65b48982bf71b3103dae, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 74487dacfa71afa4ab5180524205917c, type: 2}
     - target: {fileID: 9179017853419834167, guid: 6cb97086099f65b48982bf71b3103dae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -89.98021
@@ -1616,6 +1666,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 952008322}
   m_SourcePrefab: {fileID: 100100000, guid: 6acc212319ebe414db59a64d3041f8fa, type: 3}
+--- !u!23 &619748459 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6829333093618665122, guid: 6cb97086099f65b48982bf71b3103dae, type: 3}
+  m_PrefabInstance: {fileID: 427187205}
+  m_PrefabAsset: {fileID: 0}
 --- !u!137 &681917930 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 8783047476447003189, guid: fc5cb30e720998c4186591c2945fe982, type: 3}
@@ -3934,6 +3989,11 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 4354531135040196628, guid: fc5cb30e720998c4186591c2945fe982, type: 3}
   m_PrefabInstance: {fileID: 913447900}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &1128083475 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8100320773420232829, guid: 6cb97086099f65b48982bf71b3103dae, type: 3}
+  m_PrefabInstance: {fileID: 427187205}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1165325856 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3639356644492111531, guid: fc5cb30e720998c4186591c2945fe982, type: 3}
@@ -4772,6 +4832,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1406735370}
   m_CullTransparentMesh: 1
+--- !u!23 &1433767940 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8730303016566787287, guid: 6cb97086099f65b48982bf71b3103dae, type: 3}
+  m_PrefabInstance: {fileID: 427187205}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1435277439
 GameObject:
   m_ObjectHideFlags: 0

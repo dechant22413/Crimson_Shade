@@ -100,5 +100,8 @@ public class EnemyRanged : EnemyBase
         StopAllCoroutines();
         base.Die();
         animator.SetTrigger(deathHash);
+
+        DissolveEffect dissolve = GetComponent<DissolveEffect>();
+        dissolve.StartDissolve();
     }
 }
