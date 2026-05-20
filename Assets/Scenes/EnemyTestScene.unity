@@ -614,6 +614,7 @@ MonoBehaviour:
   - {fileID: 681917930}
   - {fileID: 10691428}
   dissolveDuration: 6
+  destroyOnDissolve: 1
 --- !u!1 &191369823
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,7 +727,8 @@ MonoBehaviour:
   - {fileID: 619748459}
   - {fileID: 1433767940}
   - {fileID: 146537045}
-  dissolveDuration: 2
+  dissolveDuration: 4
+  destroyOnDissolve: 1
 --- !u!1 &287042548
 GameObject:
   m_ObjectHideFlags: 0
