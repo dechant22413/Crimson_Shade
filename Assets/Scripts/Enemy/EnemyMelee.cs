@@ -26,10 +26,16 @@ public class EnemyMelee : EnemyBase
         float damp = speed < currentSpeed ? 0.25f : 0f;
         animator.SetFloat(speedHash, speed, damp, Time.deltaTime);
 
+        if (chaseDelayActive)
+        {
+            animator.speed = 1f;
+            return;
+        }
+
         if (currentState == EnemyState.Patrol || currentState == EnemyState.Chase)
         {
             float normalizedSpeed = agent.velocity.magnitude / patrolSpeed;
-            animator.speed = Mathf.Clamp(normalizedSpeed, 0.1f, chaseSpeed / patrolSpeed) * walkAnimationSpeed;
+            animator.speed = Mathf.Clamp(normalizedSpeed, 0.05f, chaseSpeed / patrolSpeed) * walkAnimationSpeed;
         }
         else
         {
@@ -116,5 +122,8 @@ public class EnemyMelee : EnemyBase
         StopAllCoroutines();
         base.Die();
         animator.SetTrigger(deathHash);
+
+        DissolveEffect dissolve = GetComponent<DissolveEffect>();
+        dissolve.StartDissolve();
     }
 }
