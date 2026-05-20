@@ -32,6 +32,12 @@ public class EnemyMelee : EnemyBase
             return;
         }
 
+        if (animator.IsInTransition(0))
+        {
+            animator.speed = 1f;
+            return;
+        }
+
         if (currentState == EnemyState.Patrol || currentState == EnemyState.Chase)
         {
             float normalizedSpeed = agent.velocity.magnitude / patrolSpeed;
@@ -92,7 +98,10 @@ public class EnemyMelee : EnemyBase
     {
         chaseDelayActive = false;
         agent.SetDestination(transform.position);
-        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+
+        Vector3 dir = (player.position - transform.position).normalized;
+        dir.y = 0;
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 5f);
 
         if (!alreadyAttacked)
         {
