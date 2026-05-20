@@ -518,7 +518,7 @@ MonoBehaviour:
   player: {fileID: 0}
   health: 60
   attackDamage: 40
-  firstAttackDelay: 2
+  firstAttackDelay: 0.5
   sightRange: 12.77
   fieldOfViewAngle: 90
   guaranteedDetectRange: 6.33
@@ -608,7 +608,7 @@ MonoBehaviour:
   - {fileID: 1092710891}
   - {fileID: 681917930}
   - {fileID: 10691428}
-  dissolveDuration: 4
+  dissolveDuration: 6
 --- !u!1 &191369823
 GameObject:
   m_ObjectHideFlags: 0
