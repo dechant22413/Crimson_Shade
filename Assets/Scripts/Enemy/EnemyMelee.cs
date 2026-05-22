@@ -7,9 +7,6 @@ public class EnemyMelee : EnemyBase
     public Animator animator;
     public float walkAnimationSpeed = 1f;
 
-    [Header("Armor Hit Settings")]
-    public float stunDuration = 2f;
-
     private static readonly int speedHash = Animator.StringToHash("Speed");
     private static readonly int isInAttackRangeHash = Animator.StringToHash("IsInAttackRange");
     private static readonly int isAttackingHash = Animator.StringToHash("IsAttacking");
@@ -118,21 +115,11 @@ public class EnemyMelee : EnemyBase
 
     public override void ResetAttack() => alreadyAttacked = false;
 
-    public override void ArmorHit()
-    {
-        if (currentState == EnemyState.Dead) return;
-        animator.SetBool(isAttackingHash, false);
-        Stun(stunDuration);
-    }
-
     protected override void Die()
     {
         CancelInvoke();
         StopAllCoroutines();
         base.Die();
         animator.SetTrigger(deathHash);
-
-        DissolveEffect dissolve = GetComponent<DissolveEffect>();
-        dissolve.StartDissolve();
     }
 }
