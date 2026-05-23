@@ -37,7 +37,7 @@ public class PlayerKnife : MonoBehaviour
     private void EnemyBodyHit(Vector3 pos, Collider col)
     {
         Debug.Log("Body Hit!");
-        PlayerStats.Instance.ChangePowerUp(powerUpBonus);
+        PlayerStatsAndUIPanel.Instance.ChangePowerUp(powerUpBonus);
 
         EnemyBase enemy = col.GetComponentInParent<EnemyBase>();
         if (enemy != null)
@@ -47,7 +47,7 @@ public class PlayerKnife : MonoBehaviour
     private void EnemyHeadHit(Vector3 pos, Collider col)
     {
         Debug.Log("Head Hit!");
-        PlayerStats.Instance.ChangePowerUp(powerUpBonus);
+        PlayerStatsAndUIPanel.Instance.ChangePowerUp(powerUpBonus);
 
         EnemyBase enemy = col.GetComponentInParent<EnemyBase>();
         if (enemy != null)

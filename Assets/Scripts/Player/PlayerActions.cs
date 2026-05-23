@@ -112,24 +112,24 @@ public class PlayerActions : MonoBehaviour
 
     private void PowerUp(InputAction.CallbackContext context)
     {
-        if (PlayerStats.Instance.GetPowerUp() < PlayerStats.Instance.maxPowerUp)
+        if (PlayerStatsAndUIPanel.Instance.GetPowerUp() < PlayerStatsAndUIPanel.Instance.maxPowerUp)
         {
             Debug.Log("Not Enough PowerUp");
             return;
         }
 
-        if(PlayerStats.Instance.GetLifePoints() ==PlayerStats.Instance.maxLifePoints)
+        if(PlayerStatsAndUIPanel.Instance.GetLifePoints() ==PlayerStatsAndUIPanel.Instance.maxLifePoints)
         {
             Debug.Log("Already full Health");
             return;
         }
 
-        PlayerStats.Instance.ActivatePowerUp();
+        PlayerStatsAndUIPanel.Instance.ActivatePowerUp();
     }
 
     private void Dash(InputAction.CallbackContext context)
     {
-        if(PlayerStats.Instance.GetStamina() < dashStrain)
+        if(PlayerStatsAndUIPanel.Instance.GetStamina() < dashStrain)
         {
             Debug.Log("Not Enough Stamina");
             return;
@@ -159,7 +159,7 @@ public class PlayerActions : MonoBehaviour
 
         PlayerMovement.Instance.StartDash(moveDir, dashForce, dashDuration);
 
-        PlayerStats.Instance.UseStamina(dashStrain);
+        PlayerStatsAndUIPanel.Instance.UseStamina(dashStrain);
     }
 
     private void Jump(InputAction.CallbackContext context)

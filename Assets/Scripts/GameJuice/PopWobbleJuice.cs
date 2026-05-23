@@ -15,6 +15,7 @@ public class PopWobbleJuice : MonoBehaviour
     [SerializeField] private bool popOnEnable = false;
 
     private Vector3 originalScale;
+    private bool wasWobbling;
 
     private void Awake()
     {
@@ -31,12 +32,21 @@ public class PopWobbleJuice : MonoBehaviour
 
     private void Update()
     {
-        //Dauerhafter Wobbel wenn aktiviert
         if (continuousWobble)
         {
+            wasWobbling = true;
             float range = wobbleScale - 1f;
             float offset = Mathf.Sin(Time.time * wobbleSpeed) * range;
             transform.localScale = originalScale * (1f + offset);
+        }
+        else if (wasWobbling)
+        {
+            transform.localScale = Vector3.Lerp(transform.localScale, originalScale, Time.deltaTime * wobbleSpeed);
+            if (Vector3.Distance(transform.localScale, originalScale) < 0.001f)
+            {
+                transform.localScale = originalScale;
+                wasWobbling = false;
+            }
         }
     }
 

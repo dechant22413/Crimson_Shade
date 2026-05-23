@@ -62,7 +62,7 @@ public class Homing_Projectile : MonoBehaviour
         if (other.GetComponentInParent<EnemyRanged>() != null) return;
 
         if (other.CompareTag("Player"))
-            PlayerStats.Instance.ChangeLifePoints(damage * (-1));
+            PlayerStatsAndUIPanel.Instance.ChangeLifePoints(damage * (-1));
 
         Destroy(gameObject);
     }

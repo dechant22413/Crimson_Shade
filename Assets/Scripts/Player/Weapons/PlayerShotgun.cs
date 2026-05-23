@@ -129,7 +129,7 @@ public class PlayerShotgun : MonoBehaviour
             return;
         }
 
-        if (PlayerStats.Instance.GetLifePoints() <= lifeDrain * (magazinCapacity - ammoCount))
+        if (PlayerStatsAndUIPanel.Instance.GetLifePoints() <= lifeDrain * (magazinCapacity - ammoCount))
         {
             shotgunAnimations.Play("Idle", 0, 0f);
             OnAnimationEnd();
@@ -139,7 +139,7 @@ public class PlayerShotgun : MonoBehaviour
 
     public void Reload()
     {
-        PlayerStats.Instance.ChangeLifePoints(lifeDrain * (-1) * (magazinCapacity - ammoCount));
+        PlayerStatsAndUIPanel.Instance.ChangeLifePoints(lifeDrain * (-1) * (magazinCapacity - ammoCount));
         ammoCount = magazinCapacity;
         UpdateAmmoUI();
 

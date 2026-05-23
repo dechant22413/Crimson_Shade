@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerStats : MonoBehaviour
+public class PlayerStatsAndUIPanel : MonoBehaviour
 {
-    public static PlayerStats Instance;
+    public static PlayerStatsAndUIPanel Instance;
 
     void Awake()
     {
@@ -13,12 +13,16 @@ public class PlayerStats : MonoBehaviour
 
     [Header("References")]
     public Slider lifePointsSlider;
+    public Slider lifePointsSliderDelayed;
     public Slider staminaSlider;
     public Image powerUpBar;
+    public Image skeletonHand;
 
     [Header("LifePoints Settings")]
     public float maxLifePoints = 90;
     public float lifePointsSmooth = 5f;
+    public float lifePointsDelayedSmooth = 3f;
+    public float lifePointsDelay = 0.5f;
     [SerializeField] private float currentLifePoints;
 
     [Header("Stamina Settings")]
@@ -35,6 +39,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float currentPowerUp;
 
     private float lifePointsTarget;
+    private float lifePointsDelayedTarget;
+    private float lifePointsDelayTimer;
     private float staminaTarget;
     private float powerUpTarget;
 
@@ -52,6 +58,13 @@ public class PlayerStats : MonoBehaviour
             lifePointsSlider.value = maxLifePoints; 
         }
 
+        if(lifePointsSliderDelayed != null)
+        {
+            lifePointsSliderDelayed.minValue = 0;
+            lifePointsSliderDelayed.maxValue = maxLifePoints;
+            lifePointsSliderDelayed.value = maxLifePoints;
+        }
+
         if (staminaSlider != null)
         {
             staminaSlider.minValue = 0;
@@ -63,6 +76,7 @@ public class PlayerStats : MonoBehaviour
             powerUpBar.fillAmount = 0;
 
         lifePointsTarget = maxLifePoints;
+        lifePointsDelayedTarget = maxLifePoints;
         staminaTarget = maxStamina;
         powerUpTarget = 0;
     }
@@ -71,20 +85,31 @@ public class PlayerStats : MonoBehaviour
     {
         RecoverStamina();
 
+        if (lifePointsDelayTimer > 0f)
+            lifePointsDelayTimer -= Time.deltaTime;
+        else
+            lifePointsDelayedTarget = lifePointsTarget;
+
         if (lifePointsSlider != null)
             lifePointsSlider.value = Mathf.Lerp(lifePointsSlider.value, lifePointsTarget, Time.deltaTime * lifePointsSmooth);
+
+        if (lifePointsSliderDelayed != null)
+            lifePointsSliderDelayed.value = Mathf.Lerp(lifePointsSliderDelayed.value, lifePointsDelayedTarget, Time.deltaTime * lifePointsDelayedSmooth);
 
         if (staminaSlider != null)
             staminaSlider.value = Mathf.Lerp(staminaSlider.value, staminaTarget, Time.deltaTime * staminaSmooth);
 
         if (powerUpBar != null)
+        {
             powerUpBar.fillAmount = Mathf.Lerp(powerUpBar.fillAmount, powerUpTarget, Time.deltaTime * powerUpSmooth);
+        }
     }
 
     public void ChangeLifePoints(int amount)
     {
         currentLifePoints = Mathf.Clamp(currentLifePoints + amount, 0, maxLifePoints);
         lifePointsTarget = currentLifePoints;
+        lifePointsDelayTimer = lifePointsDelay;
     }
 
     public void RecoverStamina()
@@ -111,6 +136,11 @@ public class PlayerStats : MonoBehaviour
     {
         currentPowerUp = Mathf.Clamp(currentPowerUp + amount, 0, maxPowerUp);
         powerUpTarget = currentPowerUp / maxPowerUp;
+
+        if(currentPowerUp == maxPowerUp)
+        {
+            skeletonHand.GetComponent<PopWobbleJuice>().continuousWobble = true;
+        }
     }
 
     public void ActivatePowerUp()
@@ -119,6 +149,7 @@ public class PlayerStats : MonoBehaviour
         powerUpTarget = currentPowerUp / maxPowerUp;
 
         ChangeLifePoints(powerUpHeal);
+        skeletonHand.GetComponent<PopWobbleJuice>().continuousWobble = false;
     }
 
     public float GetStamina() => currentStamina;
