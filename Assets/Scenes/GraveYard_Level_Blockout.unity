@@ -10565,10 +10565,10 @@ MonoBehaviour:
     m_Bits: 1024
   enemyArmorHit:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
   playerCam: {fileID: 330585545}
   attackRange: 3
-  attackDamage: 0
+  attackDamage: 10
   powerUpBonus: 2
 --- !u!4 &849161019 stripped
 Transform:
@@ -11871,8 +11871,8 @@ RectTransform:
   m_GameObject: {fileID: 941167330}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 80067067}
   - {fileID: 27900677}
@@ -11885,11 +11885,11 @@ RectTransform:
   - {fileID: 631521384}
   m_Father: {fileID: 1063828087}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0, y: 1}
 --- !u!222 &941167333
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13601,7 +13601,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -20515,7 +20515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4368261501154217105, guid: 53bb89ed70fc3b14eb6b75e195830d32, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24076,7 +24076,7 @@ MonoBehaviour:
     m_Bits: 1024
   enemyArmorHit:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
   container: {fileID: 1680033192}
   playerCam: {fileID: 330585545}
   fireImpulse: {fileID: 1876615018}
@@ -25050,8 +25050,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e056a2c10909db24eb311f0d334d3aad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CursorManager
-  hitIndicator: {fileID: 0}
-  killIndicator: {fileID: 0}
+  hitIndicator: {fileID: 1621760722}
+  killIndicator: {fileID: 287042548}
   displayTime: 0.2
 --- !u!1001 &1954577157
 PrefabInstance:
