@@ -3,32 +3,41 @@ using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
+    #region Singleton Initialization
+    //Singelton
     public static UIManager Instance;
     void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
     }
+    #endregion
 
+    [Header("References")]
     [SerializeField] private GameObject hitIndicator;
     [SerializeField] private GameObject killIndicator;
+
+    [Header("Indicator Settings")]
     [SerializeField] private float displayTime = 0.2f;
 
     private Coroutine currentIndicatorCoroutine;
 
     private void Start()
     {
+        //Hided Cursor zu Beginn der Szene
         HideCursor();
     }
 
     public void HideCursor()
     {
+        //Hided Cursor
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void ShowCursor()
     {
+        //Zeigt Cursor
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
@@ -38,6 +47,7 @@ public class UIManager : MonoBehaviour
         // Hit nicht anzeigen, wenn Kill aktiv ist
         if (killIndicator.activeSelf) return;
 
+        //Zeigt Hit Indicator
         StartIndicator(hitIndicator);
     }
 
@@ -47,10 +57,11 @@ public class UIManager : MonoBehaviour
         if (currentIndicatorCoroutine != null)
             StopCoroutine(currentIndicatorCoroutine);
 
-        hitIndicator.SetActive(false); // Hit sofort ausblenden
+        // Hit sofort ausblenden, da Kill Indicator Priorität haben soll
+        hitIndicator.SetActive(false); 
 
-        currentIndicatorCoroutine =
-            StartCoroutine(IndicatorCoroutine(killIndicator));
+        //Zeigt Kill Indicator
+        currentIndicatorCoroutine = StartCoroutine(IndicatorCoroutine(killIndicator));
     }
 
     private void StartIndicator(GameObject indicator)
@@ -58,12 +69,13 @@ public class UIManager : MonoBehaviour
         if (currentIndicatorCoroutine != null)
             StopCoroutine(currentIndicatorCoroutine);
 
-        currentIndicatorCoroutine =
-            StartCoroutine(IndicatorCoroutine(indicator));
+        //Startet Indicator Coroutine
+        currentIndicatorCoroutine = StartCoroutine(IndicatorCoroutine(indicator));
     }
 
     private IEnumerator IndicatorCoroutine(GameObject indicator)
     {
+        //Aktiviert ensprechenden Indicator
         indicator.SetActive(true);
 
         yield return new WaitForSeconds(displayTime);

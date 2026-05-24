@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerAnimations : MonoBehaviour
 {
     #region Singelton Initialization
+    //Singelton
     public static PlayerAnimations Instance;
 
     void Awake()

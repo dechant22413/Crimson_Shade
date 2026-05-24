@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     #region Singelton Initialization
+    //Singleton
     public static PlayerMovement Instance;
 
     private void Awake()
@@ -33,18 +34,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float verticalVelocity;
 
     [Header("Dash Indication")]
-    public bool isDashing;
+    [SerializeField] private bool isDashing;
+
     private float dashTimer;
     private Vector3 dashDirection;
     private float dashForce;
 
     public Vector3 CurrentVelocity;
 
-    private bool isGrounded;
-
     private CharacterController playerController;
     private Vector2 moveInput;
 
+    #region Move Action
     private void OnEnable()
     {
         moveAction.action.Enable();
@@ -60,34 +61,28 @@ public class PlayerMovement : MonoBehaviour
 
         moveAction.action.Disable();
     }
+    #endregion
 
     public void StartDash(Vector3 direction, float force, float duration)
     {
+        //Startet einen Dash mit angegebenen Werten
         isDashing = true;
         dashDirection = direction;
         dashForce = force;
-
         dashTimer = duration; 
-    }
-
-    public Vector2 GetMoveInput()
-    {
-        return moveInput;
     }
 
     private void Update()
     {
-        isGrounded = playerController.isGrounded;
-
         HandleGravity();
         HandleMovement();
-
     }
 
     private void HandleMovement()
     {
         if (isDashing)
         {
+            //Überschreibt Player Bewegung während Dash
             playerController.Move(dashDirection * dashForce * Time.deltaTime);
 
             dashTimer -= Time.deltaTime; 
@@ -97,11 +92,10 @@ public class PlayerMovement : MonoBehaviour
                 isDashing = false;
                 verticalVelocity = 0f;
             }
-
             return;
         }
 
-        // normale Bewegung
+        // normale Bewegung des Spielers
         Vector3 forward = cameraTransform.forward;
         Vector3 right = cameraTransform.right;
 
@@ -123,8 +117,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleGravity()
     {
-        if(isGrounded && verticalVelocity < 0)
+        //Künstliche Schwerkraft ohne Rigidbody
+        if(playerController.isGrounded && verticalVelocity < 0)
         {
+            //Spieler hat einen automatischen Anpressdruck an den Boden, um floaty Bewegungen zu vermeiden
             verticalVelocity = initialFallVelocity;
         }
 
@@ -136,6 +132,7 @@ public class PlayerMovement : MonoBehaviour
         moveInput = context.ReadValue<Vector2>();
     }
 
+    #region Zugriffsfunktionen für andere Skripte
     public bool IsGrounded()
     {
         return playerController.isGrounded;
@@ -145,4 +142,10 @@ public class PlayerMovement : MonoBehaviour
     {
         verticalVelocity = input;
     }
+
+    public Vector2 GetMoveInput()
+    {
+        return moveInput;
+    }
+    #endregion
 }

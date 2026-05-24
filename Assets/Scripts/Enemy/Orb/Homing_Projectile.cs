@@ -12,19 +12,26 @@ public class Homing_Projectile : MonoBehaviour
 
     private Transform playerTransform;
     private Rigidbody rb;
+
     private bool launched;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        transform.localScale = Vector3.zero;
         GameObject player = GameObject.FindWithTag("Player");
+
         if (player != null)
             playerTransform = player.transform;
+
+        //Scale wird auf 0 gesetzt
+        transform.localScale = Vector3.zero;
+
+
     }
 
     private void Start()
     {
+        //Startet direkt nach Instanziierung die Selbstzerstörung mit Timer
         StartCoroutine(SelfDestructRoutine());
     }
 
@@ -38,11 +45,14 @@ public class Homing_Projectile : MonoBehaviour
         float timer = 0f;
         while (timer < growDuration)
         {
+            //Projektil Scale wächst
             timer += Time.deltaTime;
             transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, timer / growDuration);
             yield return null;
         }
         transform.localScale = Vector3.one;
+
+        //Projektil abschussbereit
         launched = true;
     }
 
@@ -51,6 +61,7 @@ public class Homing_Projectile : MonoBehaviour
         if (!launched) return;
         if (playerTransform == null) return;
 
+        //Projektil bewegt sich nach vorne mit einem leichten Homing Effect zum Spieler hin
         Vector3 dirToPlayer = (playerTransform.position - transform.position).normalized;
         Vector3 newDir = Vector3.Lerp(transform.forward, dirToPlayer, homingFactor * Time.fixedDeltaTime);
         rb.linearVelocity = newDir * speed;
@@ -59,8 +70,10 @@ public class Homing_Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //Projektil berücksichtigt nicht den Ranged Enemy selbst
         if (other.GetComponentInParent<EnemyRanged>() != null) return;
 
+        //Projektil damaged bei Auftreffen den Spieler
         if (other.CompareTag("Player"))
             PlayerStatsAndUIPanel.Instance.ChangeLifePoints(damage * (-1));
 
@@ -69,6 +82,7 @@ public class Homing_Projectile : MonoBehaviour
 
     private IEnumerator SelfDestructRoutine()
     {
+        //Selbstzerstörung nach eingestellter Zeit
         yield return new WaitForSeconds(lifeTime);
         Debug.Log("Destroy");
         Destroy(gameObject);

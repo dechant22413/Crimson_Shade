@@ -3,16 +3,18 @@ using System.Collections;
 
 public class PopWobbleJuice : MonoBehaviour
 {
-    public bool continuousWobble;
+    [Header("UI Behaviour")]
+    [SerializeField] private bool popOnEnable = false;
+    [SerializeField] private bool popOnStart = false;
+    public bool continuousWobble = false;
+
+    [Header("Pop Settings")]
     [SerializeField] private float popScale = 1.1f;
     [SerializeField] private float popDuration = 0.1f;
 
-    [SerializeField] private bool popOnStart;
+    [Header("Wobble Settings")]
     [SerializeField] private float wobbleSpeed = 8f;
     [SerializeField] private float wobbleScale = 1.05f;
-
-    [Header("UI Behaviour")]
-    [SerializeField] private bool popOnEnable = false;
 
     private Vector3 originalScale;
     private bool wasWobbling;
@@ -24,10 +26,21 @@ public class PopWobbleJuice : MonoBehaviour
 
     private void Start()
     {
+        //Startet bei Start einen Pop, wenn gewünscht
         if (popOnStart)
         {
             StartPop();
         }
+    }
+
+    private void OnEnable()
+    {
+        //Startet bei Enable einen Pop, wenn gewünscht
+        if (!popOnEnable)
+            return;
+
+        originalScale = transform.localScale;
+        StartPop();
     }
 
     private void Update()
@@ -48,6 +61,12 @@ public class PopWobbleJuice : MonoBehaviour
                 wasWobbling = false;
             }
         }
+    }
+
+    //Startet einen Pop
+    public void StartPop()
+    {
+        StartCoroutine(Pop());
     }
 
     private IEnumerator Pop()
@@ -73,20 +92,5 @@ public class PopWobbleJuice : MonoBehaviour
             yield return null;
         }
         transform.localScale = originalScale;
-    }
-
-    //Startet einen Pop
-    public void StartPop()
-    {
-        StartCoroutine(Pop());
-    }
-
-    private void OnEnable()
-    {
-        if (!popOnEnable)
-            return;
-
-        originalScale = transform.localScale;
-        StartPop();
     }
 }

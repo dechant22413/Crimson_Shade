@@ -6,7 +6,7 @@ public class DissolveEffect : MonoBehaviour
     [Header("References")]
     public Renderer[] renderers;
 
-    [Header("Settings")]
+    [Header("Dissolve Settings")]
     public float dissolveDuration = 2f;
     public bool destroyOnDissolve = true;
 
@@ -17,12 +17,14 @@ public class DissolveEffect : MonoBehaviour
 
     public void StartDissolve()
     {
+        //Startet den Dissolve Effect
         if (dissolveCoroutine != null) StopCoroutine(dissolveCoroutine);
         dissolveCoroutine = StartCoroutine(DissolveRoutine());
     }
 
     public void StartResolve()
     {
+        //Revertet den Dissolve Effect
         if (resolveCoroutine != null) StopCoroutine(resolveCoroutine);
         dissolveCoroutine = StartCoroutine(ResolveRoutine());
     }
@@ -38,6 +40,7 @@ public class DissolveEffect : MonoBehaviour
 
             foreach (var renderer in renderers)
             {
+                //Dissolve Effect wird auf alle angegebenen Renderer ausgeführt
                 if (renderer == null || !renderer.gameObject.activeInHierarchy) continue;
                 foreach (var mat in renderer.materials)
                     mat.SetFloat(dissolveAmountHash, amount);
@@ -58,6 +61,7 @@ public class DissolveEffect : MonoBehaviour
             float amount = Mathf.Clamp01(1f - (timer / dissolveDuration));
             foreach (var renderer in renderers)
             {
+                //Resolve Effect wird auf alle angegebenen Renderer ausgeführt
                 if (renderer == null || !renderer.gameObject.activeInHierarchy) continue;
                 foreach (var mat in renderer.materials)
                     mat.SetFloat(dissolveAmountHash, amount);
