@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2972161695395905134}
   m_Layer: 0
-  m_Name: Door_Metal_001
+  m_Name: Door_Metal_001_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,14 +24,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4910092111008511479}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7150823271909093216}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1001 &7257105069731055755
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f36901ffb82db7948bb2ed21a695142a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.18
+      value: 1.13
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f36901ffb82db7948bb2ed21a695142a, type: 3}
       propertyPath: m_LocalRotation.w
