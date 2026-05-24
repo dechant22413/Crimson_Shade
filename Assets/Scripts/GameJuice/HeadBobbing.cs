@@ -33,7 +33,7 @@ public class HeadBobbing : MonoBehaviour
     {
         Vector2 move = moveAction.action.ReadValue<Vector2>();
         float speed = move.magnitude;
-        bool grounded = PlayerMovement.Instance != null && PlayerMovement.Instance.isGrounded;
+        bool grounded = PlayerMovement.Instance != null && PlayerMovement.Instance.IsGrounded();
         bool walking = grounded && speed > 0.1f;
 
         if (walking)

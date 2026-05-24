@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 
 public class PlayerActions : MonoBehaviour
 {
+    #region Singleton Initialization
+    //Singleton
     public static PlayerActions Instance;
 
     void Awake()
@@ -15,6 +18,7 @@ public class PlayerActions : MonoBehaviour
 
         Instance = this;
     }
+    #endregion
 
     [Header("References")]
     public InputActionReference jumpAction;
@@ -24,23 +28,20 @@ public class PlayerActions : MonoBehaviour
     public InputActionReference powerUpAction;
     public InputActionReference reloadAction;
 
-    [Header("Gun Settings")]
-    public int damage;
-    public float reloadTime;
-    public int shotCount;
-
     [Header("Dash Settings")]
-    public float dashForce = 20f;
-    public float dashDuration = 0.2f;
-    public float dashStrain = 10;
+    [SerializeField] private float dashForce = 20f;
+    [SerializeField] private float dashDuration = 0.2f;
+    [SerializeField] private float dashStrain = 10;
 
     [Header("Jump Settings")]
-    public float jumpForce;
+    [SerializeField] private float jumpForce;
 
     private bool isAttacking = false;
 
+    #region Actions
     private void OnEnable()
     {
+        //Enabled alle Actions
         jumpAction.action.Enable();
         shootAction.action.Enable();
         dashAction.action.Enable();
@@ -63,6 +64,7 @@ public class PlayerActions : MonoBehaviour
 
     private void OnDisable()
     {
+        //Disabled alle Actions
         jumpAction.action.performed -= Jump;
         shootAction.action.performed -= Shoot;
         dashAction.action.performed -= Dash;
@@ -80,62 +82,55 @@ public class PlayerActions : MonoBehaviour
         powerUpAction.action.Disable();
         reloadAction.action.Disable();
     }
+    #endregion 
 
     private void Shoot(InputAction.CallbackContext context)
     {
+        //Kein Input geben, wenn bereits eine Animation läuft
         if (PlayerAnimations.Instance.IsRightArmPlaying) return;
+
+        //Spielt Schuss Animation ab
         PlayerAnimations.Instance.PlayShoot();
     }
+
     private void Reload(InputAction.CallbackContext context)
     {
+        //Kein Input geben, wenn bereits eine Animation läuft
         if (PlayerAnimations.Instance.IsRightArmPlaying) return;
+
+        //Spielt Reload Animation ab
         PlayerAnimations.Instance.PlayReload();
     }
 
-    private void Hit(InputAction.CallbackContext context)
-    {
-        isAttacking = true;
-    }
-
-    private void HitCanceled(InputAction.CallbackContext context)
-    {
-        isAttacking = false;
-    }
-
-    private void Update()
-    {
-        if (PlayerAnimations.Instance.IsLeftArmPlaying) return;
-
-        if (isAttacking)
-            PlayerAnimations.Instance.PlayHit();
-    }
 
     private void PowerUp(InputAction.CallbackContext context)
     {
+        //PowerUp kann nicht aktiviert werden, wenn nicht vollständig aufgeladen
         if (PlayerStatsAndUIPanel.Instance.GetPowerUp() < PlayerStatsAndUIPanel.Instance.maxPowerUp)
         {
             Debug.Log("Not Enough PowerUp");
             return;
         }
 
+        //PowerUp kann nicht aktiviert werden, wenn Leben bereits voll
         if(PlayerStatsAndUIPanel.Instance.GetLifePoints() ==PlayerStatsAndUIPanel.Instance.maxLifePoints)
         {
             Debug.Log("Already full Health");
             return;
         }
 
+        //Aktiviert PowerUp
         PlayerStatsAndUIPanel.Instance.ActivatePowerUp();
     }
 
     private void Dash(InputAction.CallbackContext context)
     {
+        //Dash kann nur aktiviert werden, wenn genug Stamina vorhanden
         if(PlayerStatsAndUIPanel.Instance.GetStamina() < dashStrain)
         {
             Debug.Log("Not Enough Stamina");
             return;
         }
-
-        Debug.Log("Dash");
 
         Vector2 input = PlayerMovement.Instance.GetMoveInput();
 
@@ -157,19 +152,45 @@ public class PlayerActions : MonoBehaviour
 
         moveDir.Normalize();
 
+        //Startet einen Dash in BLickrichtung des Spielers mit angegebener Duration und Force
         PlayerMovement.Instance.StartDash(moveDir, dashForce, dashDuration);
 
+        //Verbraucht Stamina
         PlayerStatsAndUIPanel.Instance.UseStamina(dashStrain);
+
+        Debug.Log("Dash");
     }
 
     private void Jump(InputAction.CallbackContext context)
     {
-        if (PlayerMovement.Instance.isGrounded)
+        //Springe nur, wenn Grounded
+        if (PlayerMovement.Instance.IsGrounded())
         {
-            PlayerMovement.Instance.verticalVelocity = jumpForce;
+            PlayerMovement.Instance.SetVerticalVelocity(jumpForce);
             Debug.Log("Jump");
         }
     }
+
+    private void Hit(InputAction.CallbackContext context)
+    {
+        isAttacking = true;
+    }
+
+    private void HitCanceled(InputAction.CallbackContext context)
+    {
+        isAttacking = false;
+    }
+
+    private void Update()
+    {
+        //Kein Input geben, wenn bereits eine Animation läuft
+        if (PlayerAnimations.Instance.IsLeftArmPlaying) return;
+
+        //Spielt Hit Animation ab, solange der Input gehalten wird
+        if (isAttacking)
+            PlayerAnimations.Instance.PlayHit();
+    }
+
 
 
 }

@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    #region Singelton Initialization
     public static PlayerMovement Instance;
 
     private void Awake()
@@ -17,21 +18,19 @@ public class PlayerMovement : MonoBehaviour
 
         playerController = GetComponent<CharacterController>();
     }
+    #endregion
 
     [Header("References")]
     public Transform cameraTransform;
     public InputActionReference moveAction;
 
     [Header("Basic Movement Settings")]
-    public float speed;
+    [SerializeField] private float speed;
 
     [Header("Phsyics")]
     [SerializeField] private float gravity = 12f;
     [SerializeField] private float initialFallVelocity = -2f;
-    public float verticalVelocity;
-
-    [Header("Ground Check Settings")]
-    public bool isGrounded;
+    [SerializeField] private float verticalVelocity;
 
     [Header("Dash Indication")]
     public bool isDashing;
@@ -40,6 +39,8 @@ public class PlayerMovement : MonoBehaviour
     private float dashForce;
 
     public Vector3 CurrentVelocity;
+
+    private bool isGrounded;
 
     private CharacterController playerController;
     private Vector2 moveInput;
@@ -138,5 +139,10 @@ public class PlayerMovement : MonoBehaviour
     public bool IsGrounded()
     {
         return playerController.isGrounded;
+    }
+
+    public void SetVerticalVelocity(float input)
+    {
+        verticalVelocity = input;
     }
 }
