@@ -21277,6 +21277,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Starting Point (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4876285997155681295, guid: 6d147223293a92348bf789f8db42fb7a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7287de3e780dffb4894b51ad66f440c3, type: 2}
     - target: {fileID: 6294062970213516557, guid: 6d147223293a92348bf789f8db42fb7a, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
