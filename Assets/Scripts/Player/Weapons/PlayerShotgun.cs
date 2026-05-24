@@ -82,7 +82,7 @@ public class PlayerShotgun : Weapon
             return;
         }
 
-        if (PlayerStatsAndUIPanel.Instance.GetLifePoints() <= lifeDrain * (magazinCapacity - ammoCount))
+        if (PlayerStatsAndUIPanel.Instance.GetMaxLifePoints() <= lifeDrain * (magazinCapacity - ammoCount))
         {
             //Cancelt Reload, wenn zu wenige Leben
             shotgunAnimations.Play("Idle", 0, 0f);

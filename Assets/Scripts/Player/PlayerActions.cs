@@ -115,7 +115,7 @@ public class PlayerActions : MonoBehaviour
         }
 
         //PowerUp kann nicht aktiviert werden, wenn Leben bereits voll
-        if(PlayerStatsAndUIPanel.Instance.GetLifePoints() ==PlayerStatsAndUIPanel.Instance.GetCurrentLifePoints())
+        if(PlayerStatsAndUIPanel.Instance.GetMaxLifePoints() == PlayerStatsAndUIPanel.Instance.GetCurrentLifePoints())
         {
             Debug.Log("Already full Health");
             return;
