@@ -24079,18 +24079,18 @@ MonoBehaviour:
   environmentHit:
     serializedVersion: 2
     m_Bits: 1024
-  container: {fileID: 1680033192}
+  crosshairContainer: {fileID: 1680033192}
   playerCam: {fileID: 330585545}
   fireImpulse: {fileID: 1876615018}
   shotgunAnimations: {fileID: 1876615016}
+  ammoIndicatorLeft: {fileID: 2129349107}
+  ammoIndicatorRight: {fileID: 1300250502}
   magazinCapacity: 2
   lifeDrain: 15
   attackRange: 20
   attackDamage: 10
   pelletCount: 8
   spreadAngle: 6.31
-  ammoIndicatorLeft: {fileID: 2129349107}
-  ammoIndicatorRight: {fileID: 1300250502}
   ammoActiveColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   ammoEmptyColor: {r: 0, g: 0, b: 0, a: 0.5019608}
   spreadAmount: 70

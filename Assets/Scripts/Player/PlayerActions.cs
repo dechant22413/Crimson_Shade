@@ -108,14 +108,14 @@ public class PlayerActions : MonoBehaviour
     private void PowerUp(InputAction.CallbackContext context)
     {
         //PowerUp kann nicht aktiviert werden, wenn nicht vollständig aufgeladen
-        if (PlayerStatsAndUIPanel.Instance.GetPowerUp() < PlayerStatsAndUIPanel.Instance.maxPowerUp)
+        if (PlayerStatsAndUIPanel.Instance.GetPowerUp() < PlayerStatsAndUIPanel.Instance.GetMaxPowerUp())
         {
             Debug.Log("Not Enough PowerUp");
             return;
         }
 
         //PowerUp kann nicht aktiviert werden, wenn Leben bereits voll
-        if(PlayerStatsAndUIPanel.Instance.GetLifePoints() ==PlayerStatsAndUIPanel.Instance.maxLifePoints)
+        if(PlayerStatsAndUIPanel.Instance.GetLifePoints() ==PlayerStatsAndUIPanel.Instance.GetCurrentLifePoints())
         {
             Debug.Log("Already full Health");
             return;
@@ -192,7 +192,4 @@ public class PlayerActions : MonoBehaviour
         if (isAttacking)
             PlayerAnimations.Instance.PlayHit();
     }
-
-
-
 }

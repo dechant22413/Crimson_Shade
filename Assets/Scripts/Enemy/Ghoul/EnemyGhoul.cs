@@ -7,6 +7,7 @@ public class EnemyGhoul : EnemyMelee
 
     public override void ArmorHit()
     {
+        //Bei Treffer auf Panzerung wird Stun() auf EnemyBase ausgelöst
         if (currentState == EnemyState.Dead) return;
         animator.SetBool(Animator.StringToHash("IsAttacking"), false);
         Stun(stunDuration);

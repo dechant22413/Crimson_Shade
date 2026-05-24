@@ -3,16 +3,20 @@ using UnityEngine.AI;
 
 public class EnemyMelee : EnemyBase
 {
+    #region Settings
     [Header("Animation")]
     public Animator animator;
     public float walkAnimationSpeed = 1f;
+    #endregion
 
+    #region Animator Variables
     private static readonly int speedHash = Animator.StringToHash("Speed");
     private static readonly int isInAttackRangeHash = Animator.StringToHash("IsInAttackRange");
     private static readonly int isAttackingHash = Animator.StringToHash("IsAttacking");
     private static readonly int stunnedHash = Animator.StringToHash("Stunned");
     private static readonly int deathHash = Animator.StringToHash("Death");
     private static readonly int isInactiveHash = Animator.StringToHash("IsInactive");
+    #endregion 
 
     protected override void Update()
     {
@@ -21,6 +25,8 @@ public class EnemyMelee : EnemyBase
         float speed = agent.velocity.magnitude / chaseSpeed;
         float currentSpeed = animator.GetFloat(speedHash);
         float damp = speed < currentSpeed ? 0.25f : 0f;
+
+        //speedHash des Animators wird gesetzt
         animator.SetFloat(speedHash, speed, damp, Time.deltaTime);
 
         if (chaseDelayActive)
@@ -38,6 +44,8 @@ public class EnemyMelee : EnemyBase
         if (currentState == EnemyState.Patrol || currentState == EnemyState.Chase)
         {
             float normalizedSpeed = agent.velocity.magnitude / patrolSpeed;
+
+            //Laufgeschwindigkeit des Animators wird je nach State ver‰ndert, um Animation Speeds an geschwindigkeit des Gegners anzupassen
             animator.speed = Mathf.Clamp(normalizedSpeed, 0.05f, chaseSpeed / patrolSpeed) * walkAnimationSpeed;
         }
         else
@@ -71,37 +79,41 @@ public class EnemyMelee : EnemyBase
 
     protected override void OnPlayerOutOfAttackRange()
     {
+        //Spieler nicht mehr in Angriffsreichweite
         animator.SetBool(isAttackingHash, false);
         animator.SetBool(isInAttackRangeHash, false);
 
+        //Attacke wird gecancelt
         CancelInvoke(nameof(EnableFirstAttack));
 
         firstAttackDone = false;
         alreadyAttacked = false;
     }
 
-    protected override void Inactive() => agent.SetDestination(transform.position);
-    protected override void Idle() => agent.SetDestination(transform.position);
+    protected override void Inactive() => agent.SetDestination(transform.position); //Gegner bewegt sich nicht
+    protected override void Idle() => agent.SetDestination(transform.position); //Gegner bewegt sich nicht
     protected override void Patrol() { }
     protected override void Chase() { }
     protected override void Dead() { }
 
     protected override void Stunned()
     {
-        agent.SetDestination(transform.position);
+        agent.SetDestination(transform.position); //Gegner bewegt sich nicht
     }
 
     protected override void Attack()
     {
         chaseDelayActive = false;
-        agent.SetDestination(transform.position);
+        agent.SetDestination(transform.position); //Gegner bleibt stehen
 
+        //Gegner rotiert sich in einer flieﬂenden Bewegung zum Spieler
         Vector3 dir = (player.position - transform.position).normalized;
         dir.y = 0;
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 5f);
 
         if (!alreadyAttacked)
         {
+            //Attack Animation Loop wird gestartet
             animator.SetBool(isAttackingHash, true);
             alreadyAttacked = true;
         }
@@ -109,6 +121,7 @@ public class EnemyMelee : EnemyBase
 
     public override void OnAttackHit()
     {
+        //Wird durch Animation Event aufgerufen
         if (Vector3.Distance(transform.position, player.position) <= attackRange)
             PlayerStatsAndUIPanel.Instance.ChangeLifePoints(-(int)attackDamage);
     }
@@ -117,9 +130,11 @@ public class EnemyMelee : EnemyBase
 
     protected override void Die()
     {
+        //Alle laufenden Preozesse werden gestoppt
         CancelInvoke();
         StopAllCoroutines();
         base.Die();
+        //Death Animation Trigger
         animator.SetTrigger(deathHash);
     }
 }

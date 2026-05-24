@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class PlayerStatsAndUIPanel : MonoBehaviour
 {
+    #region Singleton Initialization
+    //Singelton
     public static PlayerStatsAndUIPanel Instance;
 
     void Awake()
@@ -10,7 +12,9 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
     }
+    #endregion
 
+    #region Settings
     [Header("References")]
     public Slider lifePointsSlider;
     public Slider lifePointsSliderDelayed;
@@ -19,38 +23,44 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
     public Image skeletonHand;
 
     [Header("LifePoints Settings")]
-    public float maxLifePoints = 90;
-    public float lifePointsSmooth = 5f;
-    public float lifePointsDelayedSmooth = 3f;
-    public float lifePointsDelay = 0.5f;
-    [SerializeField] private float currentLifePoints;
+    [SerializeField] private int maxLifePoints = 90;
+    [SerializeField] private float lifePointsSmooth = 5f;
+    [SerializeField] private float lifePointsDelayedSmooth = 3f;
+    [SerializeField] private float lifePointsDelay = 0.5f;
+    [SerializeField] private int currentLifePoints;
 
     [Header("Stamina Settings")]
-    public float maxStamina = 20;
-    public float recoverRate = 3f;
-    public float staminaRecoverDelay = 1f;
-    public float staminaSmooth = 5f;
+    [SerializeField] private float maxStamina = 20;
+    [SerializeField] private float recoverRate = 3f;
+    [SerializeField] private float staminaRecoverDelay = 1f;
+    [SerializeField] private float staminaSmooth = 5f;
     [SerializeField] private float currentStamina;
 
     [Header("PowerUp Settings")]
-    public float maxPowerUp = 5;
-    public int powerUpHeal;
-    public float powerUpSmooth = 5f;
+    [SerializeField] private float maxPowerUp = 5;
+    [SerializeField] private int powerUpHeal;
+    [SerializeField] private float powerUpSmooth = 5f;
     [SerializeField] private float currentPowerUp;
+    #endregion
 
     private float lifePointsTarget;
     private float lifePointsDelayedTarget;
     private float lifePointsDelayTimer;
     private float staminaTarget;
     private float powerUpTarget;
-
     private float currentRecoverDelay;
 
     private void Start()
     {
+        //Initialisierung aller Werte
         currentLifePoints = maxLifePoints;
         currentStamina = maxStamina;
+        lifePointsTarget = maxLifePoints;
+        lifePointsDelayedTarget = maxLifePoints;
+        staminaTarget = maxStamina;
+        powerUpTarget = 0;
 
+        //Einstellung der Slider und Bars
         if (lifePointsSlider != null)
         {
             lifePointsSlider.minValue = 0;
@@ -74,15 +84,11 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
 
         if (powerUpBar != null)
             powerUpBar.fillAmount = 0;
-
-        lifePointsTarget = maxLifePoints;
-        lifePointsDelayedTarget = maxLifePoints;
-        staminaTarget = maxStamina;
-        powerUpTarget = 0;
     }
 
     private void Update()
     {
+        //Stamina des Dash wird dauerhaft wieder aufgeladen
         RecoverStamina();
 
         if (lifePointsDelayTimer > 0f)
@@ -90,6 +96,7 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
         else
             lifePointsDelayedTarget = lifePointsTarget;
 
+        //Alle Slider werden bei Werteveränderungen mit einem Lerp angepasst
         if (lifePointsSlider != null)
             lifePointsSlider.value = Mathf.Lerp(lifePointsSlider.value, lifePointsTarget, Time.deltaTime * lifePointsSmooth);
 
@@ -107,6 +114,7 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
 
     public void ChangeLifePoints(int amount)
     {
+        //LifePoints werden um den gewünschten Wert verändert
         currentLifePoints = Mathf.Clamp(currentLifePoints + amount, 0, maxLifePoints);
         lifePointsTarget = currentLifePoints;
         lifePointsDelayTimer = lifePointsDelay;
@@ -114,46 +122,58 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
 
     public void RecoverStamina()
     {
+        //Kleines Delay vor dem Wiederaufladen des Stamina Sliders
         if (currentRecoverDelay > 0)
         {
             currentRecoverDelay -= Time.deltaTime;
             return;
         }
 
+        //Wiederaufladen des Stamina Sliders
         currentStamina = Mathf.Clamp(currentStamina + recoverRate * Time.deltaTime, 0, maxStamina);
         staminaTarget = currentStamina;
     }
 
     public void UseStamina(float amount)
     {
+        //currentStamina wird um gewünschten Wert verändert
         currentStamina = Mathf.Clamp(currentStamina - amount, 0, maxStamina);
         staminaTarget = currentStamina;
 
+        //Recover Delay
         currentRecoverDelay = staminaRecoverDelay;
     }
 
     public void ChangePowerUp(int amount)
     {
+        //currentPowerUp wird um gewünschten Wert verändert
         currentPowerUp = Mathf.Clamp(currentPowerUp + amount, 0, maxPowerUp);
         powerUpTarget = currentPowerUp / maxPowerUp;
 
         if(currentPowerUp == maxPowerUp)
         {
+            //PowerUp Bar Animation bei maxPowerUp
             skeletonHand.GetComponent<PopWobbleJuice>().continuousWobble = true;
         }
     }
 
     public void ActivatePowerUp()
     {
+        //currentPowerUp wird auf 0 gesetzt und PowerUp wird aktiviert
         currentPowerUp = 0;
         powerUpTarget = currentPowerUp / maxPowerUp;
 
         ChangeLifePoints(powerUpHeal);
+
+        //Stoppen der PowerUp Bar Animation
         skeletonHand.GetComponent<PopWobbleJuice>().continuousWobble = false;
     }
 
+    #region Weitere Zugriffsfunktionien für andere Skripte
     public float GetStamina() => currentStamina;
     public float GetLifePoints() => currentLifePoints;
-
     public float GetPowerUp() => currentPowerUp;
+    public float GetMaxPowerUp() => maxPowerUp;
+    public int GetCurrentLifePoints() => currentLifePoints;
+    #endregion
 }

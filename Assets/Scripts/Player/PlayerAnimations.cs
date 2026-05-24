@@ -24,7 +24,7 @@ public class PlayerAnimations : MonoBehaviour
 
     private int hitindex = 0;
 
-    #region Animator Strings
+    #region Animator Variables
     private static readonly int reload = Animator.StringToHash("Reload");
     private static readonly int shoot = Animator.StringToHash("Shoot");
     private static readonly int flip = Animator.StringToHash("Flip");

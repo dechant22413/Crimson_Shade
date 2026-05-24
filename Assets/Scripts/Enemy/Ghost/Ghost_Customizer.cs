@@ -23,7 +23,7 @@ public class GhostCustomizer : MonoBehaviour
 
     private void ApplyCustomization()
     {
-        //gewünschte Meshes können per Skript aktiviert oder deaktiviert werden
+        //gewünschter Mesh des Ghost Hosts kann per Skript ausgewählt werden
         if (this == null) return;
 
         if (ghoulMesh_001 != null) ghoulMesh_001.SetActive(hostType == HostType.Host_001);

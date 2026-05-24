@@ -180,13 +180,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aabc4d58c2c4b54f8218e76fd3c4ce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PopWobbleJuice
+  popOnEnable: 0
+  popOnStart: 0
   continuousWobble: 0
   popScale: 1.1
   popDuration: 0.1
-  popOnStart: 0
   wobbleSpeed: 8
   wobbleScale: 1.02
-  popOnEnable: 0
 --- !u!114 &63683527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -668,10 +668,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf060095ee5c9374f917722eee57235c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GhoulCustomizer
-  hasHelmet: 1
-  hasClothing: 1
   helmetMesh: {fileID: 1120280317}
   clothingMesh: {fileID: 10691426}
+  hasHelmet: 1
+  hasClothing: 1
 --- !u!114 &189386935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1143,12 +1143,15 @@ MonoBehaviour:
   enemyHeadHit:
     serializedVersion: 2
     m_Bits: 512
-  environmentHit:
-    serializedVersion: 2
-    m_Bits: 1024
   enemyArmorHit:
     serializedVersion: 2
     m_Bits: 4096
+  enemyHostHit:
+    serializedVersion: 2
+    m_Bits: 0
+  environmentHit:
+    serializedVersion: 2
+    m_Bits: 1024
   playerCam: {fileID: 1039527840}
   attackRange: 3
   attackDamage: 10
@@ -1790,13 +1793,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aabc4d58c2c4b54f8218e76fd3c4ce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PopWobbleJuice
+  popOnEnable: 0
+  popOnStart: 0
   continuousWobble: 0
   popScale: 1.1
   popDuration: 0.1
-  popOnStart: 0
   wobbleSpeed: 8
   wobbleScale: 1.02
-  popOnEnable: 0
 --- !u!114 &513973144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3654,9 +3657,6 @@ MonoBehaviour:
   hitAction: {fileID: -4900986322801745503, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
   powerUpAction: {fileID: -3361091801344585588, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
   reloadAction: {fileID: -8498300033829780412, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
-  damage: 0
-  reloadTime: 0
-  shotCount: 0
   dashForce: 25
   dashDuration: 0.3
   dashStrain: 10
@@ -3679,7 +3679,6 @@ MonoBehaviour:
   gravity: -14
   initialFallVelocity: -4
   verticalVelocity: 0
-  isGrounded: 0
   isDashing: 0
   CurrentVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &1127715463
@@ -4487,24 +4486,27 @@ MonoBehaviour:
   enemyHeadHit:
     serializedVersion: 2
     m_Bits: 512
-  environmentHit:
-    serializedVersion: 2
-    m_Bits: 1024
   enemyArmorHit:
     serializedVersion: 2
     m_Bits: 4096
-  container: {fileID: 1647140247}
+  enemyHostHit:
+    serializedVersion: 2
+    m_Bits: 0
+  environmentHit:
+    serializedVersion: 2
+    m_Bits: 1024
+  crosshairContainer: {fileID: 1647140247}
   playerCam: {fileID: 1039527840}
   fireImpulse: {fileID: 1168987166}
   shotgunAnimations: {fileID: 1168987165}
+  ammoIndicatorLeft: {fileID: 1958387772}
+  ammoIndicatorRight: {fileID: 1448809085}
   magazinCapacity: 2
   lifeDrain: 15
   attackRange: 20
   attackDamage: 10
   pelletCount: 8
   spreadAngle: 6.31
-  ammoIndicatorLeft: {fileID: 1958387772}
-  ammoIndicatorRight: {fileID: 1448809085}
   ammoActiveColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   ammoEmptyColor: {r: 0, g: 0, b: 0, a: 0.5019608}
   spreadAmount: 70
@@ -5811,13 +5813,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aabc4d58c2c4b54f8218e76fd3c4ce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PopWobbleJuice
+  popOnEnable: 0
+  popOnStart: 0
   continuousWobble: 0
   popScale: 1.2
   popDuration: 0.1
-  popOnStart: 0
   wobbleSpeed: 8
   wobbleScale: 1.05
-  popOnEnable: 0
 --- !u!114 &1448809085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6842,13 +6844,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aabc4d58c2c4b54f8218e76fd3c4ce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PopWobbleJuice
+  popOnEnable: 0
+  popOnStart: 0
   continuousWobble: 0
   popScale: 1.2
   popDuration: 0.1
-  popOnStart: 0
   wobbleSpeed: 8
   wobbleScale: 1.05
-  popOnEnable: 0
 --- !u!114 &1958387772
 MonoBehaviour:
   m_ObjectHideFlags: 0

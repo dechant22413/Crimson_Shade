@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class HeadBobbing : MonoBehaviour
 {
+    #region Settings
     [Header("References")]
     public InputActionReference moveAction;
     public Transform cameraTransform;
@@ -17,6 +18,7 @@ public class HeadBobbing : MonoBehaviour
 
     [Header("Smooth")]
     public float smooth = 12f;
+    #endregion 
 
     private Vector3 baseLocalPos;
     private Vector3 currentOffset;
