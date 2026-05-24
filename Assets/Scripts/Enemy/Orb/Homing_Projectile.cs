@@ -3,12 +3,14 @@ using System.Collections;
 
 public class Homing_Projectile : MonoBehaviour
 {
+    #region Settings
     [Header("Projectile Settings")]
     [SerializeField] private int damage;
     [SerializeField] private float lifeTime = 5f;
     [SerializeField] private float speed = 8f;
     [SerializeField] private float homingFactor = 3f;
     [SerializeField] private float growDuration = 0.3f;
+    #endregion
 
     private Transform playerTransform;
     private Rigidbody rb;

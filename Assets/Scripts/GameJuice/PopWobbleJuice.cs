@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PopWobbleJuice : MonoBehaviour
 {
+    #region Settings
     [Header("UI Behaviour")]
     [SerializeField] private bool popOnEnable = false;
     [SerializeField] private bool popOnStart = false;
@@ -15,6 +16,7 @@ public class PopWobbleJuice : MonoBehaviour
     [Header("Wobble Settings")]
     [SerializeField] private float wobbleSpeed = 8f;
     [SerializeField] private float wobbleScale = 1.05f;
+    #endregion
 
     private Vector3 originalScale;
     private bool wasWobbling;

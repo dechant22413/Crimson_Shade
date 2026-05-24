@@ -3,12 +3,14 @@ using UnityEngine;
 
 public class DissolveEffect : MonoBehaviour
 {
+    #region Settings
     [Header("References")]
     public Renderer[] renderers;
 
     [Header("Dissolve Settings")]
     public float dissolveDuration = 2f;
     public bool destroyOnDissolve = true;
+    #endregion 
 
     private static readonly int dissolveAmountHash = Shader.PropertyToID("_DissolveAmount");
 

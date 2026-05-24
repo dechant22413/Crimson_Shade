@@ -15,12 +15,14 @@ public class AudioManager : MonoBehaviour
     }
     #endregion
 
+    #region Settings
     [Header("References")]
     [SerializeField] private AudioSource audioSource;
 
     [Header("Sound Clip List")]
     [SerializeField] private List<Sound> sounds = new List<Sound>();
     private Dictionary<string, Sound> soundDict;
+    #endregion
 
     private void Initialize()
     {

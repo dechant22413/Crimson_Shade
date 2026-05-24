@@ -20,6 +20,7 @@ public class PlayerActions : MonoBehaviour
     }
     #endregion
 
+    #region Settings
     [Header("References")]
     public InputActionReference jumpAction;
     public InputActionReference shootAction;
@@ -35,6 +36,7 @@ public class PlayerActions : MonoBehaviour
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpForce;
+    #endregion
 
     private bool isAttacking = false;
 

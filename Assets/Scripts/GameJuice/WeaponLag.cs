@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class WeaponLag : MonoBehaviour
 {
+    #region Settings
     [Header("References")]
     public Transform cameraTransform;
 
@@ -12,6 +13,7 @@ public class WeaponLag : MonoBehaviour
     [Header("Movement Influence")]
     public float velocityMultiplier = 0.02f;
     public float maxOffset = 0.2f;
+    #endregion
 
     private Vector3 startLocalPos;
     private Vector3 currentOffset;
@@ -23,6 +25,7 @@ public class WeaponLag : MonoBehaviour
 
     private void LateUpdate()
     {
+        //Verzögertes Hinterherziehen der Waffen nach der Player Kamera
         if (PlayerMovement.Instance == null) return;
 
         Vector3 velocity = PlayerMovement.Instance.CurrentVelocity;
@@ -35,12 +38,7 @@ public class WeaponLag : MonoBehaviour
         targetOffset = Vector3.ClampMagnitude(targetOffset, maxOffset);
 
         //  Smooth Lag
-        currentOffset = Vector3.Lerp(
-            currentOffset,
-            targetOffset,
-            Time.deltaTime * returnSpeed
-        );
-
+        currentOffset = Vector3.Lerp(currentOffset, targetOffset, Time.deltaTime * returnSpeed);
         transform.localPosition = startLocalPos + currentOffset;
     }
 }

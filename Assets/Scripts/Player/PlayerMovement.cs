@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     }
     #endregion
 
+    #region Settings
     [Header("References")]
     public Transform cameraTransform;
     public InputActionReference moveAction;
@@ -35,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Dash Indication")]
     [SerializeField] private bool isDashing;
+    #endregion
 
     private float dashTimer;
     private Vector3 dashDirection;

@@ -13,9 +13,11 @@ public class PlayerAnimations : MonoBehaviour
     }
     #endregion
 
+    #region Settings
     [Header("References")]
     public Animator leftArmAnimator;
     public Animator rightArmAnimator;
+    #endregion
 
     public bool IsLeftArmPlaying { get; set; }
     public bool IsRightArmPlaying { get; set; }

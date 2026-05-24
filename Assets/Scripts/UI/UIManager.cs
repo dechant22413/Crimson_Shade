@@ -13,12 +13,14 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
+    #region Settings
     [Header("References")]
     [SerializeField] private GameObject hitIndicator;
     [SerializeField] private GameObject killIndicator;
 
     [Header("Indicator Settings")]
     [SerializeField] private float displayTime = 0.2f;
+    #endregion
 
     private Coroutine currentIndicatorCoroutine;
 

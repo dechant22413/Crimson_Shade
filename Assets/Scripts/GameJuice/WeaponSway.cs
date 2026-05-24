@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class WeaponSway : MonoBehaviour
 {
+    #region Settings
     [Header("References")]
     public InputActionReference lookAction;
 
@@ -10,6 +11,7 @@ public class WeaponSway : MonoBehaviour
     [SerializeField] private float smooth = 10f;
     [SerializeField] private float swayMultiplier = 0.5f;
     [SerializeField] private float maxSway = 5f;
+    #endregion 
 
     private Vector2 smoothedLook;
 
@@ -20,6 +22,7 @@ public class WeaponSway : MonoBehaviour
 
     void Update()
     {
+        //leichtes Rotieren der Waffe in BLickrichtung des Spielers
         Vector2 look = lookAction.action.ReadValue<Vector2>();
 
         smoothedLook = Vector2.Lerp(smoothedLook, look, Time.deltaTime * 10f);
@@ -32,10 +35,6 @@ public class WeaponSway : MonoBehaviour
 
         Quaternion targetRotation = rotationX * rotationY;
 
-        transform.localRotation = Quaternion.Slerp(
-            transform.localRotation,
-            targetRotation,
-            Time.deltaTime * smooth
-        );
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * smooth);
     }
 }

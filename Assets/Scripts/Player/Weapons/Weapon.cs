@@ -3,12 +3,14 @@ using System.Collections.Generic;
 
 public abstract class Weapon : MonoBehaviour
 {
+    #region Settings
     [Header("Hit Layers")]
     public LayerMask enemyBodyHit;
     public LayerMask enemyHeadHit;
     public LayerMask enemyArmorHit;
     public LayerMask enemyHostHit;
     public LayerMask environmentHit;
+    #endregion
 
     protected LayerMask Combined => enemyBodyHit | enemyHeadHit | enemyArmorHit | enemyHostHit | environmentHit;
 
