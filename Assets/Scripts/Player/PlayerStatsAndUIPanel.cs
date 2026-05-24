@@ -171,7 +171,7 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
 
     #region Weitere Zugriffsfunktionien für andere Skripte
     public float GetStamina() => currentStamina;
-    public float GetLifePoints() => currentLifePoints;
+    public float GetMaxLifePoints() => maxLifePoints;
     public float GetPowerUp() => currentPowerUp;
     public float GetMaxPowerUp() => maxPowerUp;
     public int GetCurrentLifePoints() => currentLifePoints;
