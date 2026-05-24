@@ -7340,13 +7340,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aabc4d58c2c4b54f8218e76fd3c4ce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PopWobbleJuice
+  popOnEnable: 0
+  popOnStart: 0
   continuousWobble: 0
   popScale: 1.1
   popDuration: 0.1
-  popOnStart: 0
   wobbleSpeed: 8
   wobbleScale: 1.02
-  popOnEnable: 0
 --- !u!114 &631521386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9194,13 +9194,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aabc4d58c2c4b54f8218e76fd3c4ce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PopWobbleJuice
+  popOnEnable: 0
+  popOnStart: 0
   continuousWobble: 0
   popScale: 1.1
   popDuration: 0.1
-  popOnStart: 0
   wobbleSpeed: 8
   wobbleScale: 1.02
-  popOnEnable: 0
 --- !u!4 &748657394 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7944370687114656869, guid: 3ef0f8826b6d1fb43b1e286b0cf9da36, type: 3}
@@ -10560,12 +10560,15 @@ MonoBehaviour:
   enemyHeadHit:
     serializedVersion: 2
     m_Bits: 512
-  environmentHit:
-    serializedVersion: 2
-    m_Bits: 1024
   enemyArmorHit:
     serializedVersion: 2
     m_Bits: 4096
+  enemyHostHit:
+    serializedVersion: 2
+    m_Bits: 0
+  environmentHit:
+    serializedVersion: 2
+    m_Bits: 1024
   playerCam: {fileID: 330585545}
   attackRange: 3
   attackDamage: 10
@@ -11887,7 +11890,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &941167333
@@ -16161,7 +16164,6 @@ MonoBehaviour:
   gravity: -14
   initialFallVelocity: -4
   verticalVelocity: 0
-  isGrounded: 0
   isDashing: 0
   CurrentVelocity: {x: 0, y: 0, z: 0}
 --- !u!143 &1252589638
@@ -16207,9 +16209,6 @@ MonoBehaviour:
   hitAction: {fileID: -4900986322801745503, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
   powerUpAction: {fileID: -3361091801344585588, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
   reloadAction: {fileID: -8498300033829780412, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
-  damage: 0
-  reloadTime: 0
-  shotCount: 0
   dashForce: 25
   dashDuration: 0.3
   dashStrain: 10
@@ -16444,13 +16443,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aabc4d58c2c4b54f8218e76fd3c4ce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PopWobbleJuice
+  popOnEnable: 0
+  popOnStart: 0
   continuousWobble: 0
   popScale: 1.2
   popDuration: 0.1
-  popOnStart: 0
   wobbleSpeed: 8
   wobbleScale: 1.05
-  popOnEnable: 0
 --- !u!1001 &1305103896
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20515,7 +20514,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4368261501154217105, guid: 53bb89ed70fc3b14eb6b75e195830d32, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24071,12 +24070,15 @@ MonoBehaviour:
   enemyHeadHit:
     serializedVersion: 2
     m_Bits: 512
-  environmentHit:
-    serializedVersion: 2
-    m_Bits: 1024
   enemyArmorHit:
     serializedVersion: 2
     m_Bits: 4096
+  enemyHostHit:
+    serializedVersion: 2
+    m_Bits: 0
+  environmentHit:
+    serializedVersion: 2
+    m_Bits: 1024
   container: {fileID: 1680033192}
   playerCam: {fileID: 330585545}
   fireImpulse: {fileID: 1876615018}
@@ -27478,13 +27480,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aabc4d58c2c4b54f8218e76fd3c4ce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PopWobbleJuice
+  popOnEnable: 0
+  popOnStart: 0
   continuousWobble: 0
   popScale: 1.2
   popDuration: 0.1
-  popOnStart: 0
   wobbleSpeed: 8
   wobbleScale: 1.05
-  popOnEnable: 0
 --- !u!1 &2129356754
 GameObject:
   m_ObjectHideFlags: 0

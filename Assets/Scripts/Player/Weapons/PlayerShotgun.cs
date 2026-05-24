@@ -2,15 +2,10 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using System.Collections.Generic;
 
-public class PlayerShotgun : MonoBehaviour
+public class PlayerShotgun : Weapon
 {
     [Header("References")]
-    public LayerMask enemyBodyHit;
-    public LayerMask enemyHeadHit;
-    public LayerMask environmentHit;
-    public LayerMask enemyArmorHit;
     public RectTransform container;
     public Camera playerCam;
     public CinemachineImpulseSource fireImpulse;
@@ -38,7 +33,6 @@ public class PlayerShotgun : MonoBehaviour
     private int ammoCount;
     private float baseWidth;
     private Coroutine spreadCoroutine;
-    private HashSet<EnemyBase> armorHitThisShot = new HashSet<EnemyBase>();
 
     private void Start()
     {
@@ -59,65 +53,14 @@ public class PlayerShotgun : MonoBehaviour
         fireImpulse.GenerateImpulse();
         Spread();
         UpdateAmmoUI();
-        armorHitThisShot.Clear();
-
-        LayerMask combined = enemyBodyHit | enemyHeadHit | environmentHit | enemyArmorHit;
+        armorHitThisAttack.Clear();
 
         for (int i = 0; i < pelletCount; i++)
         {
             Vector3 direction = GetSpreadDirection();
-            if (Physics.Raycast(playerCam.transform.position, direction, out RaycastHit hit, attackRange, combined))
-            {
-                int layer = hit.collider.gameObject.layer;
-                if (((1 << layer) & enemyBodyHit) != 0)
-                    EnemyBodyHit(hit.point, hit.collider);
-                else if (((1 << layer) & enemyHeadHit) != 0)
-                    EnemyHeadHit(hit.point, hit.collider);
-                else if (((1 << layer) & enemyArmorHit) != 0)
-                    EnemyArmorHit(hit.point, hit.collider);
-                else if (((1 << layer) & environmentHit) != 0)
-                    EnvironmentHit(hit.point);
-            }
+            if (Physics.Raycast(playerCam.transform.position, direction, out RaycastHit hit, attackRange, Combined))
+                ProcessHit(hit, attackDamage);
         }
-    }
-
-    private void EnemyBodyHit(Vector3 pos, Collider col)
-    {
-        EnemyBase enemy = col.GetComponentInParent<EnemyBase>();
-        if (enemy != null)
-            enemy.TakeDamage(attackDamage);
-    }
-
-    private void EnemyHeadHit(Vector3 pos, Collider col)
-    {
-        EnemyBase enemy = col.GetComponentInParent<EnemyBase>();
-        if (enemy != null)
-            enemy.TakeDamage(attackDamage * 2f);
-    }
-
-    private void EnemyArmorHit(Vector3 pos, Collider col)
-    {
-        EnemyBase enemy = col.GetComponentInParent<EnemyBase>();
-        if (enemy != null && !armorHitThisShot.Contains(enemy))
-        {
-            armorHitThisShot.Add(enemy);
-            enemy.ArmorHit();
-        }
-    }
-
-    private void EnvironmentHit(Vector3 pos)
-    {
-        Debug.Log("Environment Hit");
-    }
-
-    public void OnAnimationStart()
-    {
-        PlayerAnimations.Instance.IsRightArmPlaying = true;
-    }
-
-    public void OnAnimationEnd()
-    {
-        PlayerAnimations.Instance.IsRightArmPlaying = false;
     }
 
     public void InitializeReload()
@@ -191,6 +134,9 @@ public class PlayerShotgun : MonoBehaviour
                        + playerCam.transform.up * randomCircle.y;
         return (forward + spread).normalized;
     }
+
+    public void OnAnimationStart() => PlayerAnimations.Instance.IsRightArmPlaying = true;
+    public void OnAnimationEnd() => PlayerAnimations.Instance.IsRightArmPlaying = false;
 
     private void OnDrawGizmosSelected()
     {
