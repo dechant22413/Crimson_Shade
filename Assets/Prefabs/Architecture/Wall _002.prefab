@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall_Pillar_Small_001
       objectReference: {fileID: 0}
+    - target: {fileID: 3789041062877877141, guid: bf74b887cb77e7049bbbd3a5f9ee8efd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7327dbecb9bb8a54f858b0645c62f37d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

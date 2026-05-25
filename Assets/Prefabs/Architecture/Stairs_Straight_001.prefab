@@ -51,7 +51,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 5ab77317d1b41574fa3656265aae6dfc, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: f8916b5dc9f69294082ae2cc001c272e, type: 2}
+      objectReference: {fileID: 2100000, guid: 0f3e55a336fd5354dbdc9a826b550608, type: 2}
     - target: {fileID: 919132149155446097, guid: 5ab77317d1b41574fa3656265aae6dfc, type: 3}
       propertyPath: m_Name
       value: Stairs_Straight_001
@@ -61,6 +61,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5ab77317d1b41574fa3656265aae6dfc, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 7708313242109651694}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5ab77317d1b41574fa3656265aae6dfc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3570094693855364725}
   m_SourcePrefab: {fileID: 100100000, guid: 5ab77317d1b41574fa3656265aae6dfc, type: 3}
@@ -69,6 +72,23 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5ab77317d1b41574fa3656265aae6dfc, type: 3}
   m_PrefabInstance: {fileID: 5133446712286650245}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7708313242109651694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5475465960094900948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9b08a8911c3461498396014026a4cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MaterialChanger
+  materials:
+  - {fileID: 2100000, guid: 0f3e55a336fd5354dbdc9a826b550608, type: 2}
+  - {fileID: 2100000, guid: f8916b5dc9f69294082ae2cc001c272e, type: 2}
+  selectedMaterial: 0
+  applyToChildren: 0
 --- !u!64 &3570094693855364725
 MeshCollider:
   m_ObjectHideFlags: 0

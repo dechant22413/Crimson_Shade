@@ -63,7 +63,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: fb90e33fecebc5d4a9e57872dad9bb28, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 3a9ee2589cb777c49bbe775f8e3399d7, type: 2}
+      objectReference: {fileID: 2100000, guid: 7327dbecb9bb8a54f858b0645c62f37d, type: 2}
     - target: {fileID: 919132149155446097, guid: fb90e33fecebc5d4a9e57872dad9bb28, type: 3}
       propertyPath: m_Name
       value: Gate_Pointed
@@ -73,6 +73,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fb90e33fecebc5d4a9e57872dad9bb28, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 4518854480496579414}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fb90e33fecebc5d4a9e57872dad9bb28, type: 3}
       insertIndex: -1
       addedObject: {fileID: 407215227354308904}
   m_SourcePrefab: {fileID: 100100000, guid: fb90e33fecebc5d4a9e57872dad9bb28, type: 3}
@@ -81,6 +84,23 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: fb90e33fecebc5d4a9e57872dad9bb28, type: 3}
   m_PrefabInstance: {fileID: 3870366125480840437}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4518854480496579414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4140818711327060388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9b08a8911c3461498396014026a4cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MaterialChanger
+  materials:
+  - {fileID: 2100000, guid: 7327dbecb9bb8a54f858b0645c62f37d, type: 2}
+  - {fileID: 2100000, guid: 22349873bf631a44781f98ad08a1e143, type: 2}
+  selectedMaterial: 0
+  applyToChildren: 0
 --- !u!64 &407215227354308904
 MeshCollider:
   m_ObjectHideFlags: 0
