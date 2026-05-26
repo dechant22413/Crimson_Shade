@@ -41,6 +41,10 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
     [SerializeField] private int powerUpHeal;
     [SerializeField] private float powerUpSmooth = 5f;
     [SerializeField] private float currentPowerUp;
+
+    [Header("Audio Strings")]
+    [SerializeField] private string recoverStamina;
+    [SerializeField] private string maxPowerUpString;
     #endregion
 
     private float lifePointsTarget;
@@ -49,6 +53,7 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
     private float staminaTarget;
     private float powerUpTarget;
     private float currentRecoverDelay;
+    private bool powerUpFullPlayed = false;
 
     private void Start()
     {
@@ -89,7 +94,7 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
     private void Update()
     {
         //Stamina des Dash wird dauerhaft wieder aufgeladen
-        RecoverStamina();
+        if(currentStamina != maxStamina) RecoverStamina();
 
         if (lifePointsDelayTimer > 0f)
             lifePointsDelayTimer -= Time.deltaTime;
@@ -129,9 +134,21 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
             return;
         }
 
+        float previousStamina = currentStamina;
+
         //Wiederaufladen des Stamina Sliders
         currentStamina = Mathf.Clamp(currentStamina + recoverRate * Time.deltaTime, 0, maxStamina);
         staminaTarget = currentStamina;
+
+        if (previousStamina < maxStamina / 2 && currentStamina >= maxStamina / 2)
+        {
+            PlayAudio(recoverStamina);
+        }
+
+        if (previousStamina < maxStamina && currentStamina >= maxStamina)
+        {
+            PlayAudio(recoverStamina);
+        }
     }
 
     public void UseStamina(float amount)
@@ -146,14 +163,26 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
 
     public void ChangePowerUp(int amount)
     {
+        
         //currentPowerUp wird um gewünschten Wert verändert
-        currentPowerUp = Mathf.Clamp(currentPowerUp + amount, 0, maxPowerUp);
+        if(currentPowerUp != maxPowerUp)
+        {
+            currentPowerUp = Mathf.Clamp(currentPowerUp + amount, 0, maxPowerUp);
+            powerUpFullPlayed = false;
+        }
+
         powerUpTarget = currentPowerUp / maxPowerUp;
 
-        if(currentPowerUp == maxPowerUp)
+        if (currentPowerUp == maxPowerUp)
         {
             //PowerUp Bar Animation bei maxPowerUp
             skeletonHand.GetComponent<PopWobbleJuice>().continuousWobble = true;
+
+            if (!powerUpFullPlayed)
+            {
+                PlayAudio(maxPowerUpString);
+                powerUpFullPlayed = true;
+            }
         }
     }
 
@@ -167,6 +196,11 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
 
         //Stoppen der PowerUp Bar Animation
         skeletonHand.GetComponent<PopWobbleJuice>().continuousWobble = false;
+    }
+
+    private void PlayAudio(string audioString)
+    {
+        AudioManager.Instance.PlayAudio(audioString);
     }
 
     #region Weitere Zugriffsfunktionien für andere Skripte

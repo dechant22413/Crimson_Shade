@@ -14121,7 +14121,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0
+  - time: 0.041666668
     functionName: PlaySound
     data: Gunshot
     objectReferenceParameter: {fileID: 0}

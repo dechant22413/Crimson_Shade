@@ -494,6 +494,8 @@ MonoBehaviour:
   powerUpHeal: 30
   powerUpSmooth: 5
   currentPowerUp: 0
+  recoverStamina: Dash_Recover
+  maxPowerUpString: PowerUp_Full
 --- !u!4 &140313138
 Transform:
   m_ObjectHideFlags: 0
@@ -3506,6 +3508,7 @@ MonoBehaviour:
   attackDamage: 10
   pelletCount: 8
   spreadAngle: 6.31
+  gunEmpty: GunEmpty
   ammoActiveColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   ammoEmptyColor: {r: 0, g: 0, b: 0, a: 0.5019608}
   spreadAmount: 70
@@ -4555,9 +4558,15 @@ MonoBehaviour:
   - name: Heal
     clip: {fileID: 8300000, guid: 00e42ed196851464f86398b8d2a7f618, type: 3}
     volume: 0.829
+  - name: PowerUp_Full
+    clip: {fileID: 8300000, guid: 1c0c5af868d1d85428928b968e02350e, type: 3}
+    volume: 0.563
   - name: Dash
     clip: {fileID: 8300000, guid: a229c22e056e8ef4b83821900bf36b3d, type: 3}
     volume: 0.107
+  - name: Dash_Recover
+    clip: {fileID: 8300000, guid: 4d8337f514d0feb409d33a83f539e434, type: 3}
+    volume: 0.171
   - name: Jump
     clip: {fileID: 8300000, guid: ce176294ba435334b8461213b854ec4c, type: 3}
     volume: 0.337
@@ -4567,6 +4576,9 @@ MonoBehaviour:
   - name: GunReload
     clip: {fileID: 8300000, guid: 778ec73f2b154604b8345271e0bb26a7, type: 3}
     volume: 0.341
+  - name: GunEmpty
+    clip: {fileID: 8300000, guid: 5fb0dcc6876637346aa54ae559caf997, type: 3}
+    volume: 0.563
   - name: KnifeSlash_001
     clip: {fileID: 8300000, guid: a3d96774412a08e4cb05ef337cd0351f, type: 3}
     volume: 0.538
@@ -12656,14 +12668,14 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1186780894}
+  - {fileID: 570449856}
+  - {fileID: 1782334226}
   - {fileID: 140313138}
+  - {fileID: 1186780894}
   - {fileID: 1761786211}
   - {fileID: 650152988}
   - {fileID: 102627048}
   - {fileID: 1624357163}
-  - {fileID: 570449856}
-  - {fileID: 1782334226}
   - {fileID: 2129356758}
   - {fileID: 4205211051998337976}
   - {fileID: 8937632624114206574}

@@ -22,6 +22,9 @@ public class PlayerShotgun : Weapon
     [SerializeField] private int pelletCount = 8;
     [SerializeField] private float spreadAngle = 10f;
 
+    [Header("Audio Strings")]
+    [SerializeField] private string gunEmpty;
+
     [Header("Ammo UI")]
     [SerializeField] private Color ammoActiveColor = Color.white;
     [SerializeField] private Color ammoEmptyColor = new Color(1f, 1f, 1f, 0.2f);
@@ -49,6 +52,8 @@ public class PlayerShotgun : Weapon
             //Bei leerem Magazin wird Shoot Animation gecancelt
             shotgunAnimations.Play("Idle", 0, 0f);
             PlayerAnimations.Instance.IsRightArmPlaying = false;
+
+            PlayAudio(gunEmpty);
             return;
         }
         
@@ -157,6 +162,10 @@ public class PlayerShotgun : Weapon
 
     public void OnAnimationStart() => PlayerAnimations.Instance.IsRightArmPlaying = true;
     public void OnAnimationEnd() => PlayerAnimations.Instance.IsRightArmPlaying = false;
+    private void PlayAudio(string audioString)
+    {
+        AudioManager.Instance.PlayAudio(audioString);
+    }
 
     #region Gizmos
     private void OnDrawGizmosSelected()
