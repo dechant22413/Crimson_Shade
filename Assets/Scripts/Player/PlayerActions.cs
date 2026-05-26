@@ -36,6 +36,11 @@ public class PlayerActions : MonoBehaviour
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpForce;
+
+    [Header("Audio Strings")]
+    [SerializeField] private string powerUpAudio;
+    [SerializeField] private string jumpString;
+    [SerializeField] private string dashString;
     #endregion
 
     private bool isAttacking = false;
@@ -123,6 +128,8 @@ public class PlayerActions : MonoBehaviour
 
         //Aktiviert PowerUp
         PlayerStatsAndUIPanel.Instance.ActivatePowerUp();
+
+        PlayAudio(powerUpAudio);
     }
 
     private void Dash(InputAction.CallbackContext context)
@@ -161,6 +168,8 @@ public class PlayerActions : MonoBehaviour
         PlayerStatsAndUIPanel.Instance.UseStamina(dashStrain);
 
         Debug.Log("Dash");
+
+        PlayAudio(dashString);
     }
 
     private void Jump(InputAction.CallbackContext context)
@@ -170,6 +179,8 @@ public class PlayerActions : MonoBehaviour
         {
             PlayerMovement.Instance.SetVerticalVelocity(jumpForce);
             Debug.Log("Jump");
+
+            PlayAudio(jumpString);
         }
     }
 
@@ -191,5 +202,10 @@ public class PlayerActions : MonoBehaviour
         //Spielt Hit Animation ab, solange der Input gehalten wird
         if (isAttacking)
             PlayerAnimations.Instance.PlayHit();
+    }
+
+    private void PlayAudio(string audioString)
+    {
+        AudioManager.Instance.PlayAudio(audioString);
     }
 }

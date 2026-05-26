@@ -1,10 +1,11 @@
 using UnityEngine;
 
-public class EnemyAnimationEvents : MonoBehaviour
+public class AnimationEvents : MonoBehaviour
 {
     private EnemyBase enemy;
 
-    //Animation Events, die von einem beliebigen Gegner aufgerufen werden können
+    //Animation Events, die von einem beliebigen Gegner, Gegenstand oder dem Spieler aufgerufen werden können
+    #region Enemy Events
     private void Awake()
     {
         enemy = GetComponentInParent<EnemyBase>();
@@ -24,4 +25,12 @@ public class EnemyAnimationEvents : MonoBehaviour
     {
         enemy.SpawnProjectile();
     }
+    #endregion
+
+    #region Player Events
+    public void PlaySound(string soundName)
+    {
+        AudioManager.Instance.PlayAudio(soundName);
+    }
+    #endregion 
 }
