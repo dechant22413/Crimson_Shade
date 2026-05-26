@@ -78,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: b182d19a32de4b54791c49df6fe1b385, type: 2}
     - target: {fileID: 919132149155446097, guid: 6acc212319ebe414db59a64d3041f8fa, type: 3}
       propertyPath: m_Name
-      value: Mummy_002
+      value: Mummy_Burnt_001
       objectReference: {fileID: 0}
     - target: {fileID: 3239147860542041743, guid: 6acc212319ebe414db59a64d3041f8fa, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
