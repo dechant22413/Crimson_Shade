@@ -2337,6 +2337,8 @@ MonoBehaviour:
   playerAudioSource: {fileID: 6010387281345813397}
   recoverStamina: Dash_Recover
   maxPowerUpString: PowerUp_Full
+  fleshHitAudio: Flesh_Hit_Sounds
+  hitAudio: 
 --- !u!114 &9043080847041896594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3938,6 +3940,7 @@ MonoBehaviour:
   environmentHit:
     serializedVersion: 2
     m_Bits: 1024
+  stunOnHit: 0
   playerCam: {fileID: 1097868980655363721}
   attackRange: 3
   attackDamage: 10
@@ -4654,6 +4657,7 @@ MonoBehaviour:
   environmentHit:
     serializedVersion: 2
     m_Bits: 1024
+  stunOnHit: 1
   crosshairContainer: {fileID: 3263460703356095483}
   playerCam: {fileID: 1097868980655363721}
   fireImpulse: {fileID: 2302125831818565444}

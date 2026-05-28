@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Audio;
 
 public abstract class Weapon : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public abstract class Weapon : MonoBehaviour
     public LayerMask enemyArmorHit;
     public LayerMask enemyHostHit;
     public LayerMask environmentHit;
+
+    [Header("Stun")]
+    [SerializeField] protected bool stunOnHit = true;
     #endregion
 
     protected LayerMask Combined => enemyBodyHit | enemyHeadHit | enemyArmorHit | enemyHostHit | environmentHit;
@@ -36,12 +40,16 @@ public abstract class Weapon : MonoBehaviour
     {
         EnemyBase enemy = col.GetComponentInParent<EnemyBase>();
         if (enemy != null) enemy.TakeDamage(damage);
+
+        PlaySurfaceSound(col);
     }
 
     protected virtual void EnemyHeadHit(Vector3 pos, Collider col, float damage)
     {
         EnemyBase enemy = col.GetComponentInParent<EnemyBase>();
         if (enemy != null) enemy.TakeDamage(damage);
+
+        PlaySurfaceSound(col);
     }
 
     protected virtual void EnemyArmorHit(Vector3 pos, Collider col)
@@ -50,14 +58,29 @@ public abstract class Weapon : MonoBehaviour
         if (enemy != null && !armorHitThisAttack.Contains(enemy))
         {
             armorHitThisAttack.Add(enemy);
-            enemy.ArmorHit();
+            enemy.ArmorHit(stunOnHit);
+
+            PlaySurfaceSound(col);
+
+            Debug.Log("Armor Hit");
         }
     }
 
     protected virtual void EnemyHostHit(Vector3 pos, Collider col, float damage)
     {
-
+        PlaySurfaceSound(col);
     }
 
     protected virtual void EnvironmentHit(Vector3 pos) { }
+
+    private void PlaySurfaceSound(Collider col)
+    {
+        SurfaceIdentifier surface = col.GetComponentInParent<SurfaceIdentifier>();
+        if (surface == null) return;
+
+        AudioSource source = col.GetComponentInParent<AudioSource>();
+        if (source == null) return;
+
+        AudioManager.Instance.PlayAudio(surface.surfaceData.hitSoundName, source);
+    }
 }

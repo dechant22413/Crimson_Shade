@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class PlayerStatsAndUIPanel : MonoBehaviour
@@ -47,6 +48,9 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
 
     [SerializeField] private string recoverStamina;
     [SerializeField] private string maxPowerUpString;
+    [SerializeField] private string fleshHitAudio;
+    [SerializeField] private string hitAudio;
+
     #endregion
 
     private float lifePointsTarget;
@@ -126,6 +130,18 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
         lifePointsTarget = currentLifePoints;
         lifePointsDelayTimer = lifePointsDelay;
     }
+
+    public void DamagePlayer(int amount)
+    {
+        //LifePoints werden um den gewünschten Wert veringert, wird von Enemys aufgerufen
+        currentLifePoints = Mathf.Clamp(currentLifePoints - amount, 0, maxLifePoints);
+        lifePointsTarget = currentLifePoints;
+        lifePointsDelayTimer = lifePointsDelay;
+
+        AudioManager.Instance.PlayAudio(fleshHitAudio, playerAudioSource);
+        AudioManager.Instance.PlayAudio(hitAudio, playerAudioSource);
+    }
+
 
     public void RecoverStamina()
     {

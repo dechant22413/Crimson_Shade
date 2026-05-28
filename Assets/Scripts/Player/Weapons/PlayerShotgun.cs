@@ -1,7 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class PlayerShotgun : Weapon
 {
@@ -40,6 +41,7 @@ public class PlayerShotgun : Weapon
     private int ammoCount;
     private float baseWidth;
     private Coroutine UIspreadCoroutine;
+
 
     private void Start()
     {

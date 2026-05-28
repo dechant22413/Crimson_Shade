@@ -1,16 +1,8 @@
 using UnityEngine;
 
-public class SurfaceData : MonoBehaviour
+[CreateAssetMenu(fileName = "SurfaceData", menuName = "Game/Surface Data")]
+public class SurfaceData : ScriptableObject
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string hitSoundName;
+    public string footstepSoundName;
 }

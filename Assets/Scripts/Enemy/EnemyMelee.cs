@@ -11,6 +11,10 @@ public class EnemyMelee : EnemyBase
     [Header("TurnIndex and Attack Angle")]
     [SerializeField] private float turnIndex = 5f;
     [SerializeField] private float maxAttackAngle = 60f;
+
+    [Header("Audio Strings and Source")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private string fleshHitAudio;
     #endregion
 
     #region Animator Variables
@@ -124,7 +128,9 @@ public class EnemyMelee : EnemyBase
     {
         //Wird durch Animation Event aufgerufen
         if (Vector3.Distance(transform.position, player.position) <= attackRange)
-            PlayerStatsAndUIPanel.Instance.ChangeLifePoints(-(int)attackDamage);
+        {
+            PlayerStatsAndUIPanel.Instance.DamagePlayer ((int)attackDamage);
+        }
     }
 
     public override void ResetAttack()

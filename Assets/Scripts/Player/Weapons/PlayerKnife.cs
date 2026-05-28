@@ -10,10 +10,12 @@ public class PlayerKnife : Weapon
     public float attackRange = 3f;
     public float attackDamage;
     public int powerUpBonus = 2;
+
     #endregion
 
     public void Attack()
     {
+        armorHitThisAttack.Clear();
         //Wird über Animation Event des Messers aufgerufen
         if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out RaycastHit hit, attackRange, Combined))
             ProcessHit(hit, attackDamage);

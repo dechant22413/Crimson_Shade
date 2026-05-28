@@ -63,6 +63,9 @@ MonoBehaviour:
     - name: Jump
       clip: {fileID: 8300000, guid: ce176294ba435334b8461213b854ec4c, type: 3}
       volume: 0.337
+    - name: Damaged
+      clip: {fileID: 8300000, guid: 138ae39745e6f464fb0759d4e46456f0, type: 3}
+      volume: 0.337
     patches: []
   - groupName: Shotgun
     sounds:
@@ -102,6 +105,9 @@ MonoBehaviour:
     - name: Ghoul_Idle
       clip: {fileID: 8300000, guid: b954bf3192a23ea4b98ac6ece2544d1a, type: 3}
       volume: 1
+    - name: Helmet_Hit
+      clip: {fileID: 8300000, guid: fffed367fb62f23499922bbe2be336dc, type: 3}
+      volume: 1
     patches:
     - name: Ghoul_Hit_Sounds
       sounds:
@@ -134,8 +140,8 @@ MonoBehaviour:
     - name: Ghoul_Attack_Sounds
       sounds:
       - name: Ghoul_Attack_001
-        clip: {fileID: 8300000, guid: 138ae39745e6f464fb0759d4e46456f0, type: 3}
-        volume: 1
+        clip: {fileID: 8300000, guid: 12ebce75bc162464f949fae73530512a, type: 3}
+        volume: 0.281
   - groupName: Material_Impacts
     sounds: []
     patches:
@@ -149,4 +155,18 @@ MonoBehaviour:
         volume: 1
       - name: Flesh_Hit_003
         clip: {fileID: 8300000, guid: 6eae307892809a742b87ad250feef8be, type: 3}
+        volume: 1
+    - name: Metal_Hit_Sounds
+      sounds:
+      - name: Metal_Hit_001
+        clip: {fileID: 8300000, guid: c0526b60ed99bbc48875e11680248f75, type: 3}
+        volume: 1
+      - name: Metal_Hit_002
+        clip: {fileID: 8300000, guid: c4126d1d78c9098459cad6152cb1c6e8, type: 3}
+        volume: 1
+      - name: Metal_Hit_003
+        clip: {fileID: 8300000, guid: c96bef692aff7fb44bdedd564f11e6dc, type: 3}
+        volume: 1
+      - name: Metal_Hit_004
+        clip: {fileID: 8300000, guid: 9fd76debe8372a24d8a89dfc0d352203, type: 3}
         volume: 1

@@ -411,7 +411,7 @@ public abstract class EnemyBase : MonoBehaviour
             UIManager.Instance.ShowHitIndicator();
     }
 
-    public virtual void ArmorHit() { }
+    public virtual void ArmorHit(bool stun) { }
 
     public virtual void Stun(float duration)
     {
@@ -428,6 +428,9 @@ public abstract class EnemyBase : MonoBehaviour
     private void RecoverFromStun()
     {
         isStunnedFlag = false;
+
+        alreadyAttacked = false;
+
         SetState(stateBeforeStun);
     }
 
