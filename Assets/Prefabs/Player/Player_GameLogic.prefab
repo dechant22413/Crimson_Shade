@@ -2273,12 +2273,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1575956195133781107}
   - component: {fileID: 6854710746797512028}
+  - component: {fileID: 9043080847041896594}
   - component: {fileID: 6775948888803623875}
   - component: {fileID: 8950469375036743510}
   - component: {fileID: 1008841638708159480}
   - component: {fileID: 6487585378187806207}
   - component: {fileID: 6010387281345813397}
-  - component: {fileID: 9043080847041896594}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2335,8 +2335,25 @@ MonoBehaviour:
   powerUpHeal: 30
   powerUpSmooth: 5
   currentPowerUp: 0
+  playerAudioSource: {fileID: 6010387281345813397}
   recoverStamina: Dash_Recover
   maxPowerUpString: PowerUp_Full
+--- !u!114 &9043080847041896594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7065769480013628758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05d21ba251bd3fb4996dd9af2aeea281, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractionSystem
+  interactAction: {fileID: 6501055758473916744, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
+  playerCam: {fileID: 1097868980655363721}
+  interactionLabel: {fileID: 3396176821729342348}
+  interactionRange: 3
 --- !u!114 &6775948888803623875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2379,6 +2396,7 @@ MonoBehaviour:
   dashDuration: 0.3
   dashStrain: 10
   jumpForce: 8
+  playerAudioSource: {fileID: 6010387281345813397}
   powerUpAudio: Heal
   jumpString: Jump
   dashString: Dash
@@ -2518,22 +2536,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &9043080847041896594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7065769480013628758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05d21ba251bd3fb4996dd9af2aeea281, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InteractionSystem
-  playerCam: {fileID: 1097868980655363721}
-  interactionLabel: {fileID: 3396176821729342348}
-  interactionRange: 3
-  interactKey: 101
 --- !u!1 &7277579890676943973
 GameObject:
   m_ObjectHideFlags: 0
@@ -2690,10 +2692,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6232654902724286350}
-  - component: {fileID: 6136197367480150289}
   - component: {fileID: 629801024726855695}
   m_Layer: 0
-  m_Name: PlayerAudioManager
+  m_Name: AudioManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2714,103 +2715,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2418017082680117664}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &6136197367480150289
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7769359374895460237}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &629801024726855695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2823,7 +2727,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af5f175b1d0a6440aa58fbe8bc8efb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
-  audioSource: {fileID: 6010387281345813397}
   sounds:
   - name: Heal
     clip: {fileID: 8300000, guid: 00e42ed196851464f86398b8d2a7f618, type: 3}
@@ -2858,6 +2761,12 @@ MonoBehaviour:
   - name: KnifeSlash_003
     clip: {fileID: 8300000, guid: 1b6b29af4f1deb54c9aeec4b174eb3f9, type: 3}
     volume: 0.563
+  - name: Chest_Lock
+    clip: {fileID: 8300000, guid: b435f2d1162314142b159536ea0ad174, type: 3}
+    volume: 0.299
+  - name: Chest_Open
+    clip: {fileID: 8300000, guid: f4ab6fef57d12224887365d7d9064a84, type: 3}
+    volume: 0.321
 --- !u!1 &7941457969519328488
 GameObject:
   m_ObjectHideFlags: 0
@@ -4130,6 +4039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce5336bda700c4439224bda938a559e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimationEvents
+  audioSource: {fileID: 6010387281345813397}
 --- !u!1001 &2360751461843610465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4841,6 +4751,7 @@ MonoBehaviour:
   attackDamage: 10
   pelletCount: 8
   spreadAngle: 6.31
+  playerAudioSource: {fileID: 0}
   gunEmpty: GunEmpty
   ammoActiveColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   ammoEmptyColor: {r: 0, g: 0, b: 0, a: 0.5019608}
@@ -4912,3 +4823,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce5336bda700c4439224bda938a559e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimationEvents
+  audioSource: {fileID: 6010387281345813397}

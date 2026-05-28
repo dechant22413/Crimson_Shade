@@ -1,40 +1,69 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class InteractionSystem : MonoBehaviour
 {
     #region Settings
+
     [Header("References")]
-    public Camera playerCam;
-    public TextMeshProUGUI interactionLabel;
+    [SerializeField] private InputActionReference interactAction;
+    [SerializeField] private Camera playerCam;
+    [SerializeField] private TextMeshProUGUI interactionLabel;
 
     [Header("Settings")]
-    public float interactionRange = 3f;
-    public KeyCode interactKey = KeyCode.E;
+    [SerializeField] private float interactionRange = 3f;
+
     #endregion
 
-    private IInteractable currentInteractable;
+    #region Actions
+    private void OnEnable()
+    {
+        interactAction.action.Enable();
+
+        interactAction.action.performed += Interact;
+    }
+    private void OnDisable()
+    {
+        interactAction.action.Disable();
+
+        interactAction.action.performed -= Interact;
+    }
+    #endregion
+    private Interactable currentInteractable;
 
     private void Update()
     {
-        if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out RaycastHit hit, interactionRange))
+        HandleInteractionCheck();
+    }
+
+    private void HandleInteractionCheck()
+    {
+        currentInteractable = null;
+
+        interactionLabel.gameObject.SetActive(false);
+
+        if (Physics.Raycast(playerCam.transform.position,playerCam.transform.forward,out RaycastHit hit,interactionRange))
         {
-            IInteractable interactable = hit.collider.GetComponentInParent<IInteractable>();
+            Interactable interactable = hit.collider.GetComponentInParent<Interactable>();
 
             if (interactable != null)
             {
                 currentInteractable = interactable;
-                interactionLabel.text = interactable.GetInteractionLabel();
+
+                interactionLabel.text =
+                    interactable.GetInteractionLabel();
+
                 interactionLabel.gameObject.SetActive(true);
-
-                if (Input.GetKeyDown(interactKey))
-                    interactable.Interact();
-
-                return;
             }
         }
+    }
 
-        currentInteractable = null;
-        interactionLabel.gameObject.SetActive(false);
+    private void Interact(InputAction.CallbackContext context)
+    {
+        if (currentInteractable == null)
+            return;
+
+        currentInteractable.Interact();
     }
 }

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class AnimationEvents : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] private AudioSource audioSource;
     private EnemyBase enemy;
 
     //Animation Events, die von einem beliebigen Gegner, Gegenstand oder dem Spieler aufgerufen werden können
@@ -30,7 +32,7 @@ public class AnimationEvents : MonoBehaviour
     #region Player Events
     public void PlaySound(string soundName)
     {
-        AudioManager.Instance.PlayAudio(soundName);
+        AudioManager.Instance.PlayAudio(soundName, audioSource);
     }
     #endregion 
 }

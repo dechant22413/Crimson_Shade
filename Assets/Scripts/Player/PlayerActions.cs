@@ -37,7 +37,9 @@ public class PlayerActions : MonoBehaviour
     [Header("Jump Settings")]
     [SerializeField] private float jumpForce;
 
-    [Header("Audio Strings")]
+    [Header("Audio Strings and Source")]
+    [SerializeField] private AudioSource playerAudioSource;
+
     [SerializeField] private string powerUpAudio;
     [SerializeField] private string jumpString;
     [SerializeField] private string dashString;
@@ -206,6 +208,6 @@ public class PlayerActions : MonoBehaviour
 
     private void PlayAudio(string audioString)
     {
-        AudioManager.Instance.PlayAudio(audioString);
+        AudioManager.Instance.PlayAudio(audioString, playerAudioSource);
     }
 }

@@ -22,7 +22,9 @@ public class PlayerShotgun : Weapon
     [SerializeField] private int pelletCount = 8;
     [SerializeField] private float spreadAngle = 10f;
 
-    [Header("Audio Strings")]
+    [Header("Audio Strings and Source")]
+    [SerializeField] private AudioSource playerAudioSource;
+
     [SerializeField] private string gunEmpty;
 
     [Header("Ammo UI")]
@@ -164,7 +166,7 @@ public class PlayerShotgun : Weapon
     public void OnAnimationEnd() => PlayerAnimations.Instance.IsRightArmPlaying = false;
     private void PlayAudio(string audioString)
     {
-        AudioManager.Instance.PlayAudio(audioString);
+        AudioManager.Instance.PlayAudio(audioString, playerAudioSource);
     }
 
     #region Gizmos

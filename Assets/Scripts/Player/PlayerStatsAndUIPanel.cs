@@ -42,7 +42,9 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
     [SerializeField] private float powerUpSmooth = 5f;
     [SerializeField] private float currentPowerUp;
 
-    [Header("Audio Strings")]
+    [Header("Audio Strings and Source")]
+    [SerializeField] private AudioSource playerAudioSource;
+
     [SerializeField] private string recoverStamina;
     [SerializeField] private string maxPowerUpString;
     #endregion
@@ -200,7 +202,7 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
 
     private void PlayAudio(string audioString)
     {
-        AudioManager.Instance.PlayAudio(audioString);
+        AudioManager.Instance.PlayAudio(audioString, playerAudioSource);
     }
 
     #region Weitere Zugriffsfunktionien für andere Skripte
