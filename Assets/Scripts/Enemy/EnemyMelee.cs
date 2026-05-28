@@ -13,8 +13,6 @@ public class EnemyMelee : EnemyBase
     [SerializeField] private float maxAttackAngle = 60f;
     #endregion
 
-    protected bool isPlayingAttackAnimation;
-
     #region Animator Variables
     private static readonly int speedHash = Animator.StringToHash("Speed");
     private static readonly int isInAttackRangeHash = Animator.StringToHash("IsInAttackRange");
@@ -85,8 +83,6 @@ public class EnemyMelee : EnemyBase
 
     protected override void OnPlayerOutOfAttackRange()
     {
-        if (alreadyAttacked) return; // Animation läuft noch – nicht canceln
-
         animator.SetBool(isAttackingHash, false);
         animator.SetBool(isInAttackRangeHash, false);
         CancelInvoke(nameof(EnableFirstAttack));
@@ -121,7 +117,6 @@ public class EnemyMelee : EnemyBase
 
             animator.SetBool(isAttackingHash, true);
             alreadyAttacked = true;
-            isPlayingAttackAnimation = true;
         }
     }
 
@@ -134,7 +129,6 @@ public class EnemyMelee : EnemyBase
 
     public override void ResetAttack()
     {
-        isPlayingAttackAnimation = false;
         alreadyAttacked = false;
 
         float dist = Vector3.Distance(transform.position, player.position);
@@ -145,8 +139,6 @@ public class EnemyMelee : EnemyBase
             firstAttackDone = false;
         }
     }
-
-    protected override bool IsAnimationPlaying() => isPlayingAttackAnimation;
 
     protected override void Die()
     {
