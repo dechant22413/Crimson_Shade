@@ -7,7 +7,13 @@ public class EnemyMelee : EnemyBase
     [Header("Animation")]
     public Animator animator;
     public float walkAnimationSpeed = 1f;
+
+    [Header("TurnIndex and Attack Angle")]
+    [SerializeField] private float turnIndex = 5f;
+    [SerializeField] private float maxAttackAngle = 60f;
     #endregion
+
+    protected bool isPlayingAttackAnimation;
 
     #region Animator Variables
     private static readonly int speedHash = Animator.StringToHash("Speed");
@@ -79,13 +85,11 @@ public class EnemyMelee : EnemyBase
 
     protected override void OnPlayerOutOfAttackRange()
     {
-        //Spieler nicht mehr in Angriffsreichweite
+        if (alreadyAttacked) return; // Animation läuft noch – nicht canceln
+
         animator.SetBool(isAttackingHash, false);
         animator.SetBool(isInAttackRangeHash, false);
-
-        //Attacke wird gecancelt
         CancelInvoke(nameof(EnableFirstAttack));
-
         firstAttackDone = false;
         alreadyAttacked = false;
     }
@@ -104,18 +108,20 @@ public class EnemyMelee : EnemyBase
     protected override void Attack()
     {
         chaseDelayActive = false;
-        agent.SetDestination(transform.position); //Gegner bleibt stehen
+        agent.SetDestination(transform.position);
 
-        //Gegner rotiert sich in einer fließenden Bewegung zum Spieler
         Vector3 dir = (player.position - transform.position).normalized;
         dir.y = 0;
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 5f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * turnIndex);
 
         if (!alreadyAttacked)
         {
-            //Attack Animation Loop wird gestartet
+            float angle = Vector3.Angle(transform.forward, dir);
+            if (angle > maxAttackAngle) return;
+
             animator.SetBool(isAttackingHash, true);
             alreadyAttacked = true;
+            isPlayingAttackAnimation = true;
         }
     }
 
@@ -126,7 +132,21 @@ public class EnemyMelee : EnemyBase
             PlayerStatsAndUIPanel.Instance.ChangeLifePoints(-(int)attackDamage);
     }
 
-    public override void ResetAttack() => alreadyAttacked = false;
+    public override void ResetAttack()
+    {
+        isPlayingAttackAnimation = false;
+        alreadyAttacked = false;
+
+        float dist = Vector3.Distance(transform.position, player.position);
+        if (dist > attackRange)
+        {
+            animator.SetBool(isAttackingHash, false);
+            animator.SetBool(isInAttackRangeHash, false);
+            firstAttackDone = false;
+        }
+    }
+
+    protected override bool IsAnimationPlaying() => isPlayingAttackAnimation;
 
     protected override void Die()
     {

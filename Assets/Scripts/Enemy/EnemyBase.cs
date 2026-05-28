@@ -176,7 +176,21 @@ public abstract class EnemyBase : MonoBehaviour
                 EnemyState.Patrol
             );
         }
+
+        if (alreadyAttacked)
+        {
+            float dist = Vector3.Distance(transform.position, player.position);
+            if (dist > attackRange && !IsAnimationPlaying())
+            {
+                alreadyAttacked = false;
+                OnPlayerOutOfAttackRange();
+            }
+            return;
+        }
     }
+
+    protected virtual bool IsAnimationPlaying() => false;
+
     protected void SetState(EnemyState newState)
     {
         if (currentState == newState) return;
