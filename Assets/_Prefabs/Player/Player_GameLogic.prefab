@@ -219,7 +219,7 @@ Transform:
   m_GameObject: {fileID: 1271837427179566510}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -399.36, y: -220.15399, z: 1.66}
+  m_LocalPosition: {x: -395.2302, y: -224.594, z: -1.27828}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2272,12 +2272,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1575956195133781107}
   - component: {fileID: 6854710746797512028}
-  - component: {fileID: 9043080847041896594}
   - component: {fileID: 6775948888803623875}
   - component: {fileID: 8950469375036743510}
   - component: {fileID: 1008841638708159480}
-  - component: {fileID: 6487585378187806207}
+  - component: {fileID: 9043080847041896594}
+  - component: {fileID: 8462516448580344951}
   - component: {fileID: 6010387281345813397}
+  - component: {fileID: 6487585378187806207}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2339,22 +2340,6 @@ MonoBehaviour:
   maxPowerUpString: PowerUp_Full
   fleshHitAudio: Flesh_Hit_Sounds
   hitAudio: 
---- !u!114 &9043080847041896594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7065769480013628758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05d21ba251bd3fb4996dd9af2aeea281, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InteractionSystem
-  interactAction: {fileID: 6501055758473916744, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
-  playerCam: {fileID: 1097868980655363721}
-  interactionLabel: {fileID: 3396176821729342348}
-  interactionRange: 3
 --- !u!114 &6775948888803623875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2415,31 +2400,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimations
   leftArmAnimator: {fileID: 5887013628149731776}
   rightArmAnimator: {fileID: 8929695670979485837}
---- !u!143 &6487585378187806207
-CharacterController:
+--- !u!114 &9043080847041896594
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7065769480013628758}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05d21ba251bd3fb4996dd9af2aeea281, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractionSystem
+  interactAction: {fileID: 6501055758473916744, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
+  playerCam: {fileID: 1097868980655363721}
+  interactionLabel: {fileID: 3396176821729342348}
+  interactionRange: 3
+--- !u!114 &8462516448580344951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7065769480013628758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db55f1ec1d9b4544bac00673a174c00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAudio
+  playerAudioSource: {fileID: 6010387281345813397}
 --- !u!82 &6010387281345813397
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2537,6 +2526,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!143 &6487585378187806207
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7065769480013628758}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7277579890676943973
 GameObject:
   m_ObjectHideFlags: 0

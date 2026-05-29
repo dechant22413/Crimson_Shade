@@ -63,7 +63,7 @@ MonoBehaviour:
     - name: Jump
       clip: {fileID: 8300000, guid: ce176294ba435334b8461213b854ec4c, type: 3}
       volume: 0.337
-    - name: Damaged
+    - name: TakeDamage
       clip: {fileID: 8300000, guid: 138ae39745e6f464fb0759d4e46456f0, type: 3}
       volume: 0.337
     patches: []
@@ -109,7 +109,7 @@ MonoBehaviour:
       clip: {fileID: 8300000, guid: fffed367fb62f23499922bbe2be336dc, type: 3}
       volume: 1
     patches:
-    - name: Ghoul_Hit_Sounds
+    - name: Ghoul_TakeDamage
       sounds:
       - name: Ghoul_Hit_001
         clip: {fileID: 8300000, guid: 46d0ea307657d4f479ff893369c00b4c, type: 3}
@@ -132,12 +132,12 @@ MonoBehaviour:
       - name: Ghoul_Hit_007
         clip: {fileID: 8300000, guid: b7aa3fb47465abd4595e8548741219d2, type: 3}
         volume: 1
-    - name: Ghoul_Death_Sounds
+    - name: Ghoul_Death
       sounds:
       - name: Ghoul_Death_001
         clip: {fileID: 8300000, guid: 28c2791712c594147b0d8a904c6e2553, type: 3}
         volume: 1
-    - name: Ghoul_Attack_Sounds
+    - name: Ghoul_Attack
       sounds:
       - name: Ghoul_Attack_001
         clip: {fileID: 8300000, guid: 12ebce75bc162464f949fae73530512a, type: 3}

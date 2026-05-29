@@ -326,8 +326,9 @@ GameObject:
   - component: {fileID: 189386933}
   - component: {fileID: 189386932}
   - component: {fileID: 189386934}
-  - component: {fileID: 189386935}
   - component: {fileID: 189386936}
+  - component: {fileID: 189386935}
+  - component: {fileID: 189386938}
   - component: {fileID: 189386937}
   m_Layer: 0
   m_Name: Ghoul_Enemy
@@ -448,9 +449,7 @@ MonoBehaviour:
   audioSource: {fileID: 189386937}
   fleshHitAudio: Flesh_Hit_Sounds
   stunDuration: 6
-  ghoulAudioSource: {fileID: 189386937}
-  helmetHitSound: Helmet_Hit
-  ghoulHitSound: Ghoul_Hit_Sounds
+  ghoulAudio: {fileID: 0}
 --- !u!82 &189386937
 AudioSource:
   m_ObjectHideFlags: 0
@@ -548,6 +547,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &189386938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189386929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa19b6e9c6192564f89c18c053ccfd2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GhoulAudio
+  ghoulAudioSource: {fileID: 189386937}
 --- !u!1 &191369823
 GameObject:
   m_ObjectHideFlags: 0

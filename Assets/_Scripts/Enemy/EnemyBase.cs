@@ -60,6 +60,8 @@ public abstract class EnemyBase : MonoBehaviour
             player = playerObj.transform;
         else
             Debug.LogWarning($"{gameObject.name}: Kein Player mit Tag 'Player' gefunden.");
+
+        GetAudioReference();
     }
 
     protected virtual void Start()
@@ -391,6 +393,7 @@ public abstract class EnemyBase : MonoBehaviour
         }
     }
 
+    protected abstract void GetAudioReference();
     protected abstract void Inactive();
     protected abstract void Idle();
     protected abstract void Patrol();

@@ -5,10 +5,7 @@ public class EnemyGhoul : EnemyMelee
     [Header("Armor Hit Settings")]
     public float stunDuration = 2f;
 
-    [Header("Audio Strings and Source")]
-    [SerializeField] private AudioSource ghoulAudioSource;
-    [SerializeField] private string helmetHitSound;
-    [SerializeField] private string ghoulHitSound;
+    public GhoulAudio ghoulAudio;
 
     public override void ArmorHit(bool stun)
     {
@@ -17,7 +14,7 @@ public class EnemyGhoul : EnemyMelee
 
         if(!isStunnedFlag && stun == true)
         {
-            AudioManager.Instance.PlayAudio(helmetHitSound, ghoulAudioSource);
+            ghoulAudio.PlayHelmetImpact();
         }
 
         if (stun == true)
@@ -39,6 +36,11 @@ public class EnemyGhoul : EnemyMelee
     {
         base.TakeDamage(damage);
 
-        AudioManager.Instance.PlayAudio(ghoulHitSound, ghoulAudioSource);
+        ghoulAudio.PlayTakeDamage();
+    }
+
+    protected override void GetAudioReference()
+    {
+        ghoulAudio = GetComponent<GhoulAudio>();
     }
 }

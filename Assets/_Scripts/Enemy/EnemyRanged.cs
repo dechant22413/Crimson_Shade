@@ -104,4 +104,6 @@ public class EnemyRanged : EnemyBase
         DissolveEffect dissolve = GetComponent<DissolveEffect>();
         dissolve.StartDissolve();
     }
+
+    protected override void GetAudioReference() { }
 }

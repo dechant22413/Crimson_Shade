@@ -11,10 +11,6 @@ public class EnemyMelee : EnemyBase
     [Header("TurnIndex and Attack Angle")]
     [SerializeField] private float turnIndex = 5f;
     [SerializeField] private float maxAttackAngle = 60f;
-
-    [Header("Audio Strings and Source")]
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private string fleshHitAudio;
     #endregion
 
     #region Animator Variables
@@ -155,4 +151,6 @@ public class EnemyMelee : EnemyBase
         //Death Animation Trigger
         animator.SetTrigger(deathHash);
     }
+
+    protected override void GetAudioReference() { }
 }

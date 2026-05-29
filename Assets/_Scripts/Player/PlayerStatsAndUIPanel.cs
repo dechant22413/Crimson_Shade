@@ -43,14 +43,6 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
     [SerializeField] private float powerUpSmooth = 5f;
     [SerializeField] private float currentPowerUp;
 
-    [Header("Audio Strings and Source")]
-    [SerializeField] private AudioSource playerAudioSource;
-
-    [SerializeField] private string recoverStamina;
-    [SerializeField] private string maxPowerUpString;
-    [SerializeField] private string fleshHitAudio;
-    [SerializeField] private string hitAudio;
-
     #endregion
 
     private float lifePointsTarget;
@@ -138,8 +130,8 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
         lifePointsTarget = currentLifePoints;
         lifePointsDelayTimer = lifePointsDelay;
 
-        AudioManager.Instance.PlayAudio(fleshHitAudio, playerAudioSource);
-        AudioManager.Instance.PlayAudio(hitAudio, playerAudioSource);
+        PlayerAudio.Instance.PlayTakeDamageFlesh();
+        PlayerAudio.Instance.PlayTakeDamagePunch();
     }
 
 
@@ -160,12 +152,12 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
 
         if (previousStamina < maxStamina / 2 && currentStamina >= maxStamina / 2)
         {
-            PlayAudio(recoverStamina);
+            PlayerAudio.Instance.PlayDashRecover();
         }
 
         if (previousStamina < maxStamina && currentStamina >= maxStamina)
         {
-            PlayAudio(recoverStamina);
+            PlayerAudio.Instance.PlayDashRecover();
         }
     }
 
@@ -198,7 +190,7 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
 
             if (!powerUpFullPlayed)
             {
-                PlayAudio(maxPowerUpString);
+                PlayerAudio.Instance.PlayPowerUpFull();
                 powerUpFullPlayed = true;
             }
         }
@@ -214,11 +206,6 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
 
         //Stoppen der PowerUp Bar Animation
         skeletonHand.GetComponent<PopWobbleJuice>().continuousWobble = false;
-    }
-
-    private void PlayAudio(string audioString)
-    {
-        AudioManager.Instance.PlayAudio(audioString, playerAudioSource);
     }
 
     #region Weitere Zugriffsfunktionien für andere Skripte
