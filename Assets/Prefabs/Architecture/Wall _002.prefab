@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall_Pillar_Small_001
       objectReference: {fileID: 0}
+    - target: {fileID: 3428818995579187776, guid: bf74b887cb77e7049bbbd3a5f9ee8efd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 3789041062877877141, guid: bf74b887cb77e7049bbbd3a5f9ee8efd, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -145,6 +149,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: be7c04db0aeea7649bc1a6fc0ad827ac, type: 3}
       propertyPath: m_Name
       value: Wall _002
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: be7c04db0aeea7649bc1a6fc0ad827ac, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
