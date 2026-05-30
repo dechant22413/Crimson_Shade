@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: b182d19a32de4b54791c49df6fe1b385, type: 2}
+    - target: {fileID: -3470916264474739276, guid: 8c7a3ac4a6b5f1a4f9d294fdba954713, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: -2982265501736787702, guid: 8c7a3ac4a6b5f1a4f9d294fdba954713, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -72,6 +76,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mummy_Burnt_006
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8c7a3ac4a6b5f1a4f9d294fdba954713, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7109728306181334069, guid: 8c7a3ac4a6b5f1a4f9d294fdba954713, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -79,6 +91,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8c7a3ac4a6b5f1a4f9d294fdba954713, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4080072518080958747}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8c7a3ac4a6b5f1a4f9d294fdba954713, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2119372113715141733}
   m_SourcePrefab: {fileID: 100100000, guid: 8c7a3ac4a6b5f1a4f9d294fdba954713, type: 3}
 --- !u!1 &5239054703267282803 stripped
 GameObject:
@@ -107,3 +122,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &2119372113715141733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5239054703267282803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa0f2258b0900741a4c9120bdefeef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SurfaceIdentifier
+  surfaceData: {fileID: 11400000, guid: 18fea5f14aa0cce4f9567285f2b73725, type: 2}

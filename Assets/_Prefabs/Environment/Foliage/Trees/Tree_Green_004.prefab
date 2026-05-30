@@ -239,6 +239,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bbe385a31913b6142a711abb851e6dc0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4745937212656425577}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bbe385a31913b6142a711abb851e6dc0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6267507288728822438}
   m_SourcePrefab: {fileID: 100100000, guid: bbe385a31913b6142a711abb851e6dc0, type: 3}
 --- !u!1 &1400704834162700047 stripped
 GameObject:
@@ -268,3 +271,16 @@ CapsuleCollider:
   m_Height: 12.071362
   m_Direction: 1
   m_Center: {x: 0, y: 5.0814705, z: -0.39743233}
+--- !u!114 &6267507288728822438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400704834162700047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa0f2258b0900741a4c9120bdefeef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SurfaceIdentifier
+  surfaceData: {fileID: 11400000, guid: dd182a2ce4dce554a8ec87d42a15d4aa, type: 2}

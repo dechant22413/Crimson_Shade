@@ -33,7 +33,7 @@ public abstract class Weapon : MonoBehaviour
         else if (((1 << layer) & enemyHostHit) != 0)
             EnemyHostHit(hit.point, hit.collider, damage);
         else if (((1 << layer) & environmentHit) != 0)
-            EnvironmentHit(hit.point);
+            EnvironmentHit(hit.point, hit.collider);
     }
 
     protected virtual void EnemyBodyHit(Vector3 pos, Collider col, float damage)
@@ -71,15 +71,15 @@ public abstract class Weapon : MonoBehaviour
         PlaySurfaceSound(col);
     }
 
-    protected virtual void EnvironmentHit(Vector3 pos) { }
+    protected virtual void EnvironmentHit(Vector3 pos, Collider col)
+    {
+        PlaySurfaceSound(col);
+    }
 
     private void PlaySurfaceSound(Collider col)
     {
         SurfaceIdentifier surface = col.GetComponentInParent<SurfaceIdentifier>();
         if (surface == null || surface.surfaceData?.hitSound == null) return;
-
-        AudioSource source = col.GetComponentInParent<AudioSource>();
-        if (source == null) return;
 
         SoundFXManager.Instance.Play(surface.surfaceData.hitSound, col.transform);
     }

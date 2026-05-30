@@ -66,7 +66,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 1bc3f834c60ce864bb48d528df147b66, type: 2}
     - target: {fileID: 919132149155446097, guid: 6ead069909248b54ab32c55a25ab47e4, type: 3}
       propertyPath: m_Name
-      value: Tombstone005
+      value: Tombstone_003
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6ead069909248b54ab32c55a25ab47e4, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -75,6 +79,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6ead069909248b54ab32c55a25ab47e4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7319821721085153556}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6ead069909248b54ab32c55a25ab47e4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1327280943870160774}
   m_SourcePrefab: {fileID: 100100000, guid: 6ead069909248b54ab32c55a25ab47e4, type: 3}
 --- !u!1 &8126037002166248953 stripped
 GameObject:
@@ -102,3 +109,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.023924941, y: 0.015125671, z: 0.03331903}
   m_Center: {x: -0.00019649041, y: 0.0017209541, z: 0.015796043}
+--- !u!114 &1327280943870160774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8126037002166248953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa0f2258b0900741a4c9120bdefeef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SurfaceIdentifier
+  surfaceData: {fileID: 11400000, guid: 60a8f6efe843e824385c6e537a03859c, type: 2}

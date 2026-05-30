@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8343405086470711607}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.UpperLeg.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2713677483978139577}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.Pelvis.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 305703297476161744}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.UpperArm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2005350509027176947}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.LowerArm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 19457092461006626}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4291633878446650651}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.Pelvis.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4060808283826462922}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.Hand.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,7 +233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3847320127475503372}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.UpperArm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +265,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3835941198614597807}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.Hand.R_end_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,7 +296,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5708353956671841123}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.Hand.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +328,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9109098778729594406}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.Foot.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,7 +360,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4207269024615159478}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.Shoulder.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -392,7 +392,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 833351037108795898}
-  m_Layer: 0
+  - component: {fileID: 6573382607187912302}
+  - component: {fileID: 2196415645555982069}
+  m_Layer: 10
   m_Name: Mummy_Burnt_004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -417,6 +419,41 @@ Transform:
   - {fileID: 5420662455963450064}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &6573382607187912302
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3042023699808576776}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
+--- !u!114 &2196415645555982069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3042023699808576776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa0f2258b0900741a4c9120bdefeef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SurfaceIdentifier
+  surfaceData: {fileID: 11400000, guid: 18fea5f14aa0cce4f9567285f2b73725, type: 2}
 --- !u!1 &3366359724115242293
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,7 +463,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7963394903810749555}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.Hand.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -458,7 +495,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2364064249544182895}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.Foot.R_end_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -489,7 +526,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6730276126787613970}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -521,7 +558,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7164499752197815839}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.Hand.L_end_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -552,7 +589,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2098210233534754435}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -586,7 +623,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8638728831933378112}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.LowerLeg.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -618,7 +655,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7786572513561714126}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.Neck.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -650,7 +687,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5414199941739174256}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.LowerArm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -682,7 +719,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3095705547004298645}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.LowerLeg.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -714,7 +751,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 965371994167117193}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.Pelvis.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -748,7 +785,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4843789063784311884}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.UpperLeg.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -780,7 +817,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6549971992289990566}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.Foot.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -812,7 +849,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3025019622774176559}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.Foot.L_end_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -843,7 +880,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3180034746122075239}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.Neck.001_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -875,7 +912,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5107774564789203221}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.Foot.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -907,7 +944,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7143773515489089506}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.Shoulder.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -940,7 +977,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5420662455963450064}
   - component: {fileID: 1746715726968370545}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ghoul Head.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1056,7 +1093,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 130733159956835755}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.Foot.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1088,7 +1125,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4221468199162743684}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.Neck.001_end_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1120,7 +1157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3182676434084460996}
   - component: {fileID: 1841456044154100923}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ghoul Body.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1236,7 +1273,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2314393512659065400}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.Hand.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}

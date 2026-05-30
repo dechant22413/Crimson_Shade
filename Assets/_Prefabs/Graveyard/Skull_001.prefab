@@ -69,6 +69,10 @@ PrefabInstance:
       value: Skull_001
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 60419d1e0f5e80046b8de2d66a7b62ea, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 60419d1e0f5e80046b8de2d66a7b62ea, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}

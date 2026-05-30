@@ -66,7 +66,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 1bc3f834c60ce864bb48d528df147b66, type: 2}
     - target: {fileID: 919132149155446097, guid: 70f0d2e21e7b1784aa812a3c58ac19cd, type: 3}
       propertyPath: m_Name
-      value: Casket Lid Wooden
+      value: Coffin_Lid_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 70f0d2e21e7b1784aa812a3c58ac19cd, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -75,6 +79,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 70f0d2e21e7b1784aa812a3c58ac19cd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1312218477951476586}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 70f0d2e21e7b1784aa812a3c58ac19cd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2129666952582990916}
   m_SourcePrefab: {fileID: 100100000, guid: 70f0d2e21e7b1784aa812a3c58ac19cd, type: 3}
 --- !u!1 &6849089651995737322 stripped
 GameObject:
@@ -102,3 +109,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.046295013, y: 0.0034919984, z: 0.10445793}
   m_Center: {x: -0.00038207843, y: -0.034515336, z: 0.052546747}
+--- !u!114 &2129666952582990916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6849089651995737322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa0f2258b0900741a4c9120bdefeef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SurfaceIdentifier
+  surfaceData: {fileID: 11400000, guid: dd182a2ce4dce554a8ec87d42a15d4aa, type: 2}

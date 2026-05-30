@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spike_Wood_001
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d2083e52eb03b104ca982ecd199febaa, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -75,6 +79,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d2083e52eb03b104ca982ecd199febaa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1178411598598619469}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d2083e52eb03b104ca982ecd199febaa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7500661174954993623}
   m_SourcePrefab: {fileID: 100100000, guid: d2083e52eb03b104ca982ecd199febaa, type: 3}
 --- !u!1 &5783749797549588600 stripped
 GameObject:
@@ -102,3 +109,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.009191398, y: 0.009079751, z: 0.13165627}
   m_Center: {x: -0.00042444232, y: 0.00015491895, z: 0.06596535}
+--- !u!114 &7500661174954993623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5783749797549588600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa0f2258b0900741a4c9120bdefeef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SurfaceIdentifier
+  surfaceData: {fileID: 11400000, guid: dd182a2ce4dce554a8ec87d42a15d4aa, type: 2}

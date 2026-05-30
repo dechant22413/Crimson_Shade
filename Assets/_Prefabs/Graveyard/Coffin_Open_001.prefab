@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coffin_Open_001
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7e4fdb7fb2bb49a4bb920b012e8cabfd, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -75,6 +79,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7e4fdb7fb2bb49a4bb920b012e8cabfd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1440495125636673782}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7e4fdb7fb2bb49a4bb920b012e8cabfd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8035694368835810374}
   m_SourcePrefab: {fileID: 100100000, guid: 7e4fdb7fb2bb49a4bb920b012e8cabfd, type: 3}
 --- !u!1 &3851495123730727080 stripped
 GameObject:
@@ -102,3 +109,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.046295013, y: 0.029663099, z: 0.10445794}
   m_Center: {x: -0.00017184472, y: 0.005246429, z: 0.052589346}
+--- !u!114 &8035694368835810374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3851495123730727080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa0f2258b0900741a4c9120bdefeef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SurfaceIdentifier
+  surfaceData: {fileID: 11400000, guid: dd182a2ce4dce554a8ec87d42a15d4aa, type: 2}
