@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c892d4676591241bb30855081d7cfb, type: 3}
   m_Name: Metal_Surface
   m_EditorClassIdentifier: Assembly-CSharp::SurfaceData
-  hitSoundName: Metal_Hit_Sounds
-  footstepSoundName: 
+  hitSound: {fileID: 11400000, guid: 9fc6e6fd1c7ed0740ba1d91218c6eeb9, type: 2}
+  footstepSound: {fileID: 0}

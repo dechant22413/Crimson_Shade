@@ -46,10 +46,7 @@ public class AnimationEvents : MonoBehaviour
     #endregion
 
     #region Player Events
-    public void PlaySound(string soundName)
-    {
-        AudioManager.Instance.PlayAudio(soundName, audioSource);
-    }
+
     #endregion
 
 

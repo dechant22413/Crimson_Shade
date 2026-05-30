@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c892d4676591241bb30855081d7cfb, type: 3}
   m_Name: FleshSurface
   m_EditorClassIdentifier: Assembly-CSharp::SurfaceData
-  hitSoundName: Flesh_Hit_Sounds
-  footstepSoundName: 
+  hitSound: {fileID: 11400000, guid: eea123f014bf4a5418550461629c6df0, type: 2}
+  footstepSound: {fileID: 0}

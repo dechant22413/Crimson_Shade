@@ -131,7 +131,7 @@ public class PlayerActions : MonoBehaviour
         //Aktiviert PowerUp
         PlayerStatsAndUIPanel.Instance.ActivatePowerUp();
 
-        PlayAudio(powerUpAudio);
+        PlayerAudio.Instance.PlayHeal();
     }
 
     private void Dash(InputAction.CallbackContext context)
@@ -171,7 +171,7 @@ public class PlayerActions : MonoBehaviour
 
         Debug.Log("Dash");
 
-        PlayAudio(dashString);
+        PlayerAudio.Instance.PlayDash(); ;
     }
 
     private void Jump(InputAction.CallbackContext context)
@@ -182,7 +182,7 @@ public class PlayerActions : MonoBehaviour
             PlayerMovement.Instance.SetVerticalVelocity(jumpForce);
             Debug.Log("Jump");
 
-            PlayAudio(jumpString);
+            PlayerAudio.Instance.PlayJump();
         }
     }
 
@@ -204,10 +204,5 @@ public class PlayerActions : MonoBehaviour
         //Spielt Hit Animation ab, solange der Input gehalten wird
         if (isAttacking)
             PlayerAnimations.Instance.PlayHit();
-    }
-
-    private void PlayAudio(string audioString)
-    {
-        AudioManager.Instance.PlayAudio(audioString, playerAudioSource);
     }
 }

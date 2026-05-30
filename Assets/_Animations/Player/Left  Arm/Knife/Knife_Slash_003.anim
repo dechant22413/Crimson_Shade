@@ -15491,8 +15491,8 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.125
-    functionName: PlaySound
-    data: KnifeSlash_003
+    functionName: PlayKnifeSlash_003
+    data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

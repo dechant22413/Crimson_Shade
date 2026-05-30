@@ -76,11 +76,11 @@ public abstract class Weapon : MonoBehaviour
     private void PlaySurfaceSound(Collider col)
     {
         SurfaceIdentifier surface = col.GetComponentInParent<SurfaceIdentifier>();
-        if (surface == null) return;
+        if (surface == null || surface.surfaceData?.hitSound == null) return;
 
         AudioSource source = col.GetComponentInParent<AudioSource>();
         if (source == null) return;
 
-        AudioManager.Instance.PlayAudio(surface.surfaceData.hitSoundName, source);
+        SoundFXManager.Instance.Play(surface.surfaceData.hitSound, col.transform);
     }
 }

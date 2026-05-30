@@ -41,7 +41,7 @@ public class DamageTickZone : MonoBehaviour
     {
         while(true)
         {
-            PlayerStatsAndUIPanel.Instance.ChangeLifePoints(damage * -1);
+            PlayerStatsAndUIPanel.Instance.DamagePlayer(damage);
             yield return new WaitForSeconds(tickRate);
         }
     }

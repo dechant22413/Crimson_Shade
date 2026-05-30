@@ -329,7 +329,6 @@ GameObject:
   - component: {fileID: 189386936}
   - component: {fileID: 189386935}
   - component: {fileID: 189386938}
-  - component: {fileID: 189386937}
   m_Layer: 0
   m_Name: Ghoul_Enemy
   m_TagString: Untagged
@@ -446,107 +445,8 @@ MonoBehaviour:
   walkAnimationSpeed: 1
   turnIndex: 15
   maxAttackAngle: 60
-  audioSource: {fileID: 189386937}
-  fleshHitAudio: Flesh_Hit_Sounds
   stunDuration: 6
   ghoulAudio: {fileID: 0}
---- !u!82 &189386937
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 189386929}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &189386938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,7 +459,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa19b6e9c6192564f89c18c053ccfd2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GhoulAudio
-  ghoulAudioSource: {fileID: 189386937}
+  takeDamage:
+    audioEvent: {fileID: 11400000, guid: 3b7f73d51c30aae458e6524b3748a4dd, type: 2}
+    volumeOverride: 1
+  death:
+    audioEvent: {fileID: 11400000, guid: 5e9a104fd8ef6db45950606ff7635714, type: 2}
+    volumeOverride: 1
+  helmetImpact:
+    audioEvent: {fileID: 11400000, guid: 1cc8aaf29b636444fb8a51257f7b2f17, type: 2}
+    volumeOverride: 1
+  attack:
+    audioEvent: {fileID: 11400000, guid: 2e6598363d68bca44b09d635fdc67945, type: 2}
+    volumeOverride: 1
 --- !u!1 &191369823
 GameObject:
   m_ObjectHideFlags: 0
@@ -1097,7 +1008,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce5336bda700c4439224bda938a559e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimationEvents
-  audioSource: {fileID: 189386937}
+  audioSource: {fileID: 0}
 --- !u!95 &600058999
 Animator:
   serializedVersion: 7
@@ -3086,6 +2997,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_GameLogic
       objectReference: {fileID: 0}
+    - target: {fileID: 6720114227517350877, guid: 73e06da99a3981042a103aed13d94207, type: 3}
+      propertyPath: empty.audioEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: f91a17adfaa104940b58a212786ebc5b, type: 2}
+    - target: {fileID: 6720114227517350877, guid: 73e06da99a3981042a103aed13d94207, type: 3}
+      propertyPath: attack.audioEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 82cb10dc7e4bfa74fa46f3c72d829b1c, type: 2}
+    - target: {fileID: 6720114227517350877, guid: 73e06da99a3981042a103aed13d94207, type: 3}
+      propertyPath: reload.audioEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: f24ef2249b987b84ebb3ba86489f9b05, type: 2}
     - target: {fileID: 6854710746797512028, guid: 73e06da99a3981042a103aed13d94207, type: 3}
       propertyPath: hitAudio
       value: Damaged
@@ -3959,6 +3882,63 @@ Transform:
   - {fileID: 2668653625900235384}
   m_Father: {fileID: 2773198951680196868}
   m_LocalEulerAnglesHint: {x: -24.315851, y: -21.396313, z: 45.850075}
+--- !u!1001 &2244435170879030008
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 989852056475639550, guid: eba38dd0049ac4344b7ad684f8f9537b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 989852056475639550, guid: eba38dd0049ac4344b7ad684f8f9537b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 989852056475639550, guid: eba38dd0049ac4344b7ad684f8f9537b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 989852056475639550, guid: eba38dd0049ac4344b7ad684f8f9537b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 989852056475639550, guid: eba38dd0049ac4344b7ad684f8f9537b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 989852056475639550, guid: eba38dd0049ac4344b7ad684f8f9537b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 989852056475639550, guid: eba38dd0049ac4344b7ad684f8f9537b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 989852056475639550, guid: eba38dd0049ac4344b7ad684f8f9537b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 989852056475639550, guid: eba38dd0049ac4344b7ad684f8f9537b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 989852056475639550, guid: eba38dd0049ac4344b7ad684f8f9537b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7114809752865462699, guid: eba38dd0049ac4344b7ad684f8f9537b, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eba38dd0049ac4344b7ad684f8f9537b, type: 3}
 --- !u!1 &2388581188254440468
 GameObject:
   m_ObjectHideFlags: 0
@@ -4947,3 +4927,4 @@ SceneRoots:
   - {fileID: 1535872132}
   - {fileID: 1071660685}
   - {fileID: 610648111}
+  - {fileID: 2244435170879030008}

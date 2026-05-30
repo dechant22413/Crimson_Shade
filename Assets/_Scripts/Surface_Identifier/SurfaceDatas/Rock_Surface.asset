@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04c892d4676591241bb30855081d7cfb, type: 3}
+  m_Name: Rock_Surface
+  m_EditorClassIdentifier: Assembly-CSharp::SurfaceData
+  hitSound: {fileID: 11400000, guid: 36bd6f88c7d520849b9cac721394b067, type: 2}
+  footstepSound: {fileID: 0}

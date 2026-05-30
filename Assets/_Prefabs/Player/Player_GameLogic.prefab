@@ -2277,7 +2277,6 @@ GameObject:
   - component: {fileID: 1008841638708159480}
   - component: {fileID: 9043080847041896594}
   - component: {fileID: 8462516448580344951}
-  - component: {fileID: 6010387281345813397}
   - component: {fileID: 6487585378187806207}
   m_Layer: 0
   m_Name: Player
@@ -2377,7 +2376,7 @@ MonoBehaviour:
   dashDuration: 0.3
   dashStrain: 10
   jumpForce: 8
-  playerAudioSource: {fileID: 6010387281345813397}
+  playerAudioSource: {fileID: 0}
   powerUpAudio: Heal
   jumpString: Jump
   dashString: Dash
@@ -2423,104 +2422,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7db55f1ec1d9b4544bac00673a174c00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAudio
-  playerAudioSource: {fileID: 6010387281345813397}
---- !u!82 &6010387281345813397
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7065769480013628758}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  jump:
+    audioEvent: {fileID: 11400000, guid: 20412210ae0285345b3c5fb199e53bce, type: 2}
+    volumeOverride: 1
+  dash:
+    audioEvent: {fileID: 11400000, guid: 2ff934cf46a43014aadd4116269bed59, type: 2}
+    volumeOverride: 1
+  heal:
+    audioEvent: {fileID: 11400000, guid: 5bec1ededc236df40831bd5b8a2976a1, type: 2}
+    volumeOverride: 1
+  dashRecover:
+    audioEvent: {fileID: 11400000, guid: cb9f9e7b781e94d40a560310b14958c9, type: 2}
+    volumeOverride: 1
+  powerupFull:
+    audioEvent: {fileID: 11400000, guid: 440589de0723ee5428c9b45e5d33d097, type: 2}
+    volumeOverride: 1
+  takeDamageFlesh:
+    audioEvent: {fileID: 11400000, guid: eea123f014bf4a5418550461629c6df0, type: 2}
+    volumeOverride: 1
+  takeDamagePunch:
+    audioEvent: {fileID: 11400000, guid: 73e387514c1f9d44eb8f9ee5fb4ce240, type: 2}
+    volumeOverride: 1
 --- !u!143 &6487585378187806207
 CharacterController:
   m_ObjectHideFlags: 0
@@ -3969,7 +3891,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce5336bda700c4439224bda938a559e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimationEvents
-  audioSource: {fileID: 6010387281345813397}
+  audioSource: {fileID: 0}
 --- !u!114 &3349607748508466222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3982,7 +3904,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2fc5c5496f19c04c95c6349726885ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KnifeAudio
-  knifeAudioSource: {fileID: 6010387281345813397}
+  slash_001:
+    audioEvent: {fileID: 11400000, guid: 5d87eabc308ec4b428c1b9a069a08d2f, type: 2}
+    volumeOverride: 1
+  slash_002:
+    audioEvent: {fileID: 11400000, guid: e8d88867f643e134780472238084fdb1, type: 2}
+    volumeOverride: 1
+  slash_003:
+    audioEvent: {fileID: 11400000, guid: 4a8f99ffa62928d4ba01624de090ddd4, type: 2}
+    volumeOverride: 1
 --- !u!1001 &2360751461843610465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4768,7 +4698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce5336bda700c4439224bda938a559e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimationEvents
-  audioSource: {fileID: 6010387281345813397}
+  audioSource: {fileID: 0}
 --- !u!114 &6720114227517350877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4781,4 +4711,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4040bcdb255d2dc4ca8b99fa636e31b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShotgunAudio
-  shotgunAudioSource: {fileID: 6010387281345813397}
+  reload:
+    audioEvent: {fileID: 0}
+    volumeOverride: 1
+  attack:
+    audioEvent: {fileID: 0}
+    volumeOverride: 1
+  empty:
+    audioEvent: {fileID: 0}
+    volumeOverride: 1

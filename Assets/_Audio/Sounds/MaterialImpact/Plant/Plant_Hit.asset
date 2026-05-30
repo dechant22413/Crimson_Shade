@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bb250ec91b5be84c9dc53be63b5fa45, type: 3}
+  m_Name: Plant_Hit
+  m_EditorClassIdentifier: Assembly-CSharp::AudioEvent
+  clips:
+  - {fileID: 8300000, guid: ed72bffb4f2b95a459899f7a057c224a, type: 3}
+  - {fileID: 8300000, guid: 2ceec9f7be35ab443b8806715bbe366a, type: 3}
+  - {fileID: 8300000, guid: 2e57f58b85b3e2d4282a31deaae623f7, type: 3}
+  volume: 1
+  pitchMin: 1
+  pitchMax: 1
+  mixerGroup: {fileID: 0}
