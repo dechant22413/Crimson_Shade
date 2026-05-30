@@ -6,11 +6,15 @@ public class AnimationEvents : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     private EnemyBase enemy;
 
+    private GhoulAudio ghoulAudio;
+
     //Animation Events, die von einem beliebigen Gegner, Gegenstand oder dem Spieler aufgerufen werden können
     #region Enemy Events
     private void Awake()
     {
         enemy = GetComponentInParent<EnemyBase>();
+
+        ghoulAudio = GetComponentInParent<GhoulAudio>();
     }
 
     public void OnAttackHit()
@@ -27,6 +31,14 @@ public class AnimationEvents : MonoBehaviour
     {
         enemy.SpawnProjectile();
     }
+
+    #region GhoulAudio
+    public void GhoulPlayAttackSound()
+    {
+        if (ghoulAudio == null) return;
+        ghoulAudio.PlayAttack();
+    }
+    #endregion
     #endregion
 
     #region Player Events

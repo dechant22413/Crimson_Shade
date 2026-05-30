@@ -170,3 +170,36 @@ MonoBehaviour:
       - name: Metal_Hit_004
         clip: {fileID: 8300000, guid: 9fd76debe8372a24d8a89dfc0d352203, type: 3}
         volume: 1
+    - name: Wood_Hit_Sounds
+      sounds:
+      - name: Wood_Hit_001
+        clip: {fileID: 8300000, guid: 6ffaec2381aeab943ba3fc0103e069f6, type: 3}
+        volume: 1
+      - name: Wood_Hit_001
+        clip: {fileID: 8300000, guid: 2198aba80a00ead4ea1caedf38a96678, type: 3}
+        volume: 1
+      - name: Wood_Hit_001
+        clip: {fileID: 8300000, guid: 511c640cbdbefa8428c2710e2cb04895, type: 3}
+        volume: 1
+    - name: Rock_Hit_Sounds
+      sounds:
+      - name: Rock_Hit_001
+        clip: {fileID: 8300000, guid: dd7b365f5e7dae64aafa8f30a44362e1, type: 3}
+        volume: 1
+      - name: Rock_Hit_002
+        clip: {fileID: 8300000, guid: 776b36014a6af504696107b8dacf1a32, type: 3}
+        volume: 1
+      - name: Rock_Hit_003
+        clip: {fileID: 8300000, guid: 6db97e3367489b847840c2c00cc00e54, type: 3}
+        volume: 1
+    - name: Plant_Hit_Sounds
+      sounds:
+      - name: Plant_Hit_001
+        clip: {fileID: 8300000, guid: ed72bffb4f2b95a459899f7a057c224a, type: 3}
+        volume: 1
+      - name: Plant_Hit_001
+        clip: {fileID: 8300000, guid: 2ceec9f7be35ab443b8806715bbe366a, type: 3}
+        volume: 1
+      - name: Plant_Hit_001
+        clip: {fileID: 8300000, guid: 2e57f58b85b3e2d4282a31deaae623f7, type: 3}
+        volume: 1
