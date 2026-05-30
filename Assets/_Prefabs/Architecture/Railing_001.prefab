@@ -57,6 +57,10 @@ PrefabInstance:
       value: Railing_001
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7b2325c57b9d4364fa4ebc89064e4e27, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7b2325c57b9d4364fa4ebc89064e4e27, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -70,6 +74,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7b2325c57b9d4364fa4ebc89064e4e27, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4656432799394300133}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7b2325c57b9d4364fa4ebc89064e4e27, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7324418701882824963}
   m_SourcePrefab: {fileID: 100100000, guid: 7b2325c57b9d4364fa4ebc89064e4e27, type: 3}
 --- !u!1 &9081540177140878800 stripped
 GameObject:
@@ -114,3 +121,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.09529373, y: 0.01254702, z: 0.018567532}
   m_Center: {x: -0.00029070303, y: 0, z: 0.008204855}
+--- !u!114 &7324418701882824963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9081540177140878800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa0f2258b0900741a4c9120bdefeef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SurfaceIdentifier
+  surfaceData: {fileID: 11400000, guid: 60a8f6efe843e824385c6e537a03859c, type: 2}

@@ -57,6 +57,10 @@ PrefabInstance:
       value: Tree_Trunk_001
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 69993c8a81bed5f4e8947f1525e3fff0, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 69993c8a81bed5f4e8947f1525e3fff0, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}

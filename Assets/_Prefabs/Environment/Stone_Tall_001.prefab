@@ -69,6 +69,10 @@ PrefabInstance:
       value: Stone_Tall_001
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: cda6067d426724a42b8477f3e98cf899, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cda6067d426724a42b8477f3e98cf899, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}

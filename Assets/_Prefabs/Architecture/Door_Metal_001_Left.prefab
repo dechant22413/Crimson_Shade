@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2972161695395905134}
-  m_Layer: 0
+  - component: {fileID: 7482542847527309197}
+  m_Layer: 10
   m_Name: Door_Metal_001_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,6 +33,19 @@ Transform:
   - {fileID: 7150823271909093216}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &7482542847527309197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4910092111008511479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa0f2258b0900741a4c9120bdefeef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SurfaceIdentifier
+  surfaceData: {fileID: 11400000, guid: 68a07355e2b21af48aa08ee9d33380a7, type: 2}
 --- !u!1001 &7257105069731055755
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -99,6 +113,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f36901ffb82db7948bb2ed21a695142a, type: 3}
       propertyPath: m_Name
       value: Metal_Gate_Mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f36901ffb82db7948bb2ed21a695142a, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

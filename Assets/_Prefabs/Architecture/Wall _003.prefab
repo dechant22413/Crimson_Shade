@@ -65,6 +65,10 @@ PrefabInstance:
       value: Wall_Pillar_Big_001
       objectReference: {fileID: 0}
     - target: {fileID: 4368261501154217105, guid: 53bb89ed70fc3b14eb6b75e195830d32, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368261501154217105, guid: 53bb89ed70fc3b14eb6b75e195830d32, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -147,6 +151,10 @@ PrefabInstance:
       value: Wall _003
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: be7c04db0aeea7649bc1a6fc0ad827ac, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: be7c04db0aeea7649bc1a6fc0ad827ac, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -160,6 +168,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: be7c04db0aeea7649bc1a6fc0ad827ac, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6156573678135556003}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: be7c04db0aeea7649bc1a6fc0ad827ac, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5447220335001453819}
   m_SourcePrefab: {fileID: 100100000, guid: be7c04db0aeea7649bc1a6fc0ad827ac, type: 3}
 --- !u!4 &7370370302651382715 stripped
 Transform:
@@ -192,3 +203,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.021526236, y: 0.021526242, z: 0.049285147}
   m_Center: {x: -0.0000023329633, y: -0.0026162628, z: 0.021675268}
+--- !u!114 &5447220335001453819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7855122248383848705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa0f2258b0900741a4c9120bdefeef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SurfaceIdentifier
+  surfaceData: {fileID: 11400000, guid: 60a8f6efe843e824385c6e537a03859c, type: 2}

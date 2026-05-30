@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4925035717706194123}
-  m_Layer: 0
+  - component: {fileID: 5168774953563237130}
+  m_Layer: 10
   m_Name: 'Door_Metal_Left_001 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,6 +33,19 @@ Transform:
   - {fileID: 432563956477116519}
   m_Father: {fileID: 2972161695395905134}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &5168774953563237130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2942684393178890265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa0f2258b0900741a4c9120bdefeef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SurfaceIdentifier
+  surfaceData: {fileID: 11400000, guid: 68a07355e2b21af48aa08ee9d33380a7, type: 2}
 --- !u!1 &4910092111008511479
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,7 +55,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2972161695395905134}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Door_Metal_001_Both_Frame_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +89,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3199058442704821779}
-  m_Layer: 0
+  - component: {fileID: 8382830229999976767}
+  m_Layer: 10
   m_Name: 'Door_Metal_Right_001 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,6 +113,19 @@ Transform:
   - {fileID: 1041979803327629343}
   m_Father: {fileID: 2972161695395905134}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &8382830229999976767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7550448258393838478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa0f2258b0900741a4c9120bdefeef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SurfaceIdentifier
+  surfaceData: {fileID: 11400000, guid: 68a07355e2b21af48aa08ee9d33380a7, type: 2}
 --- !u!1001 &111041728370812812
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -165,6 +193,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f36901ffb82db7948bb2ed21a695142a, type: 3}
       propertyPath: m_Name
       value: Metal_Gate_Mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f36901ffb82db7948bb2ed21a695142a, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -273,6 +305,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Metal_Gate_Mesh
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f36901ffb82db7948bb2ed21a695142a, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -376,6 +412,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gate_Pointed
       objectReference: {fileID: 0}
+    - target: {fileID: 4140818711327060388, guid: ce2070060ee1a7c4992741d949f4da91, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4518854480496579414, guid: ce2070060ee1a7c4992741d949f4da91, type: 3}
       propertyPath: selectedMaterial
       value: 0
@@ -383,8 +423,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4140818711327060388, guid: ce2070060ee1a7c4992741d949f4da91, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7835413454933481186}
   m_SourcePrefab: {fileID: 100100000, guid: ce2070060ee1a7c4992741d949f4da91, type: 3}
+--- !u!1 &1719785212616803807 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4140818711327060388, guid: ce2070060ee1a7c4992741d949f4da91, type: 3}
+  m_PrefabInstance: {fileID: 3362714631977972859}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7835413454933481186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719785212616803807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa0f2258b0900741a4c9120bdefeef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SurfaceIdentifier
+  surfaceData: {fileID: 11400000, guid: 60a8f6efe843e824385c6e537a03859c, type: 2}
 --- !u!4 &2059894513321566053 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3620036487061498654, guid: ce2070060ee1a7c4992741d949f4da91, type: 3}
