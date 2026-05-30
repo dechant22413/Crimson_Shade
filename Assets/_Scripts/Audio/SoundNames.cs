@@ -12,6 +12,26 @@ public static class SoundNames
     }
     #endregion
 
+    #region weapons
+    #region Knife
+    public static class Knife
+    {
+        public const string KnifeSlash_001 = "KnifeSlash_001";
+        public const string KnifeSlash_002 = "KnifeSlash_002";
+        public const string KnifeSlash_003 = "KnifeSlash_003";
+    }
+    #endregion
+
+    #region Shotgun
+    public static class Shotgun
+    {
+        public const string ShotgunReload = "GunReload";
+        public const string ShotgunShot = "Gunshot";
+        public const string ShotgunTriggerpull = "GunEmpty";
+    }
+    #endregion
+    #endregion
+
     #region Enemys
 
     #region Ghoul

@@ -23,11 +23,6 @@ public class PlayerShotgun : Weapon
     [SerializeField] private int pelletCount = 8;
     [SerializeField] private float spreadAngle = 10f;
 
-    [Header("Audio Strings and Source")]
-    [SerializeField] private AudioSource playerAudioSource;
-
-    [SerializeField] private string gunEmpty;
-
     [Header("Ammo UI")]
     [SerializeField] private Color ammoActiveColor = Color.white;
     [SerializeField] private Color ammoEmptyColor = new Color(1f, 1f, 1f, 0.2f);
@@ -41,10 +36,12 @@ public class PlayerShotgun : Weapon
     private int ammoCount;
     private float baseWidth;
     private Coroutine UIspreadCoroutine;
+    private ShotgunAudio shotGunAudio;
 
 
     private void Start()
     {
+        shotGunAudio = GetComponent<ShotgunAudio>();
         ammoCount = magazinCapacity;
         baseWidth = crosshairContainer.sizeDelta.x;
     }
@@ -57,7 +54,7 @@ public class PlayerShotgun : Weapon
             shotgunAnimations.Play("Idle", 0, 0f);
             PlayerAnimations.Instance.IsRightArmPlaying = false;
 
-            PlayAudio(gunEmpty);
+            shotGunAudio.PlayEmpty();
             return;
         }
         
@@ -166,11 +163,6 @@ public class PlayerShotgun : Weapon
 
     public void OnAnimationStart() => PlayerAnimations.Instance.IsRightArmPlaying = true;
     public void OnAnimationEnd() => PlayerAnimations.Instance.IsRightArmPlaying = false;
-    private void PlayAudio(string audioString)
-    {
-        AudioManager.Instance.PlayAudio(audioString, playerAudioSource);
-    }
-
     #region Gizmos
     private void OnDrawGizmosSelected()
     {

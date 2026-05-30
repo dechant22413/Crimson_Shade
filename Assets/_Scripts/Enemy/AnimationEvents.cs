@@ -7,15 +7,19 @@ public class AnimationEvents : MonoBehaviour
     private EnemyBase enemy;
 
     private GhoulAudio ghoulAudio;
+    private KnifeAudio knifeAudio;
+    private ShotgunAudio shotgunAudio;
 
-    //Animation Events, die von einem beliebigen Gegner, Gegenstand oder dem Spieler aufgerufen werden können
-    #region Enemy Events
-    private void Awake()
+        private void Awake()
     {
         enemy = GetComponentInParent<EnemyBase>();
 
         ghoulAudio = GetComponentInParent<GhoulAudio>();
+        knifeAudio = GetComponentInParent<KnifeAudio>();
+        shotgunAudio = GetComponentInParent<ShotgunAudio>();
     }
+    //Animation Events, die von einem beliebigen Gegner, Gegenstand oder dem Spieler aufgerufen werden können
+    #region Enemy Events
 
     public void OnAttackHit()
     {
@@ -46,5 +50,42 @@ public class AnimationEvents : MonoBehaviour
     {
         AudioManager.Instance.PlayAudio(soundName, audioSource);
     }
-    #endregion 
+    #endregion
+
+
+    #region weapons
+    #region Shotgun
+    public void ShotgunPlayReload()
+    {
+        if (shotgunAudio == null) return;
+        shotgunAudio.PlayReload();
+    }
+
+    public void ShotgunPlayAttack()
+    {
+        if (shotgunAudio == null) return;
+        shotgunAudio.PlayAttack();
+    }
+    #endregion
+
+    #region Knife
+    public void KnifePlaySlashSound_001()
+    {
+        if (knifeAudio == null) return;
+        knifeAudio.PlayKnifeSlash_001();
+    }
+
+    public void KnifePlaySlashSound_002()
+    {
+        if (knifeAudio == null) return;
+        knifeAudio.PlayKnifeSlash_002();
+    }
+
+    public void KnifePlaySlashSound_003()
+    {
+        if (knifeAudio == null) return;
+        knifeAudio.PlayKnifeSlash_003();
+    }
+    #endregion
+    #endregion
 }
