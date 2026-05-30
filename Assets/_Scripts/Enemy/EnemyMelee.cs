@@ -94,7 +94,7 @@ public class EnemyMelee : EnemyBase
     protected override void Idle() => agent.SetDestination(transform.position); //Gegner bewegt sich nicht
     protected override void Patrol() { }
     protected override void Chase() { }
-    protected override void Dead() { }
+    protected override void Dead() => isdead = true;
 
     protected override void Stunned()
     {

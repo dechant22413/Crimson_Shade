@@ -2,13 +2,12 @@ using UnityEngine;
 
 public class AnimationEvents : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private AudioSource audioSource;
     private EnemyBase enemy;
 
     private GhoulAudio ghoulAudio;
     private KnifeAudio knifeAudio;
     private ShotgunAudio shotgunAudio;
+    private ChestAudio chestAudio;
 
         private void Awake()
     {
@@ -17,6 +16,7 @@ public class AnimationEvents : MonoBehaviour
         ghoulAudio = GetComponentInParent<GhoulAudio>();
         knifeAudio = GetComponentInParent<KnifeAudio>();
         shotgunAudio = GetComponentInParent<ShotgunAudio>();
+        chestAudio = GetComponentInParent<ChestAudio>();
     }
     //Animation Events, die von einem beliebigen Gegner, Gegenstand oder dem Spieler aufgerufen werden können
     #region Enemy Events
@@ -49,8 +49,7 @@ public class AnimationEvents : MonoBehaviour
 
     #endregion
 
-
-    #region weapons
+    #region weapons Events
     #region Shotgun
     public void ShotgunPlayReload()
     {
@@ -84,5 +83,19 @@ public class AnimationEvents : MonoBehaviour
         knifeAudio.PlayKnifeSlash_003();
     }
     #endregion
-    #endregion
+    #endregion Events
+
+    #region Chest
+    public void ChestPlayOpenLid()
+    {
+        if (chestAudio == null) return;
+        chestAudio.OpenLid();
+    }
+
+    public void ChestPlayOpenLock()
+    {
+        if (chestAudio == null) return;
+        chestAudio.OpenLock();
+    }
+    #endregion 
 }

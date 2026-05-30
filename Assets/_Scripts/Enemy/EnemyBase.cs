@@ -38,6 +38,7 @@ public abstract class EnemyBase : MonoBehaviour
     public bool alreadyAttacked;
     protected bool firstAttackDone;
     protected bool chaseDelayActive;
+    protected bool isdead = false;
 
     private EnemyState stateBeforeStun;
     private float navUpdateTimer;
