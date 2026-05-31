@@ -300,7 +300,12 @@ public abstract class EnemyBase : MonoBehaviour
         if (isWaiting)
         {
             waitTimer -= Time.deltaTime;
-            if (waitTimer <= 0f) isWaiting = false;
+
+            if (waitTimer <= 0f)
+                isWaiting = false;
+
+            agent.SetDestination(transform.position); //  WICHTIG: hart stoppen
+
             return;
         }
 
@@ -314,7 +319,8 @@ public abstract class EnemyBase : MonoBehaviour
                 goingToB = !goingToB;
                 isWaiting = true;
                 waitTimer = waitAtPointDuration;
-                if (!goingToB) walkPointsSet = false;
+
+                agent.SetDestination(transform.position); //  sofort stoppen
             }
         }
     }
