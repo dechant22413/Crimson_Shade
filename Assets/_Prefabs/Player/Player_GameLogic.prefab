@@ -2274,7 +2274,6 @@ GameObject:
   - component: {fileID: 6854710746797512028}
   - component: {fileID: 6775948888803623875}
   - component: {fileID: 8950469375036743510}
-  - component: {fileID: 1008841638708159480}
   - component: {fileID: 9043080847041896594}
   - component: {fileID: 8462516448580344951}
   - component: {fileID: 6487585378187806207}
@@ -2367,33 +2366,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerActions
   jumpAction: {fileID: -1054639396817077319, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
-  shootAction: {fileID: -6958466865685411686, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
   dashAction: {fileID: 4922645045113211378, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
-  hitAction: {fileID: -4900986322801745503, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
+  leftAttackAction: {fileID: -4900986322801745503, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
+  rightAttackAction: {fileID: -6958466865685411686, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
   powerUpAction: {fileID: -3361091801344585588, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
   reloadAction: {fileID: -8498300033829780412, guid: c75081f7cd219a84091723be6c7b82e9, type: 3}
+  leftHandWeapon: {fileID: 2665569371210342544}
+  rightHandWeapon: {fileID: 1776853080910304889}
   dashForce: 25
   dashDuration: 0.3
   dashStrain: 10
   jumpForce: 8
-  playerAudioSource: {fileID: 0}
-  powerUpAudio: Heal
-  jumpString: Jump
-  dashString: Dash
---- !u!114 &1008841638708159480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7065769480013628758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b71bef3311514bd429a161497f1206f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimations
-  leftArmAnimator: {fileID: 5887013628149731776}
-  rightArmAnimator: {fileID: 8929695670979485837}
 --- !u!114 &9043080847041896594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3859,6 +3842,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cdc1f55667a04d45b5f7a886bb67f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerKnife
+  inputType: 1
+  animator: {fileID: 5887013628149731776}
   enemyBodyHit:
     serializedVersion: 2
     m_Bits: 256
@@ -3891,7 +3876,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce5336bda700c4439224bda938a559e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimationEvents
-  audioSource: {fileID: 0}
 --- !u!114 &3349607748508466222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4600,6 +4584,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19053bfdab4b100469434e71dcc4f987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShotgun
+  inputType: 0
+  animator: {fileID: 8929695670979485837}
   enemyBodyHit:
     serializedVersion: 2
     m_Bits: 256
@@ -4619,7 +4605,6 @@ MonoBehaviour:
   crosshairContainer: {fileID: 3263460703356095483}
   playerCam: {fileID: 1097868980655363721}
   fireImpulse: {fileID: 2302125831818565444}
-  shotgunAnimations: {fileID: 8929695670979485837}
   ammoIndicatorLeft: {fileID: 5911101691908265682}
   ammoIndicatorRight: {fileID: 2422365074149985483}
   magazinCapacity: 2
@@ -4698,7 +4683,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce5336bda700c4439224bda938a559e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimationEvents
-  audioSource: {fileID: 0}
 --- !u!114 &6720114227517350877
 MonoBehaviour:
   m_ObjectHideFlags: 0

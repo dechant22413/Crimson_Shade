@@ -25,7 +25,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Shoot",
+                    "name": "RIghtArmAttack",
                     "type": "Button",
                     "id": "26a9d7aa-1ff1-427b-a4d0-046abcf8917a",
                     "expectedControlType": "",
@@ -34,7 +34,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Hit",
+                    "name": "LeftArmAttack",
                     "type": "Button",
                     "id": "25a8272c-91d5-4a1e-921e-cd861b7860d1",
                     "expectedControlType": "",
@@ -171,7 +171,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Shoot",
+                    "action": "RIghtArmAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -182,7 +182,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Hit",
+                    "action": "LeftArmAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

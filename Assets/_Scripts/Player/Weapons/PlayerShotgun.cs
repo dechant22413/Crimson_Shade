@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +10,6 @@ public class PlayerShotgun : Weapon
     public RectTransform crosshairContainer;
     public Camera playerCam;
     public CinemachineImpulseSource fireImpulse;
-    public Animator shotgunAnimations;
     public Image ammoIndicatorLeft;
     public Image ammoIndicatorRight;
 
@@ -33,65 +31,96 @@ public class PlayerShotgun : Weapon
     [SerializeField] private float contractSpeed = 8f;
     #endregion
 
+    #region Animator Hashes
+    private static readonly int Shoot = Animator.StringToHash("Shoot");
+    private static readonly int ReloadTrigger = Animator.StringToHash("Reload");
+    #endregion
+
     private int ammoCount;
     private float baseWidth;
-    private Coroutine UIspreadCoroutine;
-    private ShotgunAudio shotGunAudio;
-
+    private Coroutine uiSpreadCoroutine;
+    private ShotgunAudio shotgunAudio;
 
     private void Start()
     {
-        shotGunAudio = GetComponent<ShotgunAudio>();
+        shotgunAudio = GetComponent<ShotgunAudio>();
+
         ammoCount = magazinCapacity;
         baseWidth = crosshairContainer.sizeDelta.x;
+
+        UpdateAmmoUI();
+    }
+
+    public override void OnAttackPressed()
+    {
+        if (isPlaying)
+            return;
+
+        if (!CanAttack())
+        {
+            shotgunAudio.PlayEmpty();
+            return;
+        }
+
+        animator.SetTrigger(Shoot);
+    }
+
+    public override void OnReload()
+    {
+        if (isPlaying)
+            return;
+
+        animator.SetTrigger(ReloadTrigger);
+    }
+
+    private bool CanAttack()
+    {
+        return ammoCount > 0;
     }
 
     public void Attack()
     {
-        if (ammoCount == 0)
-        {
-            //Bei leerem Magazin wird Shoot Animation gecancelt
-            shotgunAnimations.Play("Idle", 0, 0f);
-            PlayerAnimations.Instance.IsRightArmPlaying = false;
-
-            shotGunAudio.PlayEmpty();
-            return;
-        }
-        
         ammoCount--;
 
-        //Generiert Cinemachine ScreenShake
         fireImpulse.GenerateImpulse();
 
-        //Skript Animation des Crosshair Containers
         Spread();
+
         UpdateAmmoUI();
+
         armorHitThisAttack.Clear();
 
         for (int i = 0; i < pelletCount; i++)
         {
-            //erstellt für jede Shotgun Kugel einen Ray innerhalb des eingestellten Spread Cones
             Vector3 direction = GetSpreadDirection();
-            if (Physics.Raycast(playerCam.transform.position, direction, out RaycastHit hit, attackRange, Combined))
+
+            if (Physics.Raycast(
+                    playerCam.transform.position,
+                    direction,
+                    out RaycastHit hit,
+                    attackRange,
+                    Combined))
+            {
                 ProcessHit(hit, attackDamage);
+            }
         }
     }
 
     public void InitializeReload()
     {
-        //Wird im ersten Frame der Reload Animation aufgerufen
         if (ammoCount == magazinCapacity)
         {
-            //Canacelt Reload, wenn volles Magazin
-            shotgunAnimations.Play("Idle", 0, 0f);
+            animator.Play("Idle", 0, 0f);
             OnAnimationEnd();
             return;
         }
 
-        if (PlayerStatsAndUIPanel.Instance.GetCurrentLifePoints() <= lifeDrain * (magazinCapacity - ammoCount))
+        int missingShells = magazinCapacity - ammoCount;
+
+        if (PlayerStatsAndUIPanel.Instance.GetCurrentLifePoints()
+            <= lifeDrain * missingShells)
         {
-            //Cancelt Reload, wenn zu wenige Leben
-            shotgunAnimations.Play("Idle", 0, 0f);
+            animator.Play("Idle", 0, 0f);
             OnAnimationEnd();
             return;
         }
@@ -99,74 +128,103 @@ public class PlayerShotgun : Weapon
 
     public void Reload()
     {
-        //wird als Animation Event der Reload Animation aufgerufen
-        //Abziehen des LifeDrains von den Player Leben
-        PlayerStatsAndUIPanel.Instance.ChangeLifePoints(lifeDrain * (-1) * (magazinCapacity - ammoCount));
-        //Resetten des ammoCounts
+        int missingShells = magazinCapacity - ammoCount;
+
+        PlayerStatsAndUIPanel.Instance.ChangeLifePoints(
+            -lifeDrain * missingShells);
+
         ammoCount = magazinCapacity;
-        //Resetten der AmmoUI
+
         UpdateAmmoUI();
 
-        if (ammoIndicatorLeft.GetComponent<PopWobbleJuice>() != null)
+        PopWobbleJuice leftPop =
+            ammoIndicatorLeft.GetComponent<PopWobbleJuice>();
+
+        if (leftPop != null)
         {
-            //Pop der Ammo Indicator nach Reload
-            ammoIndicatorLeft.GetComponent<PopWobbleJuice>().StartPop();
-            ammoIndicatorRight.GetComponent<PopWobbleJuice>().StartPop();
+            leftPop.StartPop();
+
+            ammoIndicatorRight
+                .GetComponent<PopWobbleJuice>()
+                .StartPop();
         }
     }
 
-    public void Spread()
+    private void Spread()
     {
-        //Startet die Spread Coroutine
-        if (UIspreadCoroutine != null) StopCoroutine(UIspreadCoroutine);
-        UIspreadCoroutine = StartCoroutine(UISpreadRoutine());
+        if (uiSpreadCoroutine != null)
+            StopCoroutine(uiSpreadCoroutine);
+
+        uiSpreadCoroutine = StartCoroutine(UISpreadRoutine());
     }
 
     private IEnumerator UISpreadRoutine()
     {
-        //Kurzes Spreizen des Crosshair Containers beim Schießen
         float targetWidth = baseWidth + spreadAmount;
 
         while (Mathf.Abs(crosshairContainer.sizeDelta.x - targetWidth) > 0.5f)
         {
-            crosshairContainer.sizeDelta = new Vector2(Mathf.Lerp(crosshairContainer.sizeDelta.x, targetWidth, Time.deltaTime * expandSpeed), crosshairContainer.sizeDelta.y);
+            crosshairContainer.sizeDelta =
+                new Vector2(
+                    Mathf.Lerp(
+                        crosshairContainer.sizeDelta.x,
+                        targetWidth,
+                        Time.deltaTime * expandSpeed),
+                    crosshairContainer.sizeDelta.y);
+
             yield return null;
         }
 
         while (Mathf.Abs(crosshairContainer.sizeDelta.x - baseWidth) > 0.1f)
         {
-            crosshairContainer.sizeDelta = new Vector2(Mathf.Lerp(crosshairContainer.sizeDelta.x, baseWidth, Time.deltaTime * contractSpeed), crosshairContainer.sizeDelta.y);
+            crosshairContainer.sizeDelta =
+                new Vector2(
+                    Mathf.Lerp(
+                        crosshairContainer.sizeDelta.x,
+                        baseWidth,
+                        Time.deltaTime * contractSpeed),
+                    crosshairContainer.sizeDelta.y);
+
             yield return null;
         }
 
-        crosshairContainer.sizeDelta = new Vector2(baseWidth, crosshairContainer.sizeDelta.y);
+        crosshairContainer.sizeDelta =
+            new Vector2(baseWidth, crosshairContainer.sizeDelta.y);
     }
 
     private void UpdateAmmoUI()
     {
-        //Resetten der AmmoUI Color
         if (ammoIndicatorLeft != null)
-            ammoIndicatorLeft.color = ammoCount >= 2 ? ammoActiveColor : ammoEmptyColor;
+            ammoIndicatorLeft.color =
+                ammoCount >= 2
+                    ? ammoActiveColor
+                    : ammoEmptyColor;
+
         if (ammoIndicatorRight != null)
-            ammoIndicatorRight.color = ammoCount >= 1 ? ammoActiveColor : ammoEmptyColor;
+            ammoIndicatorRight.color =
+                ammoCount >= 1
+                    ? ammoActiveColor
+                    : ammoEmptyColor;
     }
 
     private Vector3 GetSpreadDirection()
     {
-        //returned eine randomized Streurichtung für jeden abgeschossenen Ray der Shotgun
         Vector3 forward = playerCam.transform.forward;
-        Vector2 randomCircle = Random.insideUnitCircle * Mathf.Tan(spreadAngle * Mathf.Deg2Rad);
-        Vector3 spread = playerCam.transform.right * randomCircle.x
-                       + playerCam.transform.up * randomCircle.y;
+
+        Vector2 randomCircle =
+            Random.insideUnitCircle *
+            Mathf.Tan(spreadAngle * Mathf.Deg2Rad);
+
+        Vector3 spread =
+            playerCam.transform.right * randomCircle.x +
+            playerCam.transform.up * randomCircle.y;
+
         return (forward + spread).normalized;
     }
 
-    public void OnAnimationStart() => PlayerAnimations.Instance.IsRightArmPlaying = true;
-    public void OnAnimationEnd() => PlayerAnimations.Instance.IsRightArmPlaying = false;
     #region Gizmos
     private void OnDrawGizmosSelected()
     {
-        //zeigt Gizmos für den StreuungsCone der Shotgun
         if (playerCam == null) return;
 
         Vector3 origin = playerCam.transform.position;
@@ -174,17 +232,32 @@ public class PlayerShotgun : Weapon
         Vector3 right = playerCam.transform.right;
         Vector3 up = playerCam.transform.up;
 
-        float radius = Mathf.Tan(spreadAngle * Mathf.Deg2Rad) * attackRange;
+        float radius =
+            Mathf.Tan(spreadAngle * Mathf.Deg2Rad) * attackRange;
 
         Gizmos.color = Color.red;
+
         int segments = 32;
+
         for (int i = 0; i < segments; i++)
         {
-            float angle1 = (i / (float)segments) * Mathf.PI * 2f;
-            float angle2 = ((i + 1) / (float)segments) * Mathf.PI * 2f;
+            float angle1 =
+                (i / (float)segments) * Mathf.PI * 2f;
 
-            Vector3 p1 = origin + forward * attackRange + (right * Mathf.Cos(angle1) + up * Mathf.Sin(angle1)) * radius;
-            Vector3 p2 = origin + forward * attackRange + (right * Mathf.Cos(angle2) + up * Mathf.Sin(angle2)) * radius;
+            float angle2 =
+                ((i + 1) / (float)segments) * Mathf.PI * 2f;
+
+            Vector3 p1 =
+                origin +
+                forward * attackRange +
+                (right * Mathf.Cos(angle1)
+                + up * Mathf.Sin(angle1)) * radius;
+
+            Vector3 p2 =
+                origin +
+                forward * attackRange +
+                (right * Mathf.Cos(angle2)
+                + up * Mathf.Sin(angle2)) * radius;
 
             Gizmos.DrawLine(p1, p2);
         }

@@ -1,14 +1,13 @@
+using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
 
 public class PlayerActions : MonoBehaviour
 {
-    #region Singleton Initialization
-    //Singleton
+    #region Singleton
     public static PlayerActions Instance;
 
-    void Awake()
+    private void Awake()
     {
         if (Instance != null && Instance != this)
         {
@@ -20,128 +19,118 @@ public class PlayerActions : MonoBehaviour
     }
     #endregion
 
-    #region Settings
     [Header("References")]
     public InputActionReference jumpAction;
-    public InputActionReference shootAction;
     public InputActionReference dashAction;
-    public InputActionReference hitAction;
+    public InputActionReference leftAttackAction;
+    public InputActionReference rightAttackAction;
     public InputActionReference powerUpAction;
     public InputActionReference reloadAction;
+
+    [Header("Weapon Slots")]
+    public Weapon leftHandWeapon;
+    public Weapon rightHandWeapon;
 
     [Header("Dash Settings")]
     [SerializeField] private float dashForce = 20f;
     [SerializeField] private float dashDuration = 0.2f;
-    [SerializeField] private float dashStrain = 10;
+    [SerializeField] private float dashStrain = 10f;
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpForce;
 
-    [Header("Audio Strings and Source")]
-    [SerializeField] private AudioSource playerAudioSource;
+    private bool isLeftAttacking;
+    private bool isRightAttacking;
 
-    [SerializeField] private string powerUpAudio;
-    [SerializeField] private string jumpString;
-    [SerializeField] private string dashString;
-    #endregion
-
-    private bool isAttacking = false;
-
-    #region Actions
     private void OnEnable()
     {
-        //Enabled alle Actions
         jumpAction.action.Enable();
-        shootAction.action.Enable();
         dashAction.action.Enable();
-        hitAction.action.Enable();
+        leftAttackAction.action.Enable();
+        rightAttackAction.action.Enable();
         powerUpAction.action.Enable();
         reloadAction.action.Enable();
-        
 
         jumpAction.action.performed += Jump;
-        shootAction.action.performed += Shoot;
         dashAction.action.performed += Dash;
-
-        hitAction.action.performed += Hit;
-        hitAction.action.canceled += HitCanceled;
-
         powerUpAction.action.performed += PowerUp;
         reloadAction.action.performed += Reload;
 
+        leftAttackAction.action.performed += LeftAttackPerformed;
+        leftAttackAction.action.canceled += LeftAttackCanceled;
+
+        rightAttackAction.action.performed += RightAttackPerformed;
+        rightAttackAction.action.canceled += RightAttackCanceled;
     }
 
     private void OnDisable()
     {
-        //Disabled alle Actions
         jumpAction.action.performed -= Jump;
-        shootAction.action.performed -= Shoot;
         dashAction.action.performed -= Dash;
-
-        hitAction.action.performed -= Hit;
-        hitAction.action.canceled -= HitCanceled;
-
         powerUpAction.action.performed -= PowerUp;
         reloadAction.action.performed -= Reload;
 
+        leftAttackAction.action.performed -= LeftAttackPerformed;
+        leftAttackAction.action.canceled -= LeftAttackCanceled;
+
+        rightAttackAction.action.performed -= RightAttackPerformed;
+        rightAttackAction.action.canceled -= RightAttackCanceled;
+
         jumpAction.action.Disable();
-        shootAction.action.Disable();
         dashAction.action.Disable();
-        hitAction.action.Disable();
+        leftAttackAction.action.Disable();
+        rightAttackAction.action.Disable();
         powerUpAction.action.Disable();
         reloadAction.action.Disable();
     }
-    #endregion 
 
-    private void Shoot(InputAction.CallbackContext context)
+    private void LeftAttackPerformed(InputAction.CallbackContext context)
     {
-        //Kein Input geben, wenn bereits eine Animation läuft
-        if (PlayerAnimations.Instance.IsRightArmPlaying) return;
+        isLeftAttacking = true;
 
-        //Spielt Schuss Animation ab
-        PlayerAnimations.Instance.PlayShoot();
+        leftHandWeapon?.OnAttackPressed();
+    }
+
+    private void LeftAttackCanceled(InputAction.CallbackContext context)
+    {
+        isLeftAttacking = false;
+
+        leftHandWeapon?.OnAttackReleased();
+    }
+
+    private void RightAttackPerformed(InputAction.CallbackContext context)
+    {
+        isRightAttacking = true;
+
+        rightHandWeapon?.OnAttackPressed();
+    }
+
+    private void RightAttackCanceled(InputAction.CallbackContext context)
+    {
+        isRightAttacking = false;
+
+        rightHandWeapon?.OnAttackReleased();
     }
 
     private void Reload(InputAction.CallbackContext context)
     {
-        //Kein Input geben, wenn bereits eine Animation läuft
-        if (PlayerAnimations.Instance.IsRightArmPlaying) return;
-
-        //Spielt Reload Animation ab
-        PlayerAnimations.Instance.PlayReload();
+        rightHandWeapon?.OnReload();
     }
 
-
-    private void PowerUp(InputAction.CallbackContext context)
+    private void Jump(InputAction.CallbackContext context)
     {
-        //PowerUp kann nicht aktiviert werden, wenn nicht vollständig aufgeladen
-        if (PlayerStatsAndUIPanel.Instance.GetPowerUp() < PlayerStatsAndUIPanel.Instance.GetMaxPowerUp())
-        {
-            Debug.Log("Not Enough PowerUp");
+        if (!PlayerMovement.Instance.IsGrounded())
             return;
-        }
 
-        //PowerUp kann nicht aktiviert werden, wenn Leben bereits voll
-        if(PlayerStatsAndUIPanel.Instance.GetMaxLifePoints() == PlayerStatsAndUIPanel.Instance.GetCurrentLifePoints())
-        {
-            Debug.Log("Already full Health");
-            return;
-        }
+        PlayerMovement.Instance.SetVerticalVelocity(jumpForce);
 
-        //Aktiviert PowerUp
-        PlayerStatsAndUIPanel.Instance.ActivatePowerUp();
-
-        PlayerAudio.Instance.PlayHeal();
+        PlayerAudio.Instance.PlayJump();
     }
 
     private void Dash(InputAction.CallbackContext context)
     {
-        //Dash kann nur aktiviert werden, wenn genug Stamina vorhanden
-        if(PlayerStatsAndUIPanel.Instance.GetStamina() < dashStrain)
-        {
-            Debug.Log("Not Enough Stamina");
+        if (PlayerStatsAndUIPanel.Instance.GetStamina() < dashStrain)
             return;
-        }
 
         Vector2 input = PlayerMovement.Instance.GetMoveInput();
 
@@ -156,53 +145,38 @@ public class PlayerActions : MonoBehaviour
         forward.Normalize();
         right.Normalize();
 
-        Vector3 moveDir = forward * input.y + right * input.x;
+        Vector3 moveDir =
+            forward * input.y +
+            right * input.x;
 
         if (moveDir == Vector3.zero)
-            moveDir = - forward;
+            moveDir = -forward;
 
         moveDir.Normalize();
 
-        //Startet einen Dash in BLickrichtung des Spielers mit angegebener Duration und Force
-        PlayerMovement.Instance.StartDash(moveDir, dashForce, dashDuration);
+        PlayerMovement.Instance.StartDash(
+            moveDir,
+            dashForce,
+            dashDuration);
 
-        //Verbraucht Stamina
-        PlayerStatsAndUIPanel.Instance.UseStamina(dashStrain);
+        PlayerStatsAndUIPanel.Instance.UseStamina(
+            dashStrain);
 
-        Debug.Log("Dash");
-
-        PlayerAudio.Instance.PlayDash(); ;
+        PlayerAudio.Instance.PlayDash();
     }
 
-    private void Jump(InputAction.CallbackContext context)
+    private void PowerUp(InputAction.CallbackContext context)
     {
-        //Springe nur, wenn Grounded
-        if (PlayerMovement.Instance.IsGrounded())
-        {
-            PlayerMovement.Instance.SetVerticalVelocity(jumpForce);
-            Debug.Log("Jump");
+        if (PlayerStatsAndUIPanel.Instance.GetPowerUp()
+            < PlayerStatsAndUIPanel.Instance.GetMaxPowerUp())
+            return;
 
-            PlayerAudio.Instance.PlayJump();
-        }
-    }
+        if (PlayerStatsAndUIPanel.Instance.GetCurrentLifePoints()
+            == PlayerStatsAndUIPanel.Instance.GetMaxLifePoints())
+            return;
 
-    private void Hit(InputAction.CallbackContext context)
-    {
-        isAttacking = true;
-    }
+        PlayerStatsAndUIPanel.Instance.ActivatePowerUp();
 
-    private void HitCanceled(InputAction.CallbackContext context)
-    {
-        isAttacking = false;
-    }
-
-    private void Update()
-    {
-        //Kein Input geben, wenn bereits eine Animation läuft
-        if (PlayerAnimations.Instance.IsLeftArmPlaying) return;
-
-        //Spielt Hit Animation ab, solange der Input gehalten wird
-        if (isAttacking)
-            PlayerAnimations.Instance.PlayHit();
+        PlayerAudio.Instance.PlayHeal();
     }
 }

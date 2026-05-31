@@ -446,6 +446,8 @@ MonoBehaviour:
   turnIndex: 15
   maxAttackAngle: 60
   stunDuration: 6
+  idleCryInterval: {x: 8, y: 15}
+  chaseCryInterval: {x: 3, y: 6}
   ghoulAudio: {fileID: 0}
 --- !u!114 &189386938
 MonoBehaviour:
@@ -2956,6 +2958,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2665569371210342544, guid: 73e06da99a3981042a103aed13d94207, type: 3}
+      propertyPath: inputType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3771134901825122599, guid: 73e06da99a3981042a103aed13d94207, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2982,6 +2988,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5201031939669314436, guid: 73e06da99a3981042a103aed13d94207, type: 3}
       propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5201031939669314436, guid: 73e06da99a3981042a103aed13d94207, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5201031939669314436, guid: 73e06da99a3981042a103aed13d94207, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5201031939669314436, guid: 73e06da99a3981042a103aed13d94207, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5201031939669314436, guid: 73e06da99a3981042a103aed13d94207, type: 3}
+      propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5793094420963013663, guid: 73e06da99a3981042a103aed13d94207, type: 3}
