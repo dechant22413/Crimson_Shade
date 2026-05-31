@@ -39,9 +39,6 @@ public class PlayerActions : MonoBehaviour
     [Header("Jump Settings")]
     [SerializeField] private float jumpForce;
 
-    private bool isLeftAttacking;
-    private bool isRightAttacking;
-
     private void OnEnable()
     {
         jumpAction.action.Enable();
@@ -86,29 +83,21 @@ public class PlayerActions : MonoBehaviour
 
     private void LeftAttackPerformed(InputAction.CallbackContext context)
     {
-        isLeftAttacking = true;
-
         leftHandWeapon?.OnAttackPressed();
     }
 
     private void LeftAttackCanceled(InputAction.CallbackContext context)
     {
-        isLeftAttacking = false;
-
         leftHandWeapon?.OnAttackReleased();
     }
 
     private void RightAttackPerformed(InputAction.CallbackContext context)
     {
-        isRightAttacking = true;
-
         rightHandWeapon?.OnAttackPressed();
     }
 
     private void RightAttackCanceled(InputAction.CallbackContext context)
     {
-        isRightAttacking = false;
-
         rightHandWeapon?.OnAttackReleased();
     }
 

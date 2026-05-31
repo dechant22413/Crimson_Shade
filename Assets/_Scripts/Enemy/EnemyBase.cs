@@ -50,8 +50,10 @@ public abstract class EnemyBase : MonoBehaviour
     private bool walkPointsSet;
     private bool goingToB;
     private float waitTimer;
-    private bool isWaiting;
+    public bool isWaiting;
     private bool firstChase = true;
+
+    public float animatorSpeed;
 
     protected virtual void Awake()
     {
@@ -75,6 +77,8 @@ public abstract class EnemyBase : MonoBehaviour
     {
         if (player == null) return;
         if (!agent.isOnNavMesh) return;
+
+        animatorSpeed = 
 
         navUpdateTimer -= Time.deltaTime;
         UpdateState();

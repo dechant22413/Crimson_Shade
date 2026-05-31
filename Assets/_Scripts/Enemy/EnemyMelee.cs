@@ -26,6 +26,8 @@ public class EnemyMelee : EnemyBase
     {
         base.Update();
 
+        animatorSpeed = animator.speed;
+
         float speed = agent.velocity.magnitude / chaseSpeed;
         float currentSpeed = animator.GetFloat(speedHash);
         float damp = speed < currentSpeed ? 0.25f : 0f;

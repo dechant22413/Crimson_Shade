@@ -42,6 +42,12 @@ public class AnimationEvents : MonoBehaviour
         if (ghoulAudio == null) return;
         ghoulAudio.PlayAttack();
     }
+
+    public void GhoulPlayStepSound()
+    {
+        if (ghoulAudio == null) return;
+        ghoulAudio.PlayStep();
+    }
     #endregion
     #endregion
 

@@ -10,7 +10,7 @@ public class EnemyGhoul : EnemyMelee
     [SerializeField] private Vector2 idleCryInterval = new Vector2(8f, 15f);
     [SerializeField] private Vector2 chaseCryInterval = new Vector2(3f, 6f);
 
-    public GhoulAudio ghoulAudio;
+    private GhoulAudio ghoulAudio;
 
     private Coroutine cryRoutine;
 
@@ -29,7 +29,7 @@ public class EnemyGhoul : EnemyMelee
         if(!isStunnedFlag && stun == true)
         {
             ghoulAudio.PlayHelmetImpact();
-            ghoulAudio.PlayDeath();
+            ghoulAudio.PlayStunCry();
         }
 
         if (stun == true)
@@ -57,6 +57,7 @@ public class EnemyGhoul : EnemyMelee
             ghoulAudio.PlayDeath();
             return;
         }
+        if(!isStunnedFlag)
         ghoulAudio.PlayTakeDamage();
     }
 
