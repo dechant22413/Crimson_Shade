@@ -219,7 +219,7 @@ Transform:
   m_GameObject: {fileID: 1271837427179566510}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -395.2302, y: -224.594, z: -1.27828}
+  m_LocalPosition: {x: -400.56, y: -65.57399, z: 0.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3842,7 +3842,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cdc1f55667a04d45b5f7a886bb67f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerKnife
-  inputType: 1
   animator: {fileID: 5887013628149731776}
   enemyBodyHit:
     serializedVersion: 2
@@ -4584,7 +4583,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19053bfdab4b100469434e71dcc4f987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShotgun
-  inputType: 0
   animator: {fileID: 8929695670979485837}
   enemyBodyHit:
     serializedVersion: 2
@@ -4696,11 +4694,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShotgunAudio
   reload:
-    audioEvent: {fileID: 0}
+    audioEvent: {fileID: 11400000, guid: f24ef2249b987b84ebb3ba86489f9b05, type: 2}
     volumeOverride: 1
   attack:
-    audioEvent: {fileID: 0}
+    audioEvent: {fileID: 11400000, guid: 82cb10dc7e4bfa74fa46f3c72d829b1c, type: 2}
     volumeOverride: 1
   empty:
-    audioEvent: {fileID: 0}
+    audioEvent: {fileID: 11400000, guid: f91a17adfaa104940b58a212786ebc5b, type: 2}
     volumeOverride: 1
