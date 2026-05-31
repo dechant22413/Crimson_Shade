@@ -388,7 +388,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GhoulCustomizer
   helmetMesh: {fileID: 628098291980335240}
   clothingMesh: {fileID: 2076850631256815533}
-  hasHelmet: 1
+  hasHelmet: 0
   hasClothing: 1
 --- !u!114 &189386935
 MonoBehaviour:
@@ -3689,7 +3689,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &919132148860921485
 GameObject:
   m_ObjectHideFlags: 0
