@@ -438,16 +438,19 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  walkAnimMultiplier: 1
+  chaseAnimMultiplier: 5
   startState: 2
   currentState: 0
   alreadyAttacked: 0
+  isWaiting: 0
+  animatorSpeedDebug: 0
   animator: {fileID: 600058999}
   walkAnimationSpeed: 1
-  turnIndex: 15
+  chaseAnimationSpeed: 2
+  turnIndex: 8
   maxAttackAngle: 60
   stunDuration: 6
-  idleCryInterval: {x: 4, y: 15}
-  chaseCryInterval: {x: 1, y: 5}
 --- !u!114 &189386938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -568,9 +571,13 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  walkAnimMultiplier: 1
+  chaseAnimMultiplier: 1.25
   startState: 2
   currentState: 0
   alreadyAttacked: 0
+  isWaiting: 0
+  animatorSpeedDebug: 0
   animator: {fileID: 785037681}
   projectilePrefab: {fileID: 2567240206949030101, guid: 8165872dde0e03f428bad0d83b9e33c8, type: 3}
   projectileSpawn: {fileID: 182000874}
@@ -1794,9 +1801,13 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  walkAnimMultiplier: 1
+  chaseAnimMultiplier: 1.25
   startState: 2
   currentState: 0
   alreadyAttacked: 0
+  isWaiting: 0
+  animatorSpeedDebug: 0
   animator: {fileID: 906739332}
   projectilePrefab: {fileID: 2567240206949030101, guid: 8165872dde0e03f428bad0d83b9e33c8, type: 3}
   projectileSpawn: {fileID: 1260833345}
@@ -2835,9 +2846,13 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  walkAnimMultiplier: 1
+  chaseAnimMultiplier: 1.25
   startState: 2
   currentState: 0
   alreadyAttacked: 0
+  isWaiting: 0
+  animatorSpeedDebug: 0
   animator: {fileID: 1364787714}
   projectilePrefab: {fileID: 2567240206949030101, guid: 8165872dde0e03f428bad0d83b9e33c8, type: 3}
   projectileSpawn: {fileID: 729382100}
