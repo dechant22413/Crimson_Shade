@@ -333,7 +333,12 @@ public abstract class EnemyBase : MonoBehaviour
         if (currentState == EnemyState.Dead) return;
 
         health -= damage;
-        if (health <= 0f) Die();
+
+        if (health <= 0f)
+            Die();
+
+        if (UIManager.Instance != null)
+            UIManager.Instance.ShowHitIndicator();
     }
 
     public virtual void Stun(float duration)
@@ -359,8 +364,12 @@ public abstract class EnemyBase : MonoBehaviour
     protected virtual void Die()
     {
         SetState(EnemyState.Dead);
+
         agent.SetDestination(transform.position);
         agent.enabled = false;
+
+        if (UIManager.Instance != null)
+            UIManager.Instance.ShowKillIndicator();
     }
 
     private void OnDrawGizmosSelected()
