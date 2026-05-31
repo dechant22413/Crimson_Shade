@@ -25,6 +25,9 @@ public class PlayerShotgun : Weapon
     [SerializeField] private Color ammoActiveColor = Color.white;
     [SerializeField] private Color ammoEmptyColor = new Color(1f, 1f, 1f, 0.2f);
 
+    [Header("Muzzle Flash")]
+    [SerializeField] private MuzzleFlash muzzleFlash;
+
     [Header("Crosshair Spread Settings")]
     [SerializeField] private float spreadAmount = 60f;
     [SerializeField] private float expandSpeed = 20f;
@@ -83,6 +86,8 @@ public class PlayerShotgun : Weapon
         ammoCount--;
 
         fireImpulse.GenerateImpulse();
+
+        muzzleFlash.PlayFlash();
 
         Spread();
 
