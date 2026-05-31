@@ -1,63 +1,35 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 public class EnemyMelee : EnemyBase
 {
-    #region Settings
     [Header("Animation")]
     public Animator animator;
     public float walkAnimationSpeed = 1f;
+    public float chaseAnimationSpeed = 1.5f;
 
-    [Header("TurnIndex and Attack Angle")]
-    [SerializeField] private float turnIndex = 5f;
+    [Header("Turn Settings")]
+    [SerializeField] private float turnIndex = 8f;
     [SerializeField] private float maxAttackAngle = 60f;
-    #endregion
 
-    #region Animator Variables
     private static readonly int speedHash = Animator.StringToHash("Speed");
-    private static readonly int isInAttackRangeHash = Animator.StringToHash("IsInAttackRange");
+    private static readonly int speedMultiplierHash = Animator.StringToHash("SpeedMultiplier");
     private static readonly int isAttackingHash = Animator.StringToHash("IsAttacking");
+    private static readonly int isInAttackRangeHash = Animator.StringToHash("IsInAttackRange");
     private static readonly int stunnedHash = Animator.StringToHash("Stunned");
     private static readonly int deathHash = Animator.StringToHash("Death");
     private static readonly int isInactiveHash = Animator.StringToHash("IsInactive");
-    #endregion 
 
     protected override void Update()
     {
         base.Update();
 
-        animatorSpeed = animator.speed;
+        float targetSpeed = currentState == EnemyState.Chase ? chaseSpeed : patrolSpeed;
+        float speed01 = agent.velocity.magnitude / targetSpeed;
+        animator.SetFloat(speedHash, speed01, 0.1f, Time.deltaTime);
 
-        float speed = agent.velocity.magnitude / chaseSpeed;
-        float currentSpeed = animator.GetFloat(speedHash);
-        float damp = speed < currentSpeed ? 0.25f : 0f;
-
-        //speedHash des Animators wird gesetzt
-        animator.SetFloat(speedHash, speed, damp, Time.deltaTime);
-
-        if (chaseDelayActive)
-        {
-            animator.speed = 1f;
-            return;
-        }
-
-        if (animator.IsInTransition(0))
-        {
-            animator.speed = 1f;
-            return;
-        }
-
-        if (currentState == EnemyState.Patrol || currentState == EnemyState.Chase)
-        {
-            float normalizedSpeed = agent.velocity.magnitude / patrolSpeed;
-
-            //Laufgeschwindigkeit des Animators wird je nach State verändert, um Animation Speeds an geschwindigkeit des Gegners anzupassen
-            animator.speed = Mathf.Clamp(normalizedSpeed, 0.05f, chaseSpeed / patrolSpeed) * walkAnimationSpeed;
-        }
-        else
-        {
-            animator.speed = 1f;
-        }
+        // SpeedMultiplier nur bei Chase ändern
+        float multiplier = currentState == EnemyState.Chase ? chaseAnimationSpeed : walkAnimationSpeed;
+        animator.SetFloat(speedMultiplierHash, multiplier);
     }
 
     protected override void OnStateChanged(EnemyState newState)
@@ -73,7 +45,6 @@ public class EnemyMelee : EnemyBase
             case EnemyState.Stunned:
                 animator.SetBool(isAttackingHash, false);
                 break;
-
             case EnemyState.Chase:
             case EnemyState.Patrol:
             case EnemyState.Idle:
@@ -82,25 +53,28 @@ public class EnemyMelee : EnemyBase
         }
     }
 
+    protected override void OnFirstAttackReady()
+    {
+        animator.SetBool(isAttackingHash, true);
+    }
 
     protected override void OnPlayerOutOfAttackRange()
     {
         animator.SetBool(isAttackingHash, false);
         animator.SetBool(isInAttackRangeHash, false);
-        CancelInvoke(nameof(EnableFirstAttack));
         firstAttackDone = false;
         alreadyAttacked = false;
     }
 
-    protected override void Inactive() => agent.SetDestination(transform.position); //Gegner bewegt sich nicht
-    protected override void Idle() => agent.SetDestination(transform.position); //Gegner bewegt sich nicht
+    protected override void Inactive() => agent.SetDestination(transform.position);
+    protected override void Idle() => agent.SetDestination(transform.position);
     protected override void Patrol() { }
     protected override void Chase() { }
-    protected override void Dead() => isdead = true;
+    protected override void Dead() { }
 
     protected override void Stunned()
     {
-        agent.SetDestination(transform.position); //Gegner bewegt sich nicht
+        agent.SetDestination(transform.position);
     }
 
     protected override void Attack()
@@ -124,33 +98,17 @@ public class EnemyMelee : EnemyBase
 
     public override void OnAttackHit()
     {
-        //Wird durch Animation Event aufgerufen
         if (Vector3.Distance(transform.position, player.position) <= attackRange)
-        {
-            PlayerStatsAndUIPanel.Instance.DamagePlayer ((int)attackDamage);
-        }
+            PlayerStatsAndUIPanel.Instance.ChangeLifePoints(-(int)attackDamage);
     }
 
-    public override void ResetAttack()
-    {
-        alreadyAttacked = false;
-
-        float dist = Vector3.Distance(transform.position, player.position);
-        if (dist > attackRange)
-        {
-            animator.SetBool(isAttackingHash, false);
-            animator.SetBool(isInAttackRangeHash, false);
-            firstAttackDone = false;
-        }
-    }
+    public override void ResetAttack() => alreadyAttacked = false;
 
     protected override void Die()
     {
-        //Alle laufenden Preozesse werden gestoppt
         CancelInvoke();
         StopAllCoroutines();
         base.Die();
-        //Death Animation Trigger
         animator.SetTrigger(deathHash);
     }
 
