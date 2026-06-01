@@ -462,25 +462,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GhoulAudio
   takeDamage:
     audioEvent: {fileID: 11400000, guid: 3b7f73d51c30aae458e6524b3748a4dd, type: 2}
-    volumeOverride: 1
+    volumeMultiplier: 1
   death:
     audioEvent: {fileID: 11400000, guid: 5e9a104fd8ef6db45950606ff7635714, type: 2}
-    volumeOverride: 1
+    volumeMultiplier: 1
   helmetImpact:
     audioEvent: {fileID: 11400000, guid: 1cc8aaf29b636444fb8a51257f7b2f17, type: 2}
-    volumeOverride: 1
+    volumeMultiplier: 1
   stunCry:
     audioEvent: {fileID: 11400000, guid: 4037af093d97fae45b768de4465580fd, type: 2}
-    volumeOverride: 1
+    volumeMultiplier: 1
   attack:
     audioEvent: {fileID: 11400000, guid: 2e6598363d68bca44b09d635fdc67945, type: 2}
-    volumeOverride: 1
+    volumeMultiplier: 1
   cry:
     audioEvent: {fileID: 11400000, guid: 368991517b9dc8d4599a03242669b795, type: 2}
-    volumeOverride: 1
+    volumeMultiplier: 1
   step:
     audioEvent: {fileID: 11400000, guid: e35dc70826d20284490978895a84cf1b, type: 2}
-    volumeOverride: 1
+    volumeMultiplier: 1
 --- !u!1 &191369823
 GameObject:
   m_ObjectHideFlags: 0
@@ -2230,7 +2230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5201031939669314436, guid: 73e06da99a3981042a103aed13d94207, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.0310001
+      value: 2.0310059
       objectReference: {fileID: 0}
     - target: {fileID: 5201031939669314436, guid: 73e06da99a3981042a103aed13d94207, type: 3}
       propertyPath: m_LocalPosition.z

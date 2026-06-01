@@ -219,7 +219,7 @@ Transform:
   m_GameObject: {fileID: 1271837427179566510}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -399.36, y: -220.15399, z: 1.66}
+  m_LocalPosition: {x: 0, y: 2.0310001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2067,13 +2067,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5786886281220570452}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.00073, y: 0.00709, z: -0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.42409873, y: 0.53607935, z: 0.5247906, w: 0.50730073}
+  m_LocalPosition: {x: -1.9055701, y: 4.2252793, z: 6.596569}
+  m_LocalScale: {x: 874.24963, y: 874.24945, z: 874.24927}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5623987896215310152}
-  m_Father: {fileID: 6846065896955369834}
+  m_Father: {fileID: 2830982471994133642}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6194012423038664539
 GameObject:
@@ -2440,25 +2440,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAudio
   jump:
     audioEvent: {fileID: 11400000, guid: 20412210ae0285345b3c5fb199e53bce, type: 2}
-    volumeOverride: 1
+    volumeMultiplier: 1
   dash:
     audioEvent: {fileID: 11400000, guid: 2ff934cf46a43014aadd4116269bed59, type: 2}
-    volumeOverride: 1
+    volumeMultiplier: 1
   heal:
     audioEvent: {fileID: 11400000, guid: 5bec1ededc236df40831bd5b8a2976a1, type: 2}
-    volumeOverride: 1
+    volumeMultiplier: 1
   dashRecover:
     audioEvent: {fileID: 11400000, guid: cb9f9e7b781e94d40a560310b14958c9, type: 2}
-    volumeOverride: 1
+    volumeMultiplier: 1
   powerupFull:
     audioEvent: {fileID: 11400000, guid: 440589de0723ee5428c9b45e5d33d097, type: 2}
-    volumeOverride: 1
+    volumeMultiplier: 1
   takeDamageFlesh:
     audioEvent: {fileID: 11400000, guid: eea123f014bf4a5418550461629c6df0, type: 2}
-    volumeOverride: 1
+    volumeMultiplier: 1
   takeDamagePunch:
     audioEvent: {fileID: 11400000, guid: 73e387514c1f9d44eb8f9ee5fb4ce240, type: 2}
-    volumeOverride: 1
+    volumeMultiplier: 1
 --- !u!143 &6487585378187806207
 CharacterController:
   m_ObjectHideFlags: 0
@@ -4019,13 +4019,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::KnifeAudio
   slash_001:
     audioEvent: {fileID: 11400000, guid: 5d87eabc308ec4b428c1b9a069a08d2f, type: 2}
-    volumeOverride: 1
+    volumeMultiplier: 1
   slash_002:
     audioEvent: {fileID: 11400000, guid: e8d88867f643e134780472238084fdb1, type: 2}
-    volumeOverride: 1
+    volumeMultiplier: 1
   slash_003:
     audioEvent: {fileID: 11400000, guid: 4a8f99ffa62928d4ba01624de090ddd4, type: 2}
-    volumeOverride: 1
+    volumeMultiplier: 1
 --- !u!1001 &210898554833445268
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4710,7 +4710,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 9205654897710395915, guid: 8a249a2b5faddd1478803c69cdcd4967, type: 3}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8a249a2b5faddd1478803c69cdcd4967, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1790204539687332393}
     m_AddedComponents:
@@ -4904,17 +4904,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4040bcdb255d2dc4ca8b99fa636e31b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShotgunAudio
-  reload:
-    audioEvent: {fileID: 11400000, guid: f24ef2249b987b84ebb3ba86489f9b05, type: 2}
-    volumeOverride: 1
+  reloadPartOne:
+    audioEvent: {fileID: 11400000, guid: 96e7a4b15c0e157449ca22a8247799d8, type: 2}
+    volumeMultiplier: 1
+  reloadPartTwo:
+    audioEvent: {fileID: 11400000, guid: 77bf7caf8204c0548a5735f4cfc841cc, type: 2}
+    volumeMultiplier: 1
   attack:
     audioEvent: {fileID: 11400000, guid: 82cb10dc7e4bfa74fa46f3c72d829b1c, type: 2}
-    volumeOverride: 1
+    volumeMultiplier: 1
   empty:
     audioEvent: {fileID: 11400000, guid: f91a17adfaa104940b58a212786ebc5b, type: 2}
-    volumeOverride: 1
---- !u!4 &6846065896955369834 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9205654897710395915, guid: 8a249a2b5faddd1478803c69cdcd4967, type: 3}
-  m_PrefabInstance: {fileID: 2360751461843610465}
-  m_PrefabAsset: {fileID: 0}
+    volumeMultiplier: 1

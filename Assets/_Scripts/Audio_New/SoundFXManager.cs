@@ -9,39 +9,103 @@ public class SoundFXManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         Instance = this;
     }
 
-    // Einzelner Clip mit optionalem Volume Override
-    public void Play(AudioClip clip, Transform spawnTransform, float volume = 1f, float volumeOverride = -1f)
+    #region AudioCLip (Aktuell nicht gebraucht)
+    public void Play(AudioClip clip, Transform spawnTransform, float volume = 1f)
     {
-        float finalVolume = volumeOverride >= 0 ? volumeOverride : volume;
         AudioSource source = SpawnSource(spawnTransform);
+
         source.clip = clip;
-        source.volume = finalVolume;
+        source.volume = volume;
+
         source.Play();
+
         Destroy(source.gameObject, clip.length);
     }
+    #endregion
 
-    // AudioEvent – Volume auf dem Asset, Override möglich
-    public void Play(AudioEvent audioEvent, Transform spawnTransform, float volumeOverride = -1f)
+    public void Play(AudioEvent audioEvent, Transform spawnTransform, float volumeMultiplier = 1f)
     {
-        if (audioEvent == null || audioEvent.clips.Length == 0) return;
+        if (audioEvent == null || audioEvent.clips.Length == 0)
+            return;
 
         AudioClip clip = audioEvent.clips[Random.Range(0, audioEvent.clips.Length)];
-        float finalVolume = volumeOverride >= 0 ? volumeOverride : audioEvent.volume;
 
         AudioSource source = SpawnSource(spawnTransform);
+
         source.clip = clip;
-        source.volume = finalVolume;
+        source.volume = audioEvent.volume * volumeMultiplier;
         source.pitch = Random.Range(audioEvent.pitchMin, audioEvent.pitchMax);
 
         if (audioEvent.mixerGroup != null)
             source.outputAudioMixerGroup = audioEvent.mixerGroup;
 
+        Debug.Log($"Audio Volume: {audioEvent.volume * volumeMultiplier}");
         source.Play();
+
         Destroy(source.gameObject, clip.length);
+    }
+
+    public AudioSource PlayLooping(AudioEvent audioEvent, Transform parent, float volumeMultiplier = 1f)
+    {
+        if (audioEvent == null || audioEvent.clips.Length == 0)
+            return null;
+
+        AudioClip clip = audioEvent.clips[Random.Range(0, audioEvent.clips.Length)];
+
+        AudioSource source = Instantiate(audioClipObject, parent.position, Quaternion.identity);
+
+        source.clip = clip;
+        source.volume = audioEvent.volume * volumeMultiplier;
+        source.pitch = Random.Range(audioEvent.pitchMin, audioEvent.pitchMax);
+        source.loop = true;
+
+        if (audioEvent.mixerGroup != null)
+            source.outputAudioMixerGroup = audioEvent.mixerGroup;
+
+        source.Play();
+
+        return source;
+    }
+
+    public AudioSource PlayLoopingAttached(AudioEvent audioEvent, Transform parent, float volumeMultiplier = 1f)
+    {
+        if (audioEvent == null || audioEvent.clips.Length == 0)
+            return null;
+
+        AudioClip clip = audioEvent.clips[Random.Range(0, audioEvent.clips.Length)];
+
+        AudioSource source = Instantiate(audioClipObject, parent);
+
+        source.transform.localPosition = Vector3.zero;
+        source.clip = clip;
+        source.volume = audioEvent.volume * volumeMultiplier;
+        source.pitch = Random.Range(audioEvent.pitchMin, audioEvent.pitchMax);
+        source.loop = true;
+
+        if (audioEvent.mixerGroup != null)
+            source.outputAudioMixerGroup = audioEvent.mixerGroup;
+
+        source.Play();
+
+        return source;
+    }
+
+    public void StopLooping(AudioSource source)
+    {
+        if (source == null)
+            return;
+
+        source.Stop();
+        Destroy(source.gameObject);
     }
 
     private AudioSource SpawnSource(Transform spawnTransform)

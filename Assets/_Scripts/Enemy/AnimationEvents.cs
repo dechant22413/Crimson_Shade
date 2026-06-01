@@ -57,17 +57,6 @@ public class AnimationEvents : MonoBehaviour
 
     #region weapons Events
     #region Shotgun
-    public void ShotgunPlayReload()
-    {
-        if (shotgunAudio == null) return;
-        shotgunAudio.PlayReload();
-    }
-
-    public void ShotgunPlayAttack()
-    {
-        if (shotgunAudio == null) return;
-        shotgunAudio.PlayAttack();
-    }
     #endregion
 
     #region Knife

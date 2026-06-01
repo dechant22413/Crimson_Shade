@@ -4,10 +4,17 @@ using UnityEngine;
 public class AudioEventRef
 {
     public AudioEvent audioEvent;
-    [Range(0f, 1f)] public float volumeOverride = 1f;
+
+    [Range(0f, 2f)]
+    public float volumeMultiplier = 1f;
 
     public void Play(Transform transform)
     {
-        SoundFXManager.Instance.Play(audioEvent, transform, volumeOverride);
+        SoundFXManager.Instance.Play(audioEvent, transform, volumeMultiplier);
+    }
+
+    public AudioSource PlayLooping(Transform parent)
+    {
+        return SoundFXManager.Instance.PlayLooping(audioEvent, parent, volumeMultiplier);
     }
 }

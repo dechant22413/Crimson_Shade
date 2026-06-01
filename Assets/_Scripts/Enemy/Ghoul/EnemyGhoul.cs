@@ -24,7 +24,7 @@ public class EnemyGhoul : EnemyMelee
         if (currentState == EnemyState.Dead) return;
         animator.SetBool(Animator.StringToHash("IsAttacking"), false);
 
-        if(!isStunnedFlag)
+        if(!isStunnedFlag && stun)
         {
             ghoulAudio.PlayHelmetImpact();
             ghoulAudio.PlayStunCry();

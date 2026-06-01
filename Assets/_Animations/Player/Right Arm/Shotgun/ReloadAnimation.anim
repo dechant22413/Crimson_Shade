@@ -16374,7 +16374,14 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.041666668
-    functionName: PlayReload
+    functionName: PlayReloadPartOne
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.8333333
+    functionName: PlayReloadPartTwo
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

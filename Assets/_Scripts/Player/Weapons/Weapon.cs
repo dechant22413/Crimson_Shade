@@ -73,7 +73,7 @@ public abstract class Weapon : MonoBehaviour
         if (enemy != null)
             enemy.TakeDamage(damage);
 
-        PlaySurfaceSound(col);
+        PlaySurfaceSound(pos, col);
     }
 
     protected virtual void EnemyHeadHit(Vector3 pos, Collider col, float damage)
@@ -83,7 +83,7 @@ public abstract class Weapon : MonoBehaviour
         if (enemy != null)
             enemy.TakeDamage(damage);
 
-        PlaySurfaceSound(col);
+        PlaySurfaceSound(pos, col);
     }
 
     protected virtual void EnemyArmorHit(Vector3 pos, Collider col)
@@ -96,7 +96,7 @@ public abstract class Weapon : MonoBehaviour
 
             enemy.ArmorHit(stunOnHit);
 
-            PlaySurfaceSound(col);
+            PlaySurfaceSound(pos, col);
         }
     }
 
@@ -106,16 +106,21 @@ public abstract class Weapon : MonoBehaviour
 
     protected virtual void EnvironmentHit(Vector3 pos, Collider col)
     {
-        PlaySurfaceSound(col);
+        PlaySurfaceSound(pos, col);
     }
 
-    private void PlaySurfaceSound(Collider col)
+    private void PlaySurfaceSound(Vector3 hitPoint, Collider col)
     {
         SurfaceIdentifier surface = col.GetComponentInParent<SurfaceIdentifier>();
 
         if (surface == null || surface.surfaceData?.hitSound == null)
             return;
 
-        SoundFXManager.Instance.Play(surface.surfaceData.hitSound, col.transform);
+        GameObject point = new GameObject("SurfaceHitAudio");
+        point.transform.position = hitPoint;
+
+        SoundFXManager.Instance.Play(surface.surfaceData.hitSound, point.transform);
+
+        Destroy(point, 1f);
     }
 }

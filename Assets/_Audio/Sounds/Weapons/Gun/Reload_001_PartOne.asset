@@ -10,12 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9bb250ec91b5be84c9dc53be63b5fa45, type: 3}
-  m_Name: Ghoul_Step
+  m_Name: Reload_001_PartOne
   m_EditorClassIdentifier: Assembly-CSharp::AudioEvent
   clips:
-  - {fileID: 8300000, guid: d421d67bc0e87f1409c22fb33c3a60a7, type: 3}
-  - {fileID: 8300000, guid: c4deca5e1ecf33a4fa12076ca24c524e, type: 3}
-  - {fileID: 8300000, guid: 90656ef841ee0944b8c62208119e7bbf, type: 3}
+  - {fileID: 8300000, guid: 1650bc8b96eeb6b429baed8d9d095cfc, type: 3}
   volume: 1
   pitchMin: 1
   pitchMax: 1
