@@ -493,6 +493,7 @@ GameObject:
   - component: {fileID: 191369825}
   - component: {fileID: 191369826}
   - component: {fileID: 191369827}
+  - component: {fileID: 191369828}
   m_Layer: 0
   m_Name: Orb_Enemy
   m_TagString: Untagged
@@ -599,6 +600,36 @@ MonoBehaviour:
   - {fileID: 146537045}
   dissolveDuration: 4
   destroyOnDissolve: 1
+--- !u!114 &191369828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191369823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dba0017d68eb6842a369fb41ddfda6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OrbAudio
+  takeDamage:
+    audioEvent: {fileID: 11400000, guid: 588ad7a687383bf45931d844fc0dd6bd, type: 2}
+    volumeMultiplier: 1
+  death001:
+    audioEvent: {fileID: 11400000, guid: a3122c366d35baf44a5f72255183b7db, type: 2}
+    volumeMultiplier: 1
+  death002:
+    audioEvent: {fileID: 11400000, guid: 56a1aa9d10df0b542939e52fd6abe469, type: 2}
+    volumeMultiplier: 1
+  hover:
+    audioEvent: {fileID: 11400000, guid: 7ef8d96bfa9e3bb43997fcfc27e4064b, type: 2}
+    volumeMultiplier: 1
+  activeTransitition:
+    audioEvent: {fileID: 11400000, guid: fd869f420643cc04283733b976277e8b, type: 2}
+    volumeMultiplier: 1
+  inactiveTransition:
+    audioEvent: {fileID: 11400000, guid: 512a53e4bad6f594eb68312164528d30, type: 2}
+    volumeMultiplier: 1
 --- !u!1 &283786660 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3780833614625758266, guid: 1192158d28b653c4e835e8c8f904ee30, type: 3}
@@ -814,6 +845,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6cb97086099f65b48982bf71b3103dae, type: 3}
       insertIndex: -1
       addedObject: {fileID: 785037681}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6cb97086099f65b48982bf71b3103dae, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 785037684}
   m_SourcePrefab: {fileID: 100100000, guid: 6cb97086099f65b48982bf71b3103dae, type: 3}
 --- !u!1 &435692502 stripped
 GameObject:
@@ -984,7 +1018,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &610648111
 Transform:
   m_ObjectHideFlags: 0
@@ -1186,6 +1220,19 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.47
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &785037684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785037679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa0f2258b0900741a4c9120bdefeef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SurfaceIdentifier
+  surfaceData: {fileID: 11400000, guid: 60a8f6efe843e824385c6e537a03859c, type: 2}
 --- !u!65 &809081495
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2230,7 +2277,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5201031939669314436, guid: 73e06da99a3981042a103aed13d94207, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.0310059
+      value: 2.0310001
       objectReference: {fileID: 0}
     - target: {fileID: 5201031939669314436, guid: 73e06da99a3981042a103aed13d94207, type: 3}
       propertyPath: m_LocalPosition.z

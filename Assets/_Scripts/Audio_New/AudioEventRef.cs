@@ -17,4 +17,9 @@ public class AudioEventRef
     {
         return SoundFXManager.Instance.PlayLooping(audioEvent, parent, volumeMultiplier);
     }
+
+    public AudioSource PlayLoopingAttached(Transform parent)
+    {
+        return SoundFXManager.Instance.PlayLoopingAttached(audioEvent, parent, volumeMultiplier);
+    }
 }

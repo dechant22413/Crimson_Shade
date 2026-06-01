@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class EnemyRanged : EnemyBase
@@ -17,9 +18,34 @@ public class EnemyRanged : EnemyBase
     private static readonly int deathHash = Animator.StringToHash("Death");
     private static readonly int isInactiveHash = Animator.StringToHash("IsInactive");
 
+    private OrbAudio orbAudio;
+    private AudioSource hoverAudioSource;
+
+    protected override void Start()
+    {
+        base.Start();
+
+        if(currentState != EnemyState.Inactive)
+        {
+            orbAudio.PlayHoverSound();
+        }
+    }
+
     protected override void OnStateChanged(EnemyState newState)
     {
         base.OnStateChanged(newState);
+
+        if (newState == EnemyState.Inactive)
+        {
+            orbAudio.StopHoverSound();
+            orbAudio.PlayInactiveTransition();
+        }
+
+        else
+        {
+            orbAudio.PlayHoverSound();
+            orbAudio.PlayActiveTransition();
+        }
 
         animator.SetBool(isInactiveHash, newState == EnemyState.Inactive);
 
@@ -94,6 +120,16 @@ public class EnemyRanged : EnemyBase
 
     public override void ResetAttack() => alreadyAttacked = false;
 
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+
+        if (health != 0)
+        {
+            orbAudio.PlayTakeDamage();
+        }
+    }
+
     protected override void Die()
     {
         CancelInvoke();
@@ -103,7 +139,15 @@ public class EnemyRanged : EnemyBase
 
         DissolveEffect dissolve = GetComponent<DissolveEffect>();
         dissolve.StartDissolve();
+
+        orbAudio.PlayDeath001();
+        orbAudio.PlayDeath002();
+
+        orbAudio.StopHoverSound();
     }
 
-    protected override void GetAudioReference() { }
+    protected override void GetAudioReference() 
+    {
+        orbAudio = GetComponent<OrbAudio>();
+    }
 }
