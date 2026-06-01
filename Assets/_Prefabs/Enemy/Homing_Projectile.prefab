@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 1333767979898525404}
   - component: {fileID: 3738233590244683029}
   - component: {fileID: 8071559889753561758}
+  - component: {fileID: 7782569842778723051}
   m_Layer: 0
   m_Name: Homing_Projectile
   m_TagString: Untagged
@@ -264,6 +265,27 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.25
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7782569842778723051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2567240206949030101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65dd636205d8f3b408040067bf1c80df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HomingProjectileAudio
+  charging:
+    audioEvent: {fileID: 11400000, guid: b70308afa1e6814409560970bc78f601, type: 2}
+    volumeMultiplier: 0.433
+  locomotion:
+    audioEvent: {fileID: 11400000, guid: dc9e41cd56470c741ba63e529733b484, type: 2}
+    volumeMultiplier: 0.094
+  hit:
+    audioEvent: {fileID: 11400000, guid: 13f4c4e156f11a64098dfcca3d04a39f, type: 2}
+    volumeMultiplier: 1
 --- !u!1 &6440345210195628696
 GameObject:
   m_ObjectHideFlags: 0

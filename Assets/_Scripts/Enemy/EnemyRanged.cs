@@ -44,6 +44,7 @@ public class EnemyRanged : EnemyBase
         else
         {
             orbAudio.PlayHoverSound();
+            if(newState != EnemyState.Dead)
             orbAudio.PlayActiveTransition();
         }
 

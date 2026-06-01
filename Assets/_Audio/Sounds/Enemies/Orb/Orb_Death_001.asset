@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bb250ec91b5be84c9dc53be63b5fa45, type: 3}
   m_Name: Orb_Death_001
   m_EditorClassIdentifier: Assembly-CSharp::AudioEvent
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: d2cac689e55193c4bbbb873027ea2875, type: 3}
   volume: 1
   pitchMin: 1
   pitchMax: 1

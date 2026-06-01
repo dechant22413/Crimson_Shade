@@ -14,6 +14,7 @@ public class Homing_Projectile : MonoBehaviour
 
     private Transform playerTransform;
     private Rigidbody rb;
+    private HomingProjectileAudio homingProjectileAudio;
 
     private bool launched;
 
@@ -28,7 +29,7 @@ public class Homing_Projectile : MonoBehaviour
         //Scale wird auf 0 gesetzt
         transform.localScale = Vector3.zero;
 
-
+        homingProjectileAudio = GetComponent<HomingProjectileAudio>();
     }
 
     private void Start()
@@ -40,6 +41,7 @@ public class Homing_Projectile : MonoBehaviour
     public void Launch()
     {
         StartCoroutine(GrowRoutine());
+        homingProjectileAudio.PlayCharging();
     }
 
     private IEnumerator GrowRoutine()
@@ -56,6 +58,7 @@ public class Homing_Projectile : MonoBehaviour
 
         //Projektil abschussbereit
         launched = true;
+        homingProjectileAudio.PlayLocmotionSound();
     }
 
     private void FixedUpdate()
@@ -77,8 +80,9 @@ public class Homing_Projectile : MonoBehaviour
 
         //Projektil damaged bei Auftreffen den Spieler
         if (other.CompareTag("Player"))
-            PlayerStatsAndUIPanel.Instance.ChangeLifePoints(damage * (-1));
+            PlayerStatsAndUIPanel.Instance.DamagePlayer(damage);
 
+        homingProjectileAudio.PLayHit();
         Destroy(gameObject);
     }
 
