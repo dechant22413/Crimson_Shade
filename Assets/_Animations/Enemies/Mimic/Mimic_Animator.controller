@@ -155,7 +155,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: d1b9222e006bb3b43a7627eb797f3248, type: 2}
+  m_Motion: {fileID: 7400000, guid: dc1da71786f58b84680c3545e8e67a92, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -504,7 +504,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ghoul_Animator
+  m_Name: Mimic_Animator
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Speed
@@ -550,6 +550,18 @@ AnimatorController:
     m_DefaultBool: 1
     m_Controller: {fileID: 9100000}
   - m_Name: IsInAttackRange
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: Dormant
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: Defence
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -687,7 +699,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 20fbbafce6866a748b99631ea18230ca, type: 2}
+  m_Motion: {fileID: 7400000, guid: c63af4c28a7bcb34790ddbf59f7d3e35, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -700,7 +712,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Entry_Inactive
+  m_Name: Dormant
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -714,7 +726,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 20fbbafce6866a748b99631ea18230ca, type: 2}
+  m_Motion: {fileID: 7400000, guid: c63af4c28a7bcb34790ddbf59f7d3e35, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

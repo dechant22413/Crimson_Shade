@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LootChest : Interactable
+public class LootChest : MonoBehaviour, IInteractable
 {
     [Header("References")]
     [SerializeField] private Animator chestAnimator;
@@ -8,15 +8,16 @@ public class LootChest : Interactable
     [SerializeField] private bool isOpened = false;
 
     #region Animator Variables
-    private static readonly int OpenHash = Animator.StringToHash("Open");
+    private static readonly int OpenHash =
+        Animator.StringToHash("Open");
     #endregion
 
-    public override string GetInteractionLabel()
+    public string GetInteractionLabel()
     {
         return isOpened ? "" : "OPEN [E]";
     }
 
-    public override void Interact()
+    public void Interact()
     {
         if (isOpened)
             return;
@@ -30,6 +31,6 @@ public class LootChest : Interactable
 
         chestAnimator.SetBool(OpenHash, true);
 
-        Debug.Log(chestAnimator.GetBool(OpenHash));
+        Debug.Log("Chest opened");
     }
 }

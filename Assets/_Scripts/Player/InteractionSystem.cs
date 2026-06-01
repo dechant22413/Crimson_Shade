@@ -30,7 +30,7 @@ public class InteractionSystem : MonoBehaviour
         interactAction.action.performed -= Interact;
     }
     #endregion
-    private Interactable currentInteractable;
+    private IInteractable currentInteractable;
 
     private void Update()
     {
@@ -45,7 +45,8 @@ public class InteractionSystem : MonoBehaviour
 
         if (Physics.Raycast(playerCam.transform.position,playerCam.transform.forward,out RaycastHit hit,interactionRange))
         {
-            Interactable interactable = hit.collider.GetComponentInParent<Interactable>();
+            IInteractable interactable =
+                hit.collider.GetComponentInParent<IInteractable>();
 
             if (interactable != null)
             {

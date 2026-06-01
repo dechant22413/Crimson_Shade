@@ -1,7 +1,5 @@
-using UnityEngine;
-
-public abstract class Interactable : MonoBehaviour
+public interface IInteractable
 {
-    public abstract string GetInteractionLabel();
-    public abstract void Interact();
+    string GetInteractionLabel();
+    void Interact();
 }
