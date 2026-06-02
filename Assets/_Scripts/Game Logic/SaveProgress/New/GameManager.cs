@@ -2,11 +2,16 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    #region Singleton
     public static GameManager Instance;
 
     private Transform respawnPoint;
     private GameObject player;
+
+    private int playerLifePoints;
+
+    private bool gameOver;
+
+    private Vector3 respawnPosition;
 
     private void Awake()
     {
@@ -19,16 +24,44 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         player = GameObject.FindWithTag("Player");
+        respawnPosition = player.transform.position;
     }
 
     public void SetRespawnPoint(Transform respawn)
     {
-        respawnPoint = respawn;
+        respawnPosition = respawn.position;
     }
 
     public void RespawnPlayer()
     {
-        player.transform.localPosition = respawnPoint.position;
+        Debug.Log("RespawnPlayer");
+
+        player.transform.position = respawnPoint.position;
     }
-    #endregion
+
+    public void PlayerLifePoints(int lifepoints)
+    {
+        playerLifePoints = lifepoints;
+
+        if(playerLifePoints == 0)
+        {
+            gameOver = true;
+
+            PauseGame();
+
+            UIManager.Instance.ActivateGameOverPanel(true);
+        }
+
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void ResumeGame()
+    {
+        Debug.Log("ResumeGame");
+        Time.timeScale = 1f;
+    }
 }

@@ -99,7 +99,7 @@ public class EnemyMelee : EnemyBase
     public override void OnAttackHit()
     {
         if (Vector3.Distance(transform.position, player.position) <= attackRange)
-            PlayerStatsAndUIPanel.Instance.ChangeLifePoints(-(int)attackDamage);
+            PlayerStatsAndUIPanel.Instance.DamagePlayer((int)attackDamage);
     }
 
     public override void ResetAttack() => alreadyAttacked = false;

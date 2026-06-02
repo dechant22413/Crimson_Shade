@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject hitIndicator;
     [SerializeField] private GameObject killIndicator;
 
+    [SerializeField] private GameObject gameOverPanel;
+
     [Header("Indicator Settings")]
     [SerializeField] private float displayTime = 0.2f;
     #endregion
@@ -28,6 +30,8 @@ public class UIManager : MonoBehaviour
     {
         //Hided Cursor zu Beginn der Szene
         HideCursor();
+
+        gameOverPanel.SetActive(false);
     }
 
     public void HideCursor()
@@ -64,6 +68,20 @@ public class UIManager : MonoBehaviour
 
         //Zeigt Kill Indicator
         currentIndicatorCoroutine = StartCoroutine(IndicatorCoroutine(killIndicator));
+    }
+
+    public void ActivateGameOverPanel(bool activate)
+    {
+        if (activate)
+        {
+            gameOverPanel.SetActive(true);
+            ShowCursor();
+        }
+        else
+        {
+            gameOverPanel.SetActive(false);
+            HideCursor();
+        }
     }
 
     private void StartIndicator(GameObject indicator)

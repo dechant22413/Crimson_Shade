@@ -33,9 +33,7 @@ public class Bonfire_SavePoint : MonoBehaviour, IInteractable
 
     private void SaveSpawnPoint()
     {
-        Transform player = GameObject.FindWithTag("Player").transform;
-
-        GameManager.Instance.SetRespawnPoint(player);
+        GameManager.Instance.SetRespawnPoint(transform);
 
         bonfireActivated = true;
 

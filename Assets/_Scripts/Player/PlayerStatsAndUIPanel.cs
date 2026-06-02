@@ -121,6 +121,8 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
         currentLifePoints = Mathf.Clamp(currentLifePoints + amount, 0, maxLifePoints);
         lifePointsTarget = currentLifePoints;
         lifePointsDelayTimer = lifePointsDelay;
+
+        GameManager.Instance.PlayerLifePoints(currentLifePoints);
     }
 
     public void DamagePlayer(int amount)
@@ -132,6 +134,8 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
 
         PlayerAudio.Instance.PlayTakeDamageFlesh();
         PlayerAudio.Instance.PlayTakeDamagePunch();
+
+        GameManager.Instance.PlayerLifePoints(currentLifePoints);
     }
 
 
