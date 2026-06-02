@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 [ExecuteAlways]
@@ -17,8 +18,9 @@ public class GhostCustomizer : MonoBehaviour
 
     private void OnValidate()
     {
-        //wird bereits durch Editor Unput geupdated
-        UnityEditor.EditorApplication.delayCall += ApplyCustomization;
+#if UNITY_EDITOR
+        EditorApplication.delayCall += ApplyCustomization;
+#endif
     }
 
     private void ApplyCustomization()

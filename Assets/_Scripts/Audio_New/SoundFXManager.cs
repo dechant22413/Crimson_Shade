@@ -48,7 +48,6 @@ public class SoundFXManager : MonoBehaviour
         if (audioEvent.mixerGroup != null)
             source.outputAudioMixerGroup = audioEvent.mixerGroup;
 
-        Debug.Log($"Audio Volume: {audioEvent.volume * volumeMultiplier}");
         source.Play();
 
         Destroy(source.gameObject, clip.length);

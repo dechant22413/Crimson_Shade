@@ -1,7 +1,9 @@
 using UnityEngine;
 
 #if UNITY_EDITOR
-[ExecuteAlways]
+using UnityEditor;
+#endif
+
 public class MaterialChanger : MonoBehaviour
 {
     public Material[] materials;
@@ -10,10 +12,19 @@ public class MaterialChanger : MonoBehaviour
 
     private void OnValidate()
     {
+#if UNITY_EDITOR
+        EditorApplication.delayCall += ApplyMaterialCustomization;
+#endif
+    }
+
+    private void ApplyMaterialCustomization()
+    {
         if (materials == null || materials.Length == 0) return;
+
         selectedMaterial = Mathf.Clamp(selectedMaterial, 0, materials.Length - 1);
 
-        UnityEditor.EditorApplication.delayCall += () =>
+#if UNITY_EDITOR
+        EditorApplication.delayCall += () =>
         {
             if (this == null) return;
 
@@ -27,9 +38,12 @@ public class MaterialChanger : MonoBehaviour
             else
             {
                 Renderer r = GetComponent<Renderer>();
-                if (r != null) r.sharedMaterial = mat;
+
+                if (r != null)
+                    r.sharedMaterial = mat;
             }
         };
+#endif
     }
 }
-#endif
+

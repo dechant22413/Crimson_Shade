@@ -1,5 +1,9 @@
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 [ExecuteAlways]
 public class GhoulCustomizer : MonoBehaviour
 {
@@ -11,19 +15,23 @@ public class GhoulCustomizer : MonoBehaviour
     [Header("Outfit")]
     public bool hasHelmet;
     public bool hasClothing;
-    #endregion 
+    #endregion
 
     private void OnValidate()
     {
-        //wird bereits durch Editor Unput geupdated
-        UnityEditor.EditorApplication.delayCall += ApplyCustomization;
+#if UNITY_EDITOR
+        EditorApplication.delayCall += ApplyCustomization;
+#endif
     }
 
     private void ApplyCustomization()
     {
-        //bestimmte Meshes am Ghoul können per Skript aktiviert oder deaktiviert werden
         if (this == null) return;
-        if (helmetMesh != null) helmetMesh.SetActive(hasHelmet);
-        if (clothingMesh != null) clothingMesh.SetActive(hasClothing);
+
+        if (helmetMesh != null)
+            helmetMesh.SetActive(hasHelmet);
+
+        if (clothingMesh != null)
+            clothingMesh.SetActive(hasClothing);
     }
 }

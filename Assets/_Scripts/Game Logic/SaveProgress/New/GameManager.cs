@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -7,6 +8,7 @@ public class GameManager : MonoBehaviour
     private Transform respawnPoint;
     private GameObject player;
 
+    private int initialLife;
     private int playerLifePoints;
 
     private bool gameOver;
@@ -34,9 +36,14 @@ public class GameManager : MonoBehaviour
 
     public void RespawnPlayer()
     {
-        Debug.Log("RespawnPlayer");
+        CharacterController cc = player.GetComponent<CharacterController>();
 
-        player.transform.position = respawnPoint.position;
+        cc.enabled = false;
+        player.transform.position = respawnPosition;
+        cc.enabled = true;
+
+        initialLife = PlayerStatsAndUIPanel.Instance.GetMaxLifePoints();
+        PlayerStatsAndUIPanel.Instance.ChangeLifePoints(initialLife);
     }
 
     public void PlayerLifePoints(int lifepoints)
