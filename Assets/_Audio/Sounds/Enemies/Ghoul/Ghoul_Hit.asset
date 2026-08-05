@@ -23,4 +23,5 @@ MonoBehaviour:
   volume: 1
   pitchMin: 1
   pitchMax: 1
-  mixerGroup: {fileID: 0}
+  spatialBlend: 1
+  mixerGroup: {fileID: -285945881290700431, guid: 92c71eb65958e3642b5322356b1169e6, type: 2}

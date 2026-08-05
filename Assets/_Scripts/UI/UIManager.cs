@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
@@ -17,8 +17,9 @@ public class UIManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private GameObject hitIndicator;
     [SerializeField] private GameObject killIndicator;
+    [SerializeField] private GameObject gameOverMenu;
+    [SerializeField] private GameObject pauseMenu;
 
-    [SerializeField] private GameObject gameOverPanel;
 
     [Header("Indicator Settings")]
     [SerializeField] private float displayTime = 0.2f;
@@ -26,12 +27,14 @@ public class UIManager : MonoBehaviour
 
     private Coroutine currentIndicatorCoroutine;
 
+
+
     private void Start()
     {
         //Hided Cursor zu Beginn der Szene
         HideCursor();
 
-        gameOverPanel.SetActive(false);
+        gameOverMenu.SetActive(false);
     }
 
     public void HideCursor()
@@ -70,16 +73,30 @@ public class UIManager : MonoBehaviour
         currentIndicatorCoroutine = StartCoroutine(IndicatorCoroutine(killIndicator));
     }
 
-    public void ActivateGameOverPanel(bool activate)
+    public void ActivateGameOverMenu(bool activate)
     {
         if (activate)
         {
-            gameOverPanel.SetActive(true);
+            gameOverMenu.SetActive(true);
             ShowCursor();
         }
         else
         {
-            gameOverPanel.SetActive(false);
+            gameOverMenu.SetActive(false);
+            HideCursor();
+        }
+    }
+
+    public void ActivatePauseGameMenu(bool activate)
+    {
+        if (activate)
+        {
+            pauseMenu.SetActive(true);
+            ShowCursor();
+        }
+        else
+        {
+            pauseMenu.SetActive(false);
             HideCursor();
         }
     }

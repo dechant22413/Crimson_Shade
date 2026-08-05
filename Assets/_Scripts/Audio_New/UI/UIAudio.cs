@@ -8,6 +8,9 @@ public class UIAudio : MonoBehaviour, IPointerDownHandler
     public AudioEventRef click002;
     public AudioEventRef start;
 
+    [Header("Settings")]
+    [SerializeField] private bool playStartSound = false;
+
     private bool skipNextHoverSound = false;
 
     public void OnPointerDown(PointerEventData eventData)
@@ -34,5 +37,9 @@ public class UIAudio : MonoBehaviour, IPointerDownHandler
         click002.Play(transform);
     }
 
-    public void PlayStart() => start.Play(transform);
+    public void PlayStart()
+    {
+        if (!playStartSound) return;
+        start.Play(transform);
+    }
 }
