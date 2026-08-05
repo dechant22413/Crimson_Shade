@@ -38,18 +38,17 @@ public class SoundFXManager : MonoBehaviour
             return;
 
         AudioClip clip = audioEvent.clips[Random.Range(0, audioEvent.clips.Length)];
-
         AudioSource source = SpawnSource(spawnTransform);
 
         source.clip = clip;
         source.volume = audioEvent.volume * volumeMultiplier;
         source.pitch = Random.Range(audioEvent.pitchMin, audioEvent.pitchMax);
+        source.spatialBlend = audioEvent.spatialBlend; // NEU
 
         if (audioEvent.mixerGroup != null)
             source.outputAudioMixerGroup = audioEvent.mixerGroup;
 
         source.Play();
-
         Destroy(source.gameObject, clip.length);
     }
 
