@@ -12,23 +12,32 @@ public class LevelBoundary : MonoBehaviour
     [Header("General")]
     [SerializeField] private BoundaryType boundaryType;
 
-    [Header("Kill Zone")]
-    [SerializeField] private Transform defaultSpawnPoint;
-
     [Header("Scene Transition")]
     [SerializeField] private int sceneIndex;
 
     [Header("Blocker")]
     [SerializeField] private float pushForce = 10f;
 
+    [Header("Show Gizmos")]
+    [SerializeField] private bool showBoundaryGizmos = true;
 
     private Collider boundaryCollider;
+
+    private Transform defaultSpawnPoint;
 
 
     private void Awake()
     {
         boundaryCollider = GetComponent<Collider>();
         UpdateColliderMode();
+
+        if (defaultSpawnPoint == null)
+        {
+            GameObject spawn = GameObject.FindGameObjectWithTag("Player");
+
+            if (spawn != null)
+                defaultSpawnPoint = spawn.transform;
+        }
     }
 
 
@@ -127,6 +136,9 @@ public class LevelBoundary : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (!showBoundaryGizmos)
+            return;
+
         Collider col = GetComponent<Collider>();
 
         if (col == null)
