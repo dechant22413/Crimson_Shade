@@ -609,7 +609,7 @@ RectTransform:
   m_GameObject: {fileID: 335461546}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.08, y: 1.08, z: 1.08}
+  m_LocalScale: {x: 0.42, y: 0.42, z: 0.42}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1411440108}
@@ -620,7 +620,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 46, y: 156.385}
+  m_SizeDelta: {x: 46, y: 77.248}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &365706203
 GameObject:
@@ -2316,7 +2316,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 179.464}
+  m_SizeDelta: {x: 100, y: 224.072}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1536836439
 MonoBehaviour:
@@ -2979,8 +2979,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SceneManagement
   loadingCanvas: {fileID: 1758540391}
   fadeCanvasGroup: {fileID: 844153478}
-  fadeDuration: 0.5
-  minLoadDuration: 5
+  fadeDuration: 1
+  minLoadDuration: 10
 --- !u!1 &2074768090
 GameObject:
   m_ObjectHideFlags: 0
