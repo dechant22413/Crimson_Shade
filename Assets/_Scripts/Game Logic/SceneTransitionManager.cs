@@ -35,23 +35,38 @@ public class SceneTransitionManager : MonoBehaviour
         fadeCanvasGroup.alpha = 0f;
     }
 
+    private void OnEnable()
+    {
+        // Sicherstellen dass isLoading nie hängen bleibt nach Szenenwechsel
+        isLoading = false;
+        fadeCanvasGroup.alpha = 0f;
+    }
+
     public void LoadScene(int buildIndex)
     {
-        if (isLoading)
-            return;
+        // Alle laufenden Coroutinen stoppen falls noch eine hängt
+        StopAllCoroutines();
+        isLoading = false;
+
+        Time.timeScale = 1f;
         StartCoroutine(LoadRoutine(buildIndex));
     }
 
     private IEnumerator LoadRoutine(int buildIndex)
     {
         isLoading = true;
+        Debug.Log("LoadRoutine gestartet");
 
         // 1. Loading Screen einblenden
+        Debug.Log("loadingCanvas: " + loadingCanvas);
+        Debug.Log("fadeCanvasGroup: " + fadeCanvasGroup);
         loadingCanvas.SetActive(true);
+        Debug.Log("Loading Screen aktiv");
 
         // 2. Szene im Hintergrund laden
         AsyncOperation operation = SceneManager.LoadSceneAsync(buildIndex);
         operation.allowSceneActivation = false;
+        Debug.Log("AsyncOperation gestartet");
 
         // 3. Warten bis Unity fertig geladen hat UND die minimale Ladezeit vergangen ist
         float elapsed = 0f;
@@ -60,11 +75,14 @@ public class SceneTransitionManager : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
+        Debug.Log("Laden abgeschlossen");
 
-        // 4. FadeOut - Loading Canvas liegt darunter und bleibt sichtbar
+        // 4. FadeOut
+        Debug.Log("FadeOut startet");
         yield return StartCoroutine(Fade(0f, 1f));
+        Debug.Log("FadeOut fertig");
 
-        // 5. Screen ist jetzt komplett schwarz - Loading Canvas ausblenden
+        // 5. Loading Canvas ausblenden
         loadingCanvas.SetActive(false);
 
         // 6. Neue Szene aktivieren
@@ -73,12 +91,14 @@ public class SceneTransitionManager : MonoBehaviour
         {
             yield return null;
         }
+        Debug.Log("Szene geladen");
 
-        // 7. Einen Frame warten damit die neue Szene komplett initialisiert ist
         yield return null;
 
-        // 8. FadeIn in die neue Szene
+        // 7. FadeIn
+        Debug.Log("FadeIn startet");
         yield return StartCoroutine(Fade(1f, 0f));
+        Debug.Log("FadeIn fertig");
 
         isLoading = false;
     }

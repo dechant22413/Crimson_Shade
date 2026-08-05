@@ -14,20 +14,16 @@ public class SoundFXManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
         Instance = this;
     }
 
-    #region AudioCLip (Aktuell nicht gebraucht)
+    #region AudioClip (Aktuell nicht gebraucht)
     public void Play(AudioClip clip, Transform spawnTransform, float volume = 1f)
     {
         AudioSource source = SpawnSource(spawnTransform);
-
         source.clip = clip;
         source.volume = volume;
-
         source.Play();
-
         Destroy(source.gameObject, clip.length);
     }
     #endregion
@@ -39,15 +35,12 @@ public class SoundFXManager : MonoBehaviour
 
         AudioClip clip = audioEvent.clips[Random.Range(0, audioEvent.clips.Length)];
         AudioSource source = SpawnSource(spawnTransform);
-
         source.clip = clip;
         source.volume = audioEvent.volume * volumeMultiplier;
         source.pitch = Random.Range(audioEvent.pitchMin, audioEvent.pitchMax);
-        source.spatialBlend = audioEvent.spatialBlend; // NEU
-
+        source.spatialBlend = audioEvent.GetSpatialBlend();
         if (audioEvent.mixerGroup != null)
             source.outputAudioMixerGroup = audioEvent.mixerGroup;
-
         source.Play();
         Destroy(source.gameObject, clip.length);
     }
@@ -58,19 +51,15 @@ public class SoundFXManager : MonoBehaviour
             return null;
 
         AudioClip clip = audioEvent.clips[Random.Range(0, audioEvent.clips.Length)];
-
         AudioSource source = Instantiate(audioClipObject, parent.position, Quaternion.identity);
-
         source.clip = clip;
         source.volume = audioEvent.volume * volumeMultiplier;
         source.pitch = Random.Range(audioEvent.pitchMin, audioEvent.pitchMax);
+        source.spatialBlend = audioEvent.GetSpatialBlend();
         source.loop = true;
-
         if (audioEvent.mixerGroup != null)
             source.outputAudioMixerGroup = audioEvent.mixerGroup;
-
         source.Play();
-
         return source;
     }
 
@@ -80,20 +69,16 @@ public class SoundFXManager : MonoBehaviour
             return null;
 
         AudioClip clip = audioEvent.clips[Random.Range(0, audioEvent.clips.Length)];
-
         AudioSource source = Instantiate(audioClipObject, parent);
-
         source.transform.localPosition = Vector3.zero;
         source.clip = clip;
         source.volume = audioEvent.volume * volumeMultiplier;
         source.pitch = Random.Range(audioEvent.pitchMin, audioEvent.pitchMax);
+        source.spatialBlend = audioEvent.GetSpatialBlend();
         source.loop = true;
-
         if (audioEvent.mixerGroup != null)
             source.outputAudioMixerGroup = audioEvent.mixerGroup;
-
         source.Play();
-
         return source;
     }
 
@@ -101,7 +86,6 @@ public class SoundFXManager : MonoBehaviour
     {
         if (source == null)
             return;
-
         source.Stop();
         Destroy(source.gameObject);
     }
