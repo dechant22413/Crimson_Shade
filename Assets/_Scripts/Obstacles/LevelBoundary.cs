@@ -68,7 +68,6 @@ public class LevelBoundary : MonoBehaviour
         }
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player"))
@@ -77,25 +76,12 @@ public class LevelBoundary : MonoBehaviour
         switch (boundaryType)
         {
             case BoundaryType.KillZone:
-
-                if (CheckPointManager.Instance.HasSave())
-                {
-                    CheckPointManager.Instance.RespawnAtLastCheckpoint();
-                }
-                else if (defaultSpawnPoint != null)
-                {
-                    other.transform.position = defaultSpawnPoint.position;
-                }
-
-                PlayerMovement.Instance.SetVerticalVelocity(0f);
-
+                // Triggert den kompletten GameOver/Tod-Flow
+                GameManager.Instance.PlayerLifePoints(0);
                 break;
 
-
             case BoundaryType.SceneTransition:
-
                 SceneTransitionManager.Instance.LoadScene(sceneIndex);
-
                 break;
         }
     }

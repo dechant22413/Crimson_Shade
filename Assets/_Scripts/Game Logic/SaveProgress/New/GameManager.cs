@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Audio;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -55,6 +56,7 @@ public class GameManager : MonoBehaviour
 
     public void RespawnPlayer()
     {
+        Time.timeScale = 1f;
         CharacterController cc = player.GetComponent<CharacterController>();
         cc.enabled = false;
         player.transform.position = respawnPosition;
@@ -106,13 +108,19 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         Time.timeScale = 1f;
 
-        // Player Input wieder aktivieren
-        PlayerActions.Instance.enabled = true;
-        PlayerMovement.Instance.enabled = true;
-
         audioMixer.FindSnapshot(gameplaySnapshotName)
                   .TransitionTo(snapshotTransitionTime);
 
         UIManager.Instance.ActivatePauseGameMenu(false);
+        UIManager.Instance.ActivateGameOverMenu(false);
+
+        // Einen Frame warten damit der Input-Buffer geleert wird
+        StartCoroutine(ReenableInputNextFrame());
+    }
+    private IEnumerator ReenableInputNextFrame()
+    {
+        yield return new WaitForSecondsRealtime(0.1f);
+        PlayerActions.Instance.enabled = true;
+        PlayerMovement.Instance.enabled = true;
     }
 }
