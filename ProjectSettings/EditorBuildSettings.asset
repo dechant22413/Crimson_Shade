@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/_Scenes/MainMenu.unity
     guid: 3285d87441f9d7b43b0277dc47158f16
   - enabled: 1
-    path: Assets/_Scenes/GraveYard_Level_Blockout.unity
+    path: Assets/_Scenes/Gameplay.unity
     guid: 586de0f9957d3314c8109ba358d82bc1
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

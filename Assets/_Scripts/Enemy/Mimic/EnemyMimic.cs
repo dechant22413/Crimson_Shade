@@ -77,15 +77,20 @@ public class EnemyMimic : EnemyMelee, IInteractable
     private void Activate()
     {
         isDormant = false;
+
         animator.SetBool(dormantHash, false);
         SetState(EnemyState.Idle);
+
+        BossBarManager.Instance.InitializeBoss(health);
     }
 
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
 
-        if (health != 0)
+        BossBarManager.Instance.UpdateBossHealth(health);
+
+        if (health > 0f)
         {
             mimicAudio.PlayTakeDamage();
         }
@@ -143,6 +148,20 @@ public class EnemyMimic : EnemyMelee, IInteractable
     {
         base.OnStateChanged(newState);
 
+        // Bossbar Visibility
+        if (newState == EnemyState.Chase ||
+            newState == EnemyState.Attack)
+        {
+            BossBarManager.Instance.ShowBossBar(health);
+        }
+        else if (newState == EnemyState.Patrol ||
+                 newState == EnemyState.Idle ||
+                 newState == EnemyState.Inactive ||
+                 newState == EnemyState.Dead)
+        {
+            BossBarManager.Instance.HideBossBar();
+        }
+
         // Bei Attack Defence aufheben
         if (newState == EnemyState.Attack && isInDefence)
             ExitDefence();
@@ -152,6 +171,7 @@ public class EnemyMimic : EnemyMelee, IInteractable
         {
             if (returnToInactiveCoroutine != null)
                 StopCoroutine(returnToInactiveCoroutine);
+
             returnToInactiveCoroutine = StartCoroutine(ReturnToInactiveRoutine());
         }
         else
