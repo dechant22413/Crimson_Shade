@@ -72,7 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMimic
   agent: {fileID: 0}
   player: {fileID: 0}
-  health: 500
+  health: 1500
   attackDamage: 40
   firstAttackDelay: 0
   sightRange: 18.4
