@@ -66,11 +66,23 @@ public class Homing_Projectile : MonoBehaviour
         if (!launched) return;
         if (playerTransform == null) return;
 
-        //Projektil bewegt sich nach vorne mit einem leichten Homing Effect zum Spieler hin
-        Vector3 dirToPlayer = (playerTransform.position - transform.position).normalized;
-        Vector3 newDir = Vector3.Lerp(transform.forward, dirToPlayer, homingFactor * Time.fixedDeltaTime);
-        rb.linearVelocity = newDir * speed;
-        transform.forward = newDir;
+        // Vollständige 3D-Richtung zum Spieler
+        Vector3 directionToPlayer =
+            (playerTransform.position - transform.position).normalized;
+
+        // Aktuelle Richtung langsam in Richtung Spieler drehen
+        Vector3 newDirection = Vector3.RotateTowards(
+            transform.forward,
+            directionToPlayer,
+            homingFactor * Time.fixedDeltaTime,
+            0f
+        );
+
+        // Geschwindigkeit setzen
+        rb.linearVelocity = newDirection * speed;
+
+        // Projektil in Flugrichtung drehen
+        transform.rotation = Quaternion.LookRotation(newDirection);
     }
 
     private void OnTriggerEnter(Collider other)
