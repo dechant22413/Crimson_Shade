@@ -84,7 +84,7 @@ PrefabInstance:
       addedObject: {fileID: 8134254713299413426}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bb3b90eb80c40c14697b5f113b69fefb, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8995741299529211550}
+      addedObject: {fileID: 3464225730648927052}
   m_SourcePrefab: {fileID: 100100000, guid: bb3b90eb80c40c14697b5f113b69fefb, type: 3}
 --- !u!1 &5921718166973140 stripped
 GameObject:
@@ -129,7 +129,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 8ab9e5668933565459faac0d53cc7248, type: 2}
   selectedMaterial: 0
   applyToChildren: 0
---- !u!114 &8995741299529211550
+--- !u!114 &3464225730648927052
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,7 +138,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 5921718166973140}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5360ede85817ad64fbbefb9bb832d6d5, type: 3}
+  m_Script: {fileID: 11500000, guid: 2db407868a09aa14199dfea6a3be86a0, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TextInteraction
-  interactionText: Sample
+  m_EditorClassIdentifier: Assembly-CSharp::MultipleTextInteraction
+  dialogueLines:
+  - 
