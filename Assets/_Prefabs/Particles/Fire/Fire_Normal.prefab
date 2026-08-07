@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6712503728379769033}
+  - component: {fileID: 1433128785664162294}
+  - component: {fileID: 7127825087834517530}
   m_Layer: 0
   m_Name: Fire_Normal
   m_TagString: Untagged
@@ -33,6 +35,36 @@ Transform:
   - {fileID: 3831868541438422994}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1433128785664162294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353340872591575993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9725c11fd48d5874d82fe76f1619173e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BonfireAudio
+  activate:
+    audioEvent: {fileID: 0}
+    volumeMultiplier: 1
+  loop:
+    audioEvent: {fileID: 11400000, guid: 3217c8b18e3e1e94398ab1b8b3fb8811, type: 2}
+    volumeMultiplier: 0.59
+--- !u!114 &7127825087834517530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353340872591575993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbaf5d9d0352fd84587602d4941bbacb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Fire
 --- !u!1 &4451158158165507590
 GameObject:
   m_ObjectHideFlags: 0

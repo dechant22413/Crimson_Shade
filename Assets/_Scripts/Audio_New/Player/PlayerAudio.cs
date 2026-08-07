@@ -21,6 +21,7 @@ public class PlayerAudio : MonoBehaviour
     public AudioEventRef powerupFull;
     public AudioEventRef takeDamageFlesh;
     public AudioEventRef takeDamagePunch;
+    public AudioEventRef footStep;
 
 
     public void PlayJump() => jump.Play(transform);
@@ -36,4 +37,6 @@ public class PlayerAudio : MonoBehaviour
     public void PlayTakeDamageFlesh() => takeDamageFlesh.Play(transform);
 
     public void PlayPowerUpFull() => powerupFull.Play(transform);
+
+    public void PlayFootStep() => footStep.Play(transform);
 }

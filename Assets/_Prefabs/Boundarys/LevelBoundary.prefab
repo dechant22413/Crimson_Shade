@@ -48,7 +48,7 @@ MonoBehaviour:
   boundaryType: 2
   sceneIndex: 0
   pushForce: 10
-  showBoundaryGizmos: 1
+  showBoundaryGizmos: 0
 --- !u!65 &5750678850188817007
 BoxCollider:
   m_ObjectHideFlags: 0
