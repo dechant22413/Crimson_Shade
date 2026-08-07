@@ -141,5 +141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2db407868a09aa14199dfea6a3be86a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MultipleTextInteraction
+  interactionMode: 0
   dialogueLines:
   - 

@@ -3,9 +3,20 @@ using System.Collections.Generic;
 
 public class MultipleTextInteraction : MonoBehaviour, IInteractable
 {
+    public enum InteractionMode
+    {
+        Book,
+        NPC
+    }
+
     #region Settings
+
+    [Header("Interaction")]
+    [SerializeField] private InteractionMode interactionMode = InteractionMode.NPC;
+
     [Header("Dialogue")]
     [SerializeField] private List<string> dialogueLines = new List<string>();
+
     #endregion
 
     private int currentDialogueIndex = 0;
@@ -13,14 +24,24 @@ public class MultipleTextInteraction : MonoBehaviour, IInteractable
 
     public string GetInteractionLabel()
     {
+        // Keine Dialogzeilen vorhanden
         if (dialogueLines.Count == 0)
-            return "TALK [E]";
+        {
+            return interactionMode == InteractionMode.Book
+                ? "READ [E]"
+                : "TALK [E]";
+        }
 
-        // Wenn gerade ein Dialog läuft, zeige die aktuelle Zeile an
+        // Dialog läuft
         if (isTalking)
-            return dialogueLines[currentDialogueIndex];
+        {
+            return dialogueLines[currentDialogueIndex] + "\n[E]";
+        }
 
-        return "TALK [E]";
+        // Dialog noch nicht gestartet
+        return interactionMode == InteractionMode.Book
+            ? "READ [E]"
+            : "TALK [E]";
     }
 
     public void Interact()
@@ -28,12 +49,18 @@ public class MultipleTextInteraction : MonoBehaviour, IInteractable
         if (dialogueLines.Count == 0)
             return;
 
-        isTalking = true;
+        // Dialog starten
+        if (!isTalking)
+        {
+            isTalking = true;
+            currentDialogueIndex = 0;
+            return;
+        }
 
-        // Zur nächsten Zeile wechseln
+        // Zur nächsten Dialogzeile
         currentDialogueIndex++;
 
-        // Wenn das Ende erreicht wurde, wieder von vorne beginnen
+        // Dialog beendet
         if (currentDialogueIndex >= dialogueLines.Count)
         {
             currentDialogueIndex = 0;
