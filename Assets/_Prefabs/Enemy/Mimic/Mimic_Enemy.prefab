@@ -128,6 +128,12 @@ MonoBehaviour:
   step:
     audioEvent: {fileID: 11400000, guid: 8e143c428bc352c43929d604abd31d37, type: 2}
     volumeMultiplier: 1
+  mimicOpen001:
+    audioEvent: {fileID: 11400000, guid: b1d61946ae2ac104ca45d81ba38ae1ce, type: 2}
+    volumeMultiplier: 1
+  mimicOpen002:
+    audioEvent: {fileID: 11400000, guid: 135ef989be2f90547bae64d55f1b4c0e, type: 2}
+    volumeMultiplier: 1
 --- !u!114 &4154377949981841794
 MonoBehaviour:
   m_ObjectHideFlags: 0

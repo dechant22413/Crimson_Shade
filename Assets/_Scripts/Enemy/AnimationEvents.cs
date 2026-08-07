@@ -63,6 +63,11 @@ public class AnimationEvents : MonoBehaviour
     {
         mimicAudio.PlayStep();
     }
+
+    public void MimicPlayOpenSound()
+    {
+        mimicAudio.PlayMimicOpen();
+    }
     #endregion
     #endregion
 

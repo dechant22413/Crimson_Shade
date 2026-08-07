@@ -6,6 +6,7 @@ public class LevelBoundary : MonoBehaviour
     {
         KillZone,
         SceneTransition,
+        DemoOver,
         Blocker
     }
 
@@ -22,9 +23,7 @@ public class LevelBoundary : MonoBehaviour
     [SerializeField] private bool showBoundaryGizmos = true;
 
     private Collider boundaryCollider;
-
     private Transform defaultSpawnPoint;
-
 
     private void Awake()
     {
@@ -40,7 +39,6 @@ public class LevelBoundary : MonoBehaviour
         }
     }
 
-
     private void OnValidate()
     {
         if (boundaryCollider == null)
@@ -48,7 +46,6 @@ public class LevelBoundary : MonoBehaviour
 
         UpdateColliderMode();
     }
-
 
     private void UpdateColliderMode()
     {
@@ -63,6 +60,7 @@ public class LevelBoundary : MonoBehaviour
 
             case BoundaryType.KillZone:
             case BoundaryType.SceneTransition:
+            case BoundaryType.DemoOver:
                 boundaryCollider.isTrigger = true;
                 break;
         }
@@ -76,49 +74,60 @@ public class LevelBoundary : MonoBehaviour
         switch (boundaryType)
         {
             case BoundaryType.KillZone:
+
                 // Triggert den kompletten GameOver/Tod-Flow
                 GameManager.Instance.PlayerLifePoints(0);
+
                 break;
 
             case BoundaryType.SceneTransition:
+
+                // Lädt die angegebene Szene
                 SceneTransitionManager.Instance.LoadScene(sceneIndex);
+
+                break;
+
+            case BoundaryType.DemoOver:
+
+                // Beendet die Demo
+                GameManager.Instance.EndGame();
+
                 break;
         }
     }
 
-
     private void OnTriggerStay(Collider other)
     {
-        // Nur noch als Sicherheit für alte Trigger-Blocker
+        // Nur für Blocker
         if (boundaryType != BoundaryType.Blocker)
             return;
 
         if (!other.CompareTag("Player"))
             return;
 
-
         CharacterController controller = other.GetComponent<CharacterController>();
 
         if (controller == null)
             return;
 
+        Vector3 closestPoint =
+            boundaryCollider.ClosestPoint(other.transform.position);
 
-        Vector3 closestPoint = GetComponent<Collider>().ClosestPoint(other.transform.position);
+        Vector3 pushDirection =
+            (other.transform.position - closestPoint).normalized;
 
-        Vector3 pushDirection = (other.transform.position - closestPoint).normalized;
         pushDirection.y = 0f;
-
 
         if (pushDirection.sqrMagnitude < 0.001f)
         {
-            pushDirection = (other.transform.position - transform.position).normalized;
-        }
+            pushDirection =
+                (other.transform.position - transform.position).normalized;
 
+            pushDirection.y = 0f;
+        }
 
         controller.Move(pushDirection * pushForce * Time.deltaTime);
     }
-
-
 
     private void OnDrawGizmos()
     {
@@ -130,7 +139,6 @@ public class LevelBoundary : MonoBehaviour
         if (col == null)
             return;
 
-
         switch (boundaryType)
         {
             case BoundaryType.KillZone:
@@ -141,14 +149,16 @@ public class LevelBoundary : MonoBehaviour
                 Gizmos.color = new Color(0f, 1f, 0f, 0.3f);
                 break;
 
+            case BoundaryType.DemoOver:
+                Gizmos.color = new Color(1f, 1f, 0f, 0.3f);
+                break;
+
             case BoundaryType.Blocker:
                 Gizmos.color = new Color(0f, 0f, 1f, 0.3f);
                 break;
         }
 
-
         Gizmos.matrix = transform.localToWorldMatrix;
-
 
         if (col is BoxCollider box)
         {
@@ -163,12 +173,9 @@ public class LevelBoundary : MonoBehaviour
 
             Gizmos.DrawWireCube(box.center, box.size);
 
-
             Vector3 center = transform.TransformPoint(box.center);
             Gizmos.DrawRay(center, -transform.forward * 2f);
         }
-
-
         else if (col is SphereCollider sphere)
         {
             Gizmos.DrawSphere(sphere.center, sphere.radius);
@@ -181,7 +188,6 @@ public class LevelBoundary : MonoBehaviour
             );
 
             Gizmos.DrawWireSphere(sphere.center, sphere.radius);
-
 
             Vector3 center = transform.TransformPoint(sphere.center);
             Gizmos.DrawRay(center, -transform.forward * 2f);

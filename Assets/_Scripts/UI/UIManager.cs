@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject killIndicator;
     [SerializeField] private GameObject gameOverMenu;
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject DemoFinishedMenu;
 
 
     [Header("Indicator Settings")]
@@ -97,6 +98,20 @@ public class UIManager : MonoBehaviour
         else
         {
             pauseMenu.SetActive(false);
+            HideCursor();
+        }
+    }
+
+    public void ActivateDemoFinishedMenu(bool activate)
+    {
+        if (activate)
+        {
+            DemoFinishedMenu.SetActive(true);
+            ShowCursor();
+        }
+        else
+        {
+            DemoFinishedMenu.SetActive(false);
             HideCursor();
         }
     }

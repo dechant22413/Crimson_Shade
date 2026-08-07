@@ -4847,7 +4847,6 @@ GameObject:
   - component: {fileID: 5200002245749678925}
   - component: {fileID: 8747823305899351894}
   - component: {fileID: 8809793614599706195}
-  - component: {fileID: 8287787029526477437}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -4928,27 +4927,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &8287787029526477437
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3775573382605167860}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.8
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7082624016921154000
 GameObject:
   m_ObjectHideFlags: 0
@@ -9794,6 +9772,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9015105073935168438}
+  - component: {fileID: 6463612168488890130}
+  - component: {fileID: 4651658420600170834}
+  - component: {fileID: 4723881668728427310}
   m_Layer: 0
   m_Name: ItemParticleUncommon
   m_TagString: Untagged
@@ -9818,3 +9799,52 @@ Transform:
   - {fileID: 2862771884348547959}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6463612168488890130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7535807390694465732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e947b928081edb84f90a9c16f89ad2b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Item
+  interactionText: 'COLLECT [E]'
+--- !u!114 &4651658420600170834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7535807390694465732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3c426de01864294180b8bcf2e5de7f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemAudio
+  pickUp:
+    audioEvent: {fileID: 11400000, guid: bcd5b88588095314cbc98ce02af7ddc3, type: 2}
+    volumeMultiplier: 1
+--- !u!135 &4723881668728427310
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7535807390694465732}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.11383955
+  m_Center: {x: 0, y: 0, z: 0}

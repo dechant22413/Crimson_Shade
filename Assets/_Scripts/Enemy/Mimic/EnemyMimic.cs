@@ -18,6 +18,9 @@ public class EnemyMimic : EnemyMelee, IInteractable
     [Header("Item Drop")]
     [SerializeField] private GameObject item;
 
+    [Header("Death")]
+    [SerializeField] private MimicDeathDoor deathDoor;
+
     private MimicState mimicState = MimicState.Dormant;
     private bool isDormant = true;
     private bool isInDefence = false;
@@ -148,11 +151,14 @@ public class EnemyMimic : EnemyMelee, IInteractable
     {
         base.OnStateChanged(newState);
 
-        // Bossbar Visibility
+        BackgroundMusic bm = FindFirstObjectByType<BackgroundMusic>();
+
+        // Bossbar + Musik
         if (newState == EnemyState.Chase ||
             newState == EnemyState.Attack)
         {
             BossBarManager.Instance.ShowBossBar(health);
+            if (bm != null) bm.SwitchToBossTrack();
         }
         else if (newState == EnemyState.Patrol ||
                  newState == EnemyState.Idle ||
@@ -160,6 +166,7 @@ public class EnemyMimic : EnemyMelee, IInteractable
                  newState == EnemyState.Dead)
         {
             BossBarManager.Instance.HideBossBar();
+            if (bm != null) bm.SwitchToAmbience();
         }
 
         // Bei Attack Defence aufheben
@@ -183,7 +190,6 @@ public class EnemyMimic : EnemyMelee, IInteractable
             }
         }
     }
-
     private IEnumerator ReturnToInactiveRoutine()
     {
         yield return new WaitForSeconds(returnToInactiveTime);
@@ -217,11 +223,16 @@ public class EnemyMimic : EnemyMelee, IInteractable
     protected override void Die()
     {
         base.Die();
+
         DissolveEffect dissolve = GetComponent<DissolveEffect>();
         if (dissolve != null)
             dissolve.StartDissolve();
 
         mimicAudio.PlayDeath();
+
+        if (deathDoor != null)
+            deathDoor.OpenDoor();
+
         Debug.Log("Item Drop");
     }
 

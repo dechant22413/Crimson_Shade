@@ -117,6 +117,22 @@ public class GameManager : MonoBehaviour
         // Einen Frame warten damit der Input-Buffer geleert wird
         StartCoroutine(ReenableInputNextFrame());
     }
+
+    public void EndGame()
+    {
+        isPaused = true;
+        Time.timeScale = 0f;
+
+        // Player Input während Pause deaktivieren
+        PlayerActions.Instance.enabled = false;
+        PlayerMovement.Instance.enabled = false;
+
+        audioMixer.FindSnapshot(pausedSnapshotName)
+                  .TransitionTo(snapshotTransitionTime);
+
+        UIManager.Instance.ActivateDemoFinishedMenu(true);
+    }
+
     private IEnumerator ReenableInputNextFrame()
     {
         yield return new WaitForSecondsRealtime(0.1f);
