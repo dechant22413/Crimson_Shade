@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class NPCInteraction : MonoBehaviour, IInteractable
+public class MultipleTextInteraction : MonoBehaviour, IInteractable
 {
     #region Settings
     [Header("Dialogue")]
