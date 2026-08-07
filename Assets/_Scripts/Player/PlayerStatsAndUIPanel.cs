@@ -22,6 +22,7 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
     public Slider staminaSlider;
     public Image powerUpBar;
     public Image skeletonHand;
+    public GameObject damageVignette;
 
     [Header("LifePoints Settings")]
     [SerializeField] private int maxLifePoints = 90;
@@ -136,6 +137,8 @@ public class PlayerStatsAndUIPanel : MonoBehaviour
         PlayerAudio.Instance.PlayTakeDamagePunch();
 
         GameManager.Instance.PlayerLifePoints(currentLifePoints);
+
+        damageVignette.SetActive(true);
     }
 
 
