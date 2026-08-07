@@ -8,15 +8,18 @@ public class AnimationEvents : MonoBehaviour
     private KnifeAudio knifeAudio;
     private ShotgunAudio shotgunAudio;
     private ChestAudio chestAudio;
+    private MimicAudio mimicAudio;
 
         private void Awake()
     {
         enemy = GetComponentInParent<EnemyBase>();
 
         ghoulAudio = GetComponentInParent<GhoulAudio>();
+        mimicAudio = GetComponentInParent<MimicAudio>();
         knifeAudio = GetComponentInParent<KnifeAudio>();
         shotgunAudio = GetComponentInParent<ShotgunAudio>();
         chestAudio = GetComponentInParent<ChestAudio>();
+
     }
     //Animation Events, die von einem beliebigen Gegner, Gegenstand oder dem Spieler aufgerufen werden können
     #region Enemy Events
@@ -47,6 +50,18 @@ public class AnimationEvents : MonoBehaviour
     {
         if (ghoulAudio == null) return;
         ghoulAudio.PlayStep();
+    }
+    #endregion
+
+    #region MimicAudio
+    public void MimicPlayAttackSOund()
+    {
+        mimicAudio.PlayAttack();
+    }
+
+    public void MimicPlayStepSound()
+    {
+        mimicAudio.PlayStep();
     }
     #endregion
     #endregion

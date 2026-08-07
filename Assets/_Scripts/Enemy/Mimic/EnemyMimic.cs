@@ -15,11 +15,15 @@ public class EnemyMimic : EnemyMelee, IInteractable
     private Vector3 dormantPosition;
     private Quaternion dormantRotation;
 
+    [Header("Item Drop")]
+    [SerializeField] private GameObject item;
+
     private MimicState mimicState = MimicState.Dormant;
     private bool isDormant = true;
     private bool isInDefence = false;
     private Coroutine defenceCoroutine;
     private Coroutine returnToInactiveCoroutine;
+    private MimicAudio mimicAudio;
 
     private static readonly int dormantHash = Animator.StringToHash("Dormant");
     private static readonly int defenceHash = Animator.StringToHash("Defence");
@@ -33,6 +37,7 @@ public class EnemyMimic : EnemyMelee, IInteractable
         dormantPosition = transform.position;
         dormantRotation = transform.rotation;
         animator.SetBool(dormantHash, true);
+        mimicAudio = GetComponent<MimicAudio>();
     }
 
     protected override void Update()
@@ -74,6 +79,16 @@ public class EnemyMimic : EnemyMelee, IInteractable
         isDormant = false;
         animator.SetBool(dormantHash, false);
         SetState(EnemyState.Idle);
+    }
+
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+
+        if (health != 0)
+        {
+            mimicAudio.PlayTakeDamage();
+        }
     }
 
     private IEnumerator DefenceDelayRoutine()
@@ -185,6 +200,9 @@ public class EnemyMimic : EnemyMelee, IInteractable
         DissolveEffect dissolve = GetComponent<DissolveEffect>();
         if (dissolve != null)
             dissolve.StartDissolve();
+
+        mimicAudio.PlayDeath();
+        Debug.Log("Item Drop");
     }
 
     private void OnDrawGizmosSelected()
